@@ -1,26 +1,535 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Design System Color Palette */
+  
+  /* Light Colors */
+  --light: #FFFEFD;
+  --light-2: #FFFBF8;
+  --light-3: #FFF3ED;
+  
+  /* Primary Colors */
+  --primary-1: #FFDECE;
+  --primary-2: #FDBFA2;
+  --primary-3: #FF9C6D;
+  
+  /* Primary Dark Colors */
+  --primary-dark-1: #F26522;
+  --primary-dark-2: #DC5D21;
+  --primary-dark-3: #551D00;
+  
+  /* Dark Colors */
+  --dark-1: #D1D1D1;
+  --dark-2: #B0B0B0;
+  --dark-3: #888888;
+  --dark-4: #6D6D6D;
+  --dark-5: #5D5D5D;
+  --dark-6: #4F4F4F;
+  --dark-7: #454545;
+  --dark-8: #3D3D3D;
+  --dark-9: #121212;
+  
+  /* Typography System */
+  --font-h4: 54px;
+  --font-h3: 43px;
+  --font-h2: 32px;
+  --font-h1: 24px;
+  --font-body-large: 18px;
+  --font-body-medium: 16px;
+  --font-body-small: 14px;
+  --font-body-xsmall: 11px;
+  
+  /* Legacy Liquid Glass Colors (for backward compatibility) */
+  --background: #0f0f23;
+  --foreground: #ffffff;
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-shadow: rgba(242, 101, 34, 0.37);
+  --accent-primary: #6366f1;
+  --accent-secondary: #8b5cf6;
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --text-muted: rgba(255, 255, 255, 0.5);
 }
 
 @theme inline {
+  /* Design System Colors */
+  --color-light: var(--light);
+  --color-light-2: var(--light-2);
+  --color-light-3: var(--light-3);
+  --color-primary-1: var(--primary-1);
+  --color-primary-2: var(--primary-2);
+  --color-primary-3: var(--primary-3);
+  --color-primary-dark-1: var(--primary-dark-1);
+  --color-primary-dark-2: var(--primary-dark-2);
+  --color-primary-dark-3: var(--primary-dark-3);
+  --color-dark-1: var(--dark-1);
+  --color-dark-2: var(--dark-2);
+  --color-dark-3: var(--dark-3);
+  --color-dark-4: var(--dark-4);
+  --color-dark-5: var(--dark-5);
+  --color-dark-6: var(--dark-6);
+  --color-dark-7: var(--dark-7);
+  --color-dark-8: var(--dark-8);
+  --color-dark-9: var(--dark-9);
+  
+  /* Legacy Colors (for backward compatibility) */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-glass-bg: var(--glass-bg);
+  --color-glass-border: var(--glass-border);
+  --color-accent-primary: var(--accent-primary);
+  --color-accent-secondary: var(--accent-secondary);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-montserrat: var(--font-montserrat);
+  
+  /* Typography System */
+  --font-size-h4: var(--font-h4);
+  --font-size-h3: var(--font-h3);
+  --font-size-h2: var(--font-h2);
+  --font-size-h1: var(--font-h1);
+  --font-size-body-large: var(--font-body-large);
+  --font-size-body-medium: var(--font-body-medium);
+  --font-size-body-small: var(--font-body-small);
+  --font-size-body-xsmall: var(--font-body-xsmall);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Liquid Glass Base Styles */
+body {
+  background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #2d1b69 100%);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Glassmorphism Utility Classes */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(242, 101, 34, 0.37);
+}
+
+.glass-strong {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(242, 101, 34, 0.5);
+}
+
+.glass-subtle {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 16px 0 rgba(31, 38, 135, 0.2);
+}
+
+.glass-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-hover:hover {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.6);
+}
+
+/* Gradient Text */
+.gradient-text {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Animated Background */
+.animated-bg {
+  background: linear-gradient(-45deg, #0f0f23, #1a1a3e, #2d1b69, #1e1b4b);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Floating Animation */
+.float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+/* Typography System - Montserrat Font */
+.font-montserrat {
+  font-family: var(--font-montserrat), system-ui, sans-serif;
+}
+
+/* Heading Styles */
+.text-h4 {
+  font-family: var(--font-montserrat), system-ui, sans-serif;
+  font-size: var(--font-h4);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.text-h3 {
+  font-family: var(--font-montserrat), system-ui, sans-serif;
+  font-size: var(--font-h3);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.text-h2 {
+  font-family: var(--font-montserrat), system-ui, sans-serif;
+  font-size: var(--font-h2);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.text-h1 {
+  font-family: var(--font-montserrat), system-ui, sans-serif;
+  font-size: var(--font-h1);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* Body Text Styles */
+.text-body-large {
+  font-family: var(--font-montserrat), system-ui, sans-serif;
+  font-size: var(--font-body-large);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.text-body-medium {
+  font-family: var(--font-montserrat), system-ui, sans-serif;
+  font-size: var(--font-body-medium);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.text-body-small {
+  font-family: var(--font-montserrat), system-ui, sans-serif;
+  font-size: var(--font-body-small);
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.text-body-xsmall {
+  font-family: var(--font-montserrat), system-ui, sans-serif;
+  font-size: var(--font-body-xsmall);
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+  .text-h4 {
+    font-size: calc(var(--font-h4) * 0.8);
+  }
+  
+  .text-h3 {
+    font-size: calc(var(--font-h3) * 0.85);
+  }
+  
+  .text-h2 {
+    font-size: calc(var(--font-h2) * 0.9);
+  }
+  
+  .text-h1 {
+    font-size: calc(var(--font-h1) * 0.95);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Video Quality Enhancement - Optimized for Best Quality */
+video {
+  image-rendering: auto;
+  -webkit-image-rendering: auto;
+  image-rendering: -webkit-optimize-contrast;
+  -ms-interpolation-mode: bicubic;
+}
+
+.video-background {
+  image-rendering: auto;
+  -webkit-image-rendering: auto;
+  image-rendering: -webkit-optimize-contrast;
+  -ms-interpolation-mode: bicubic;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Responsive Glass Effects */
+@media (max-width: 768px) {
+  .glass {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  
+  .glass-strong {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+}
+
+/* ===== LIQUID GLASS STYLES INTEGRATION ===== */
+/* Imported from LiquidGlassStyles.css - Preserving original styles */
+
+/* Custom range slider styling untuk kontrol */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: #00000033;
+  border-radius: 999px;
+  cursor: pointer;
+  height: 24px;
+}
+
+input[type="range"]::-webkit-slider-track {
+  background: linear-gradient(90deg, rgba(59, 130, 246, 0.3), rgba(168, 85, 247, 0.3));
+  height: 6px;
+  border-radius: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  background: linear-gradient(135deg, #60a5fa, #a78bfa);
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), 0 0 0 0 rgba(96, 165, 250, 0.4);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  transform: scale(1.15);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5), 0 0 0 8px rgba(96, 165, 250, 0.2);
+  border-color: white;
+}
+
+input[type="range"]::-webkit-slider-thumb:active {
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6), 0 0 0 12px rgba(96, 165, 250, 0.3);
+}
+
+input[type="range"]::-moz-range-track {
+  background: linear-gradient(90deg, rgba(59, 130, 246, 0.3), rgba(168, 85, 247, 0.3));
+  height: 6px;
+  border-radius: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+input[type="range"]::-moz-range-thumb {
+  background: linear-gradient(135deg, #60a5fa, #a78bfa);
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+input[type="range"]::-moz-range-thumb:hover {
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  transform: scale(1.15);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+  border-color: white;
+}
+
+input[type="range"]:focus {
+  outline: none;
+}
+
+input[type="range"]:focus::-webkit-slider-thumb {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), 0 0 0 4px rgba(96, 165, 250, 0.3);
+}
+
+/* Glass card container styles */
+.liquid-glass-container {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+}
+
+.liquid-glass-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+/* Control panel styles */
+.control-panel {
+  background: rgba(17, 24, 39, 0.8);
+  backdrop-filter: blur(16px);
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.control-section {
+  margin-bottom: 2rem;
+}
+
+.control-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 0.75rem;
+}
+
+.control-value {
+  font-size: 1.25rem;
+  font-family: monospace;
+  margin-bottom: 0.5rem;
+}
+
+.control-description {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 0.5rem;
+}
+
+/* Tab switcher styles */
+.tab-switcher {
+  display: flex;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 0.5rem;
+  padding: 0.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.tab-button {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 0.375rem;
+  transition: all 0.3s ease;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+}
+
+.tab-button:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.tab-button.active {
+  background: #3b82f6;
+  color: white;
+  box-shadow: 0 4px 14px 0 rgba(59, 130, 246, 0.4);
+}
+
+/* Radio button styles */
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.radio-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.radio-input {
+  width: 1rem;
+  height: 1rem;
+  accent-color: #3b82f6;
+}
+
+.radio-label {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Checkbox styles */
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.checkbox-input {
+  width: 1.25rem;
+  height: 1.25rem;
+  accent-color: #3b82f6;
+}
+
+.checkbox-label {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Warning text */
+.warning-text {
+  font-weight: 600;
+  color: #fbbf24;
+  font-size: 0.75rem;
+  margin-top: 0.5rem;
+  line-height: 1.4;
+}
+
+/* Custom Scrollbar Styles */
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:active {
+  background-color: rgba(255, 255, 255, 0.6);
 }
