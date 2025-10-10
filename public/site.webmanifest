@@ -1,0 +1,16 @@
+{
+  "name": "Nexus Quantum",
+  "short_name": "Nexus Quantum",
+  "description": "Rust-powered cloud platform for Agentic AI with quantum-safe security",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#F26522",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    }
+  ]
+}
