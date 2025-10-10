@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 
@@ -127,12 +128,12 @@ const Navbar: React.FC<NavbarProps> = ({ className, children }) => {
           {/* Navigation Links - Desktop only, dengan glassmorphism effects */}
           <div className="hidden md:flex items-center gap-1">
             {/* Navigation items dengan glassmorphism hover effects */}
-             <a 
-               href="/" 
+             <Link
+               href="/"
                className={cn(
                  "px-[10px] py-[8px] text-[14px] font-medium leading-[1.3] relative group overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#f26522]/20",
-                 isHomePage 
-                   ? "text-[#f26522] border-b border-[#f26522]" 
+                 isHomePage
+                   ? "text-[#f26522] border-b border-[#f26522]"
                    : "text-[#888888] hover:text-[#f26522]"
                )}
              >
@@ -142,7 +143,7 @@ const Navbar: React.FC<NavbarProps> = ({ className, children }) => {
                  "absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-[#f26522] to-[#e55a1e] group-hover:h-1 transition-all duration-300",
                  isHomePage ? "w-full" : "w-0 group-hover:w-full"
                )}></div>
-             </a>
+             </Link>
              <a 
                href="/about" 
                className={cn(
@@ -522,21 +523,21 @@ const Navbar: React.FC<NavbarProps> = ({ className, children }) => {
             <div className="flex-1 overflow-y-auto">
               <div className="p-6 space-y-4">
               {/* Home */}
-              <a 
-                href="/" 
+              <Link
+                href="/"
                 onClick={() => {
                   setIsMobileMenuOpen(false);
                   setIsMobileProductOpen(false);
                 }}
                 className={cn(
                   "block px-4 py-3 text-lg font-medium transition-all duration-300 rounded-lg animate-in slide-in-from-left duration-500 delay-200 hover:scale-105 hover:shadow-lg hover:shadow-[#f26522]/20",
-                  isHomePage 
+                  isHomePage
                     ? "text-[#f26522] bg-white/10" 
                     : "text-white hover:text-[#f26522] hover:bg-white/10"
                 )}
               >
                 Home
-              </a>
+              </Link>
 
               {/* About NQ */}
               <a 

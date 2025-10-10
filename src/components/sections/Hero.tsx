@@ -232,7 +232,7 @@ const Hero: React.FC<HeroProps> = ({ className, videoSrc }) => {
                 ? 'opacity-100 transform translate-y-0' 
                 : 'opacity-0 transform translate-y-4'
             }`}>
-              Nexus Quantum Technologies delivers the world's first vertically integrated, Rust-powered cloud platform designed for the Agentic AI era. We combine memory-safe systems software with GPU-efficient AI platforms and business-facing SaaS solutions. Built on five years of intensive R&D investment in Rust technologies since 2020, we have pioneered enterprise-scale implementations that leverage Rust's unique advantages in systems programming, concurrent processing, and memory safety for AI workloads. Our mission is democratizing enterprise-grade AI infrastructure with uncompromising security, performance, and operational simplicity for organizations worldwide.
+              Nexus Quantum Technologies delivers the world&apos;s first vertically integrated, Rust-powered cloud platform designed for the Agentic AI era. We combine memory-safe systems software with GPU-efficient AI platforms and business-facing SaaS solutions. Built on five years of intensive R&D investment in Rust technologies since 2020, we have pioneered enterprise-scale implementations that leverage Rust&apos;s unique advantages in systems programming, concurrent processing, and memory safety for AI workloads. Our mission is democratizing enterprise-grade AI infrastructure with uncompromising security, performance, and operational simplicity for organizations worldwide.
             </p>
 
             {/* Buttons Section */}

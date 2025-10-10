@@ -53,8 +53,8 @@ export default function FooterPage() {
                 <h3 className="text-h1 font-semibold text-white mb-3">CTA Section</h3>
                 <ul className="text-gray-300 space-y-2 text-body-small">
                   <li>• Background orange (#F26522)</li>
-                  <li>• Text "AGENTIC AI DATA CENTER"</li>
-                  <li>• Button "Start Free Trial" dengan icon</li>
+                  <li>• Text &quot;AGENTIC AI DATA CENTER&quot;</li>
+                  <li>• Button &quot;Start Free Trial&quot; dengan icon</li>
                   <li>• Responsive padding</li>
                 </ul>
               </div>

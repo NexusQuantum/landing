@@ -3,10 +3,13 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 
-// Image assets from Figma
+// Image assets from public folder
 const imgContactusIllustration = "/contactus illustration.png";
-const imgUser = "http://localhost:3845/assets/92cf27c47afc0974e33cd9b8eebfe182870104b6.svg";
-const imgMessage = "http://localhost:3845/assets/91106842eb941991d97c1c266b712c697a933ada.svg";
+const imgUser = "/icons/user.svg";
+const imgMessage = "/icons/message.svg";
+const imgLocation = "/icons/location.svg";
+const imgMail = "/icons/mail.svg";
+const imgSupport = "/icons/support.svg";
 
 interface ContactContentProps {
   className?: string;
@@ -40,7 +43,7 @@ const ContactContent: React.FC<ContactContentProps> = ({ className }) => {
               </h1>
             </div>
             <p className="font-['Montserrat:Regular',_sans-serif] font-normal leading-[1.3] text-[#3d3d3d] text-[14px] w-full">
-              Connect with our AI infrastructure experts to discuss your specific requirements, schedule a platform demo, or explore deployment options tailored to your organization's needs.
+              Connect with our AI infrastructure experts to discuss your specific requirements, schedule a platform demo, or explore deployment options tailored to your organization&apos;s needs.
             </p>
           </div>
 
@@ -122,21 +125,25 @@ const ContactContent: React.FC<ContactContentProps> = ({ className }) => {
           {/* Contact Information */}
           <div className="bg-[#fff3ed] box-border flex flex-wrap gap-[14px] items-center p-[14px] relative rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.3),0px_2px_6px_2px_rgba(0,0,0,0.15)] shrink-0 w-full">
             <div className="bg-[rgba(0,0,0,0)] box-border flex gap-[10px] items-center justify-center p-[10px] relative rounded-[5px] shrink-0 w-[203px]">
+              <img src={imgLocation} alt="Location" className="w-[18px] h-[18px]" />
               <span className="font-['Montserrat:Medium',_sans-serif] font-medium leading-[1.3] text-[#3d3d3d] text-[14px]">
                 HQ: Jakarta, Indonesia
               </span>
             </div>
             <div className="bg-[rgba(0,0,0,0)] box-border flex gap-[10px] items-center justify-center p-[10px] relative rounded-[5px] shrink-0 w-[312px]">
+              <img src={imgMail} alt="Email" className="w-[18px] h-[18px]" />
               <span className="font-['Montserrat:Medium',_sans-serif] font-medium leading-[1.3] text-[#3d3d3d] text-[14px]">
                 Sales: enterprise@nexusquantum.id
               </span>
             </div>
             <div className="bg-[rgba(0,0,0,0)] box-border flex gap-[10px] items-center justify-center p-[10px] relative rounded-[5px] shrink-0 w-[290px]">
+              <img src={imgMail} alt="Email" className="w-[18px] h-[18px]" />
               <span className="font-['Montserrat:Medium',_sans-serif] font-medium leading-[1.3] text-[#3d3d3d] text-[14px]">
                 General: hello@nexusquantum.id
               </span>
             </div>
             <div className="bg-[rgba(0,0,0,0)] box-border flex gap-[10px] items-center justify-center p-[10px] relative rounded-[5px] shrink-0 w-[317px]">
+              <img src={imgSupport} alt="Support" className="w-[18px] h-[18px]" />
               <span className="font-['Montserrat:Medium',_sans-serif] font-medium leading-[1.3] text-[#3d3d3d] text-[14px]">
                 Support: support@nexusquantum.id
               </span>
@@ -154,7 +161,7 @@ const ContactContent: React.FC<ContactContentProps> = ({ className }) => {
               Contact Us
             </h1>
             <p className="font-['Montserrat:Regular',_sans-serif] font-normal leading-[1.4] text-[#3d3d3d] text-[14px] text-center w-full">
-              Ready to get started? Let's talk about how we can help your organization with our cutting-edge AI infrastructure solutions.
+              Ready to get started? Let&apos;s talk about how we can help your organization with our cutting-edge AI infrastructure solutions.
             </p>
           </div>
 
@@ -229,22 +236,26 @@ const ContactContent: React.FC<ContactContentProps> = ({ className }) => {
 
           {/* Contact Information */}
           <div className="bg-[#fff3ed] box-border flex flex-col gap-3 items-center p-4 relative rounded-[12px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.3),0px_2px_6px_2px_rgba(0,0,0,0.15)] w-full">
-            <div className="bg-white/50 box-border flex items-center justify-center p-3 relative rounded-[8px] w-full">
+            <div className="bg-white/50 box-border flex items-center justify-center gap-2 p-3 relative rounded-[8px] w-full">
+              <img src={imgLocation} alt="Location" className="w-[18px] h-[18px] flex-shrink-0" />
               <span className="font-['Montserrat:Medium',_sans-serif] font-medium leading-[1.3] text-[#3d3d3d] text-[14px] text-center">
                 HQ: Jakarta, Indonesia
               </span>
             </div>
-            <div className="bg-white/50 box-border flex items-center justify-center p-3 relative rounded-[8px] w-full">
+            <div className="bg-white/50 box-border flex items-center justify-center gap-2 p-3 relative rounded-[8px] w-full">
+              <img src={imgMail} alt="Email" className="w-[18px] h-[18px] flex-shrink-0" />
               <span className="font-['Montserrat:Medium',_sans-serif] font-medium leading-[1.3] text-[#3d3d3d] text-[14px] text-center break-all">
                 Sales: enterprise@nexusquantum.id
               </span>
             </div>
-            <div className="bg-white/50 box-border flex items-center justify-center p-3 relative rounded-[8px] w-full">
+            <div className="bg-white/50 box-border flex items-center justify-center gap-2 p-3 relative rounded-[8px] w-full">
+              <img src={imgMail} alt="Email" className="w-[18px] h-[18px] flex-shrink-0" />
               <span className="font-['Montserrat:Medium',_sans-serif] font-medium leading-[1.3] text-[#3d3d3d] text-[14px] text-center break-all">
                 General: hello@nexusquantum.id
               </span>
             </div>
-            <div className="bg-white/50 box-border flex items-center justify-center p-3 relative rounded-[8px] w-full">
+            <div className="bg-white/50 box-border flex items-center justify-center gap-2 p-3 relative rounded-[8px] w-full">
+              <img src={imgSupport} alt="Support" className="w-[18px] h-[18px] flex-shrink-0" />
               <span className="font-['Montserrat:Medium',_sans-serif] font-medium leading-[1.3] text-[#3d3d3d] text-[14px] text-center break-all">
                 Support: support@nexusquantum.id
               </span>

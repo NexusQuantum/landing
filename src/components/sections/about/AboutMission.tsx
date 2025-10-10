@@ -45,7 +45,7 @@ const AboutMission: React.FC<AboutMissionProps> = ({ className }) => {
               <span className="text-[#f26522]">ABOUT</span> <span className="text-[#551d00]">NQ</span>
             </p>
             <p className="font-montserrat font-normal lg:font-medium leading-[1.3] text-[#3d3d3d] text-[14px] lg:text-[16px] text-left">
-              Nexus Quantum Technologies delivers the world's first vertically integrated, Rust-powered cloud platform designed for the Agentic AI era. We combine memory-safe systems software with GPU-efficient AI platforms and business-facing SaaS solutions. Our mission is democratizing enterprise-grade AI infrastructure with uncompromising security, performance, and operational simplicity for organizations worldwide.
+              Nexus Quantum Technologies delivers the world&apos;s first vertically integrated, Rust-powered cloud platform designed for the Agentic AI era. We combine memory-safe systems software with GPU-efficient AI platforms and business-facing SaaS solutions. Our mission is democratizing enterprise-grade AI infrastructure with uncompromising security, performance, and operational simplicity for organizations worldwide.
             </p>
             <div className="flex flex-col lg:flex-row gap-[14px] items-start w-full">
               <Button
