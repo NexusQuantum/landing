@@ -73,7 +73,7 @@ const AboutMission: React.FC<AboutMissionProps> = ({ className }) => {
           </div>
           
           {/* Right Video */}
-          <div className="h-[200px] lg:h-[300px] relative rounded-[20px] w-full lg:w-[495px] overflow-hidden">
+          <div className="h-[200px] lg:h-[300px] relative rounded-[20px] w-full lg:w-[495px] overflow-hidden bg-gray-100">
             <video 
               autoPlay 
               muted
@@ -81,9 +81,14 @@ const AboutMission: React.FC<AboutMissionProps> = ({ className }) => {
               controlsList="nodownload" 
               loop 
               playsInline
+              preload="auto"
             >
               <source src="/video/video-aboutus.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
+              <img 
+                src="/illustration about us.png" 
+                alt="About NQ illustration" 
+                className="w-full h-full object-cover rounded-[20px]"
+              />
             </video>
           </div>
         </div>
