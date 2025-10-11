@@ -73,7 +73,7 @@ const AboutMission: React.FC<AboutMissionProps> = ({ className }) => {
           </div>
           
           {/* Right Video */}
-          <div className="h-[200px] lg:h-auto relative rounded-[20px] w-full lg:w-[495px] overflow-hidden">
+          <div className="h-[200px] lg:h-[300px] relative rounded-[20px] w-full lg:w-[495px] overflow-hidden">
             <video 
               autoPlay 
               muted
