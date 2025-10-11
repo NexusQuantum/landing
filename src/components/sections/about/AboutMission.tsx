@@ -37,7 +37,7 @@ const AboutMission: React.FC<AboutMissionProps> = ({ className }) => {
         </div>
 
         {/* About NQ Section with Video */}
-        <div className="flex flex-col lg:flex-row gap-4 lg:gap-[36px] items-start relative w-full">
+        <div className="flex flex-col lg:flex-row gap-4 lg:gap-[36px] items-stretch relative w-full">
           {/* Left Content */}
           <div className="bg-transparent flex flex-col gap-4 lg:gap-[24px] items-start p-4 lg:p-[36px] relative rounded-[20px] w-full lg:flex-1">
             <div className="absolute border border-[#888888] inset-0 pointer-events-none rounded-[20px]" />
@@ -73,7 +73,7 @@ const AboutMission: React.FC<AboutMissionProps> = ({ className }) => {
           </div>
           
           {/* Right Video */}
-          <div className="h-[250px] lg:h-[400px] relative rounded-[20px] w-full lg:w-[495px] overflow-hidden bg-gray-100">
+          <div className="h-[250px] lg:h-full relative rounded-[20px] w-full lg:w-[495px] overflow-hidden bg-gray-100">
             <video 
               autoPlay 
               muted
