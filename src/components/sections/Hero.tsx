@@ -22,6 +22,7 @@ const Hero: React.FC<HeroProps> = ({ className, videoSrc }) => {
 
   const [isVisible, setIsVisible] = useState(false);
   const [isPageLoaded, setIsPageLoaded] = useState(false);
+  const [isDownloading, setIsDownloading] = useState(false);
   
   // Liquid glass effect states
   const [mainCardMousePos, setMainCardMousePos] = useState({ x: 0, y: 0 });
@@ -109,6 +110,41 @@ const Hero: React.FC<HeroProps> = ({ className, videoSrc }) => {
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
     setStatsCardMousePos(prev => prev.map((pos, i) => i === index ? { x, y } : pos));
+  };
+
+  // Handle whitepaper download
+  const handleWhitepaperDownload = async () => {
+    if (!isDownloading) {
+      setIsDownloading(true);
+      try {
+        const whitepaperFileName = '[Nexus] NQRust Secure-AI-DC v1.0.pdf';
+        const whitepaperUrl = `/whitepaper-product/${whitepaperFileName}`;
+        
+        // Fetch the file first to ensure it exists
+        const response = await fetch(whitepaperUrl);
+        if (response.ok) {
+          const blob = await response.blob();
+          const url = window.URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = whitepaperFileName;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          window.URL.revokeObjectURL(url);
+        } else {
+          // Fallback: Open in new tab if fetch fails
+          window.open(whitepaperUrl, '_blank');
+        }
+      } catch (error) {
+        console.error('Download failed:', error);
+        // Fallback: Open in new tab
+        const whitepaperUrl = '/whitepaper-product/[Nexus] NQRust Secure-AI-DC v1.0.pdf';
+        window.open(whitepaperUrl, '_blank');
+      } finally {
+        setIsDownloading(false);
+      }
+    }
   };
 
   return (
@@ -206,7 +242,7 @@ const Hero: React.FC<HeroProps> = ({ className, videoSrc }) => {
             </div>
             
             {/* Main Title */}
-            <h1 className={`text-[var(--primary-3)] text-h1 md:text-h3 font-semibold text-center leading-[1.3] transition-all duration-800 ease-out delay-400 ${
+            <h1 className={`bg-gradient-to-b from-[#FF5001] to-[#FF9C6D] bg-clip-text text-transparent text-h1 md:text-h3 font-semibold text-center leading-[1.3] transition-all duration-800 ease-out delay-400 ${
               isPageLoaded 
                 ? 'opacity-100 transform translate-y-0' 
                 : 'opacity-0 transform translate-y-4'
@@ -254,12 +290,19 @@ const Hero: React.FC<HeroProps> = ({ className, videoSrc }) => {
                 <Button
                   variant="primary"
                   size="sm"
-                  icon={<Download />}
+                  icon={isDownloading ? (
+                    <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                  ) : <Download />}
                   iconPosition="right"
                   fullWidth
                   className="md:w-auto"
+                  onClick={handleWhitepaperDownload}
+                  disabled={isDownloading}
                 >
-                  Download Whitepaper
+                  {isDownloading ? 'Downloading...' : 'Download Whitepaper'}
                 </Button>
 
                 {/* Secondary Outline Button */}
@@ -270,6 +313,7 @@ const Hero: React.FC<HeroProps> = ({ className, videoSrc }) => {
                   iconPosition="left"
                   fullWidth
                   className="bg-white md:w-auto"
+                  onClick={() => window.location.href = '/contact'}
                 >
                   Talk to Engineer
                 </Button>

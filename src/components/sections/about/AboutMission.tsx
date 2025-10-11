@@ -37,15 +37,15 @@ const AboutMission: React.FC<AboutMissionProps> = ({ className }) => {
         </div>
 
         {/* About NQ Section with Video */}
-        <div className="flex flex-col lg:flex-row gap-4 lg:gap-[36px] lg:h-[414px] items-start relative w-full">
+        <div className="flex flex-col lg:flex-row gap-4 lg:gap-[36px] items-stretch relative w-full">
           {/* Left Content */}
-          <div className="bg-transparent flex flex-col gap-4 lg:gap-[28px] lg:h-full items-start p-4 lg:p-[36px] relative rounded-[20px] w-full lg:flex-1">
+          <div className="bg-transparent flex flex-col gap-4 lg:gap-[24px] items-start p-4 lg:p-[36px] relative rounded-[20px] w-full lg:flex-1">
             <div className="absolute border border-[#888888] inset-0 pointer-events-none rounded-[20px]" />
             <p className="font-montserrat font-medium lg:font-semibold leading-[1.3] text-[18px] lg:text-[24px] text-left w-full">
               <span className="text-[#f26522]">ABOUT</span> <span className="text-[#551d00]">NQ</span>
             </p>
             <p className="font-montserrat font-normal lg:font-medium leading-[1.3] text-[#3d3d3d] text-[14px] lg:text-[16px] text-left">
-              Nexus Quantum Technologies delivers the world&apos;s first vertically integrated, Rust-powered cloud platform designed for the Agentic AI era. We combine memory-safe systems software with GPU-efficient AI platforms and business-facing SaaS solutions. Our mission is democratizing enterprise-grade AI infrastructure with uncompromising security, performance, and operational simplicity for organizations worldwide.
+              Nexus Quantum Technologies delivers the world&apos;s first vertically integrated, Rust-powered cloud platform designed for the Agentic AI era. We combine memory-safe systems software with GPU-efficient AI platforms and business-facing SaaS solutions. Built on five years of intensive R&D investment in Rust technologies since 2020, we have pioneered enterprise-scale implementations that leverage Rust&apos;s unique advantages in systems programming, concurrent processing, and memory safety for AI workloads. Our mission is democratizing enterprise-grade AI infrastructure with uncompromising security, performance, and operational simplicity for organizations worldwide.
             </p>
             <div className="flex flex-col lg:flex-row gap-[14px] items-start w-full">
               <Button

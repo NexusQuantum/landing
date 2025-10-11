@@ -3,8 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 
-// Image assets from Figma
-const imgPrimaryNoBackgroundWithOrangeText1 = "http://localhost:3845/assets/ec3336d0dba7a53e40ec3f6232975f6ce2fb7ee9.png";
 
 interface LayersSectionProps {
   className?: string;
@@ -52,19 +50,13 @@ const LayersSection: React.FC<LayersSectionProps> = ({ className }) => {
 
   return (
     <section id="layers-section" className={cn('w-full overflow-hidden', className)}>
-      <div className="bg-[var(--light-3)] flex flex-col gap-6 md:gap-7 items-center justify-center px-4 md:px-[70px] py-[50px] md:py-[70px] relative w-full max-w-full">
+      <div className="bg-[var(--light-3)] flex flex-col gap-6 md:gap-7 items-center justify-center px-4 md:px-[70px] py-[36px] relative w-full max-w-full">
         {/* Header Content */}
         <div className={`flex flex-col gap-2 items-center transition-all duration-800 ease-out delay-200 ${
           isVisible 
             ? 'opacity-100 transform translate-y-0' 
             : 'opacity-0 transform translate-y-4'
         }`}>
-          {/* Logo/Badge */}
-          <div 
-            className="h-8 w-[90px] bg-center bg-no-repeat bg-cover"
-            style={{ backgroundImage: `url('${imgPrimaryNoBackgroundWithOrangeText1}')` }}
-          />
-          
           {/* Title */}
           <h2 className="text-h2 font-semibold text-[var(--dark-3)] text-center">
             <span>ONE CLOUD, </span>

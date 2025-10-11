@@ -6,6 +6,28 @@ import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import { LiquidGlassCard } from '@/components/liquid/LiquidGlassCard';
 
+// Mapping product titles to whitepaper files
+const whitepaperMapping: { [key: string]: string } = {
+  'AI Appliance': '[Nexus] NQRust Secure-AI-DC v1.0.pdf',
+  'Analytics': '[Nexus] NQRust-Analytics v2.0.pdf',
+  'FleetMgr': '[Nexus] NQRust-FleetMgr v1.0.pdf',
+  'HV Hypervisor': '[Nexus] NQRust-HV v1.0.pdf',
+  'Lake': '[Nexus] NQRust-Lake v1.0.pdf',
+  'MicroVM': '[Nexus] NQRust-MicroVM v1.0.pdf',
+  'Storage': '[Nexus] NQRust-Storage v1.0.pdf',
+  // Products without whitepaper files (will be disabled)
+  'BPMN': '',
+  'Edge': '',
+  'Enclave': '',
+  'Guard': '',
+  'HV': '',
+  'Identity': '',
+  'Insight': '',
+  'LLMOps': '',
+  'SecureGPU': '',
+  'ZeroCode': '',
+};
+
 // Icons
 const DownloadIcon = () => (
   <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -45,6 +67,43 @@ export default function ProductDetailLayout1({
   whitepaperUrl = "#"
 }: ProductDetailLayout1Props) {
   const [activeBenefit, setActiveBenefit] = useState(0);
+  const [isDownloading, setIsDownloading] = useState(false);
+  
+  // Check if whitepaper file exists
+  const whitepaperFileName = whitepaperMapping[productTitle];
+  const hasWhitepaper = !!whitepaperFileName && whitepaperFileName.trim() !== '';
+  const actualWhitepaperUrl = hasWhitepaper ? `/whitepaper-product/${whitepaperFileName}` : "#";
+
+  // Handle whitepaper download
+  const handleWhitepaperDownload = async () => {
+    if (hasWhitepaper && !isDownloading) {
+      setIsDownloading(true);
+      try {
+        // Fetch the file first to ensure it exists
+        const response = await fetch(actualWhitepaperUrl);
+        if (response.ok) {
+          const blob = await response.blob();
+          const url = window.URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = whitepaperFileName;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          window.URL.revokeObjectURL(url);
+        } else {
+          // Fallback: Open in new tab if fetch fails
+          window.open(actualWhitepaperUrl, '_blank');
+        }
+      } catch (error) {
+        console.error('Download failed:', error);
+        // Fallback: Open in new tab
+        window.open(actualWhitepaperUrl, '_blank');
+      } finally {
+        setIsDownloading(false);
+      }
+    }
+  };
 
   return (
     <div className="bg-white min-h-screen">
@@ -75,7 +134,7 @@ export default function ProductDetailLayout1({
             }}
           >
             <h1 className="font-bold text-3xl sm:text-4xl lg:text-[54px] leading-[1.3] mb-4">
-              <span className="text-[#ff6b2b]">NQRust </span>
+              <span className="bg-gradient-to-b from-[#FF5001] to-[#FF9C6D] bg-clip-text text-transparent">NQRust </span>
               <span className="text-[#fffefd]">{productTitle}</span>
             </h1>
             <p className="font-medium text-base sm:text-lg lg:text-[18px] leading-[1.3] text-[#fffefd]">
@@ -155,18 +214,32 @@ export default function ProductDetailLayout1({
             <div className="flex flex-col sm:flex-row gap-3.5">
               <a
                 href={brochureUrl}
-                className="inline-flex items-center justify-center gap-2.5 px-3.5 py-2.5 bg-[#f26522] text-white text-sm font-medium rounded-lg shadow-[0px_2px_6px_2px_rgba(0,0,0,0.15),0px_1px_2px_0px_rgba(0,0,0,0.3)] hover:bg-[#e55a1f] transition-colors"
+                className="inline-flex items-center justify-center gap-2.5 px-3.5 py-2.5 bg-[#f26522] text-white text-sm font-medium rounded-lg shadow-[0px_2px_6px_2px_rgba(0,0,0,0.15),0px_1px_2px_0px_rgba(0,0,0,0.3)] hover:bg-[#e55a1f] hover:scale-105 hover:shadow-lg hover:shadow-[#f26522]/25 transition-all duration-300 transform active:scale-95"
               >
                 <DownloadIcon />
                 Get Brochure
               </a>
-              <a
-                href={whitepaperUrl}
-                className="inline-flex items-center justify-center gap-2.5 px-3.5 py-2.5 bg-[#fffefd] border border-[#551d00] text-[#551d00] text-sm font-medium rounded-lg hover:bg-gray-50 transition-colors"
+              <button
+                onClick={handleWhitepaperDownload}
+                disabled={!hasWhitepaper || isDownloading}
+                className={`inline-flex items-center justify-center gap-2.5 px-3.5 py-2.5 text-sm font-medium rounded-lg transition-all duration-300 transform ${
+                  hasWhitepaper && !isDownloading
+                    ? 'bg-[#fffefd] border border-[#551d00] text-[#551d00] hover:bg-gray-50 hover:scale-105 hover:shadow-lg cursor-pointer active:scale-95'
+                    : hasWhitepaper && isDownloading
+                    ? 'bg-[#f26522] border border-[#f26522] text-white cursor-wait'
+                    : 'bg-gray-400 border border-gray-400 text-gray-600 cursor-not-allowed'
+                }`}
               >
-                <ScrollTextIcon />
-                Whitepaper
-              </a>
+                {isDownloading ? (
+                  <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                ) : (
+                  <ScrollTextIcon />
+                )}
+                {isDownloading ? 'Downloading...' : hasWhitepaper ? 'Whitepaper' : 'Coming Soon'}
+              </button>
             </div>
           </div>
         </div>

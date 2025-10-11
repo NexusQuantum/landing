@@ -22,7 +22,9 @@ export default function NQRustIdentityPage() {
         description: "6x faster authentication integration with ready-to-use UI and 300% ROI through reduced development overhead."
       }
     ],
-    backgroundImage: "/bg-product.png"
+    backgroundImage: "/bg-product.png",
+    brochureUrl: "#",
+    whitepaperUrl: "#"
   };
 
   return <ProductDetailLayout2 {...productData} />;

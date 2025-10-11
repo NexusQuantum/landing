@@ -22,7 +22,9 @@ export default function NQRustEdgePage() {
         description: "900% first-year ROI through 5G MEC optimization, smart factory integration, and retail privacy-preserving analytics."
       }
     ],
-    backgroundImage: "/bg-product.png"
+    backgroundImage: "/bg-product.png",
+    brochureUrl: "#",
+    whitepaperUrl: "#"
   };
 
   return <ProductDetailLayout2 {...productData} />;
