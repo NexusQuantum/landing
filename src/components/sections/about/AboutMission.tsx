@@ -73,15 +73,19 @@ const AboutMission: React.FC<AboutMissionProps> = ({ className }) => {
           </div>
           
           {/* Right Video */}
-          <div className="h-[200px] lg:h-full relative rounded-[20px] w-full lg:w-[495px]">
+          <div className="h-[200px] lg:h-full relative rounded-[20px] w-full lg:w-[495px] bg-gray-200">
             <video 
               autoPlay 
+              muted
               className="absolute max-w-none object-cover rounded-[20px] size-full" 
               controlsList="nodownload" 
               loop 
               playsInline
+              onError={(e) => console.error('Video failed to load:', e)}
+              onLoadStart={() => console.log('Video started loading')}
             >
-              <source src="/video/video-aboutus.mp4" />
+              <source src="/video/video-aboutus.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
             </video>
           </div>
         </div>
