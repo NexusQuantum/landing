@@ -8,24 +8,45 @@ import { LiquidGlassCard } from '@/components/liquid/LiquidGlassCard';
 
 // Mapping product titles to whitepaper files
 const whitepaperMapping: { [key: string]: string } = {
-  'AI Appliance': '[Nexus] NQRust Secure-AI-DC v1.0.pdf',
-  'Analytics': '[Nexus] NQRust-Analytics v2.0.pdf',
-  'FleetMgr': '[Nexus] NQRust-FleetMgr v1.0.pdf',
-  'HV Hypervisor': '[Nexus] NQRust-HV v1.0.pdf',
-  'Lake': '[Nexus] NQRust-Lake v1.0.pdf',
+  'AI Appliance': '[Nexus] NexusRust Secure-AI-DC v1.0.pdf',
+  'FleetMgr': '[Nexus] NQRust-FleetMgr v2.0.pdf',
+  'HV Hypervisor': '[Nexus] NQRust-HV v2.0.pdf',
+  'Lake': '[Nexus] NQRust-Lake v2.0.pdf',
   'MicroVM': '[Nexus] NQRust-MicroVM v1.0.pdf',
-  'Storage': '[Nexus] NQRust-Storage v1.0.pdf',
+  'Storage': '[Nexus] NQRust-Storage v2.0.pdf',
+  'Edge': '[Nexus] NQRust-Edge v1.0.pdf',
+  'Identity': '[Nexus] NQRust-Identity v1.0.pdf',
+  'LLMOps': '[Nexus] NQRust-LLMOps v1.0.pdf',
+  'SecureGPU': '[Nexus] NQRust-SecureGPU v1.0.pdf',
   // Products without whitepaper files (will be disabled)
+  'Analytics': '',
   'BPMN': '',
-  'Edge': '',
   'Enclave': '',
   'Guard': '',
   'HV': '',
-  'Identity': '',
   'Insight': '',
-  'LLMOps': '',
-  'SecureGPU': '',
   'ZeroCode': '',
+};
+
+// Mapping product titles to brochure files
+const brochureMapping: { [key: string]: string } = {
+  'AI Appliance': '[Nexus] Brochure NQRust-AI Appliance v1.0.pdf',
+  'Analytics': '[Nexus] Brochure NQRust-Analytics v1.0.pdf',
+  'BPMN': '[Nexus] Brochure NQRust-BPMN v1.0.pdf',
+  'Edge': '[Nexus] Brochure NQRust-Edge v1.0.pdf',
+  'Enclave': '[Nexus] Brochure NQRust-Enclave v1.0.pdf',
+  'FleetMgr': '[Nexus] Brochure NQRust-FleetMgr v1.0.pdf',
+  'Guard': '[Nexus] Brochure NQRust-Guard v1.0.pdf',
+  'HV': '[Nexus] Brochure NQRust-HV v1.0.pdf',
+  'HV Hypervisor': '[Nexus] Brochure NQRust-HV v1.0.pdf',
+  'Identity': '[Nexus] Brochure NQRust-Identity v1.0.pdf',
+  'Insight': '[Nexus] Brochure NQRust-Insight v1.0.pdf',
+  'Lake': '[Nexus] Brochure NQRust-Lake v1.0.pdf',
+  'LLMOps': '[Nexus] Brochure NQRust-LLMOps v1.0.pdf',
+  'MicroVM': '[Nexus] Brochure NQRust-MicroVM v1.0.pdf',
+  'SecureGPU': '[Nexus] Brochure NQRust-SecureGPU v1.0.pdf',
+  'Storage': '[Nexus] Brochure NQRust-Storage v1.0.pdf',
+  'ZeroCode': '[Nexus] Brochure NQRust-ZeroCode v1.0.pdf',
 };
 
 // Icons
@@ -68,11 +89,17 @@ export default function ProductDetailLayout1({
 }: ProductDetailLayout1Props) {
   const [activeBenefit, setActiveBenefit] = useState(0);
   const [isDownloading, setIsDownloading] = useState(false);
+  const [isDownloadingBrochure, setIsDownloadingBrochure] = useState(false);
   
   // Check if whitepaper file exists
   const whitepaperFileName = whitepaperMapping[productTitle];
   const hasWhitepaper = !!whitepaperFileName && whitepaperFileName.trim() !== '';
-  const actualWhitepaperUrl = hasWhitepaper ? `/whitepaper-product/${whitepaperFileName}` : "#";
+  const actualWhitepaperUrl = hasWhitepaper ? `/Finalized Whitepaper/${whitepaperFileName}` : "#";
+
+  // Check if brochure file exists
+  const brochureFileName = brochureMapping[productTitle];
+  const hasBrochure = !!brochureFileName && brochureFileName.trim() !== '';
+  const actualBrochureUrl = hasBrochure ? `/Finalized Brochure/${brochureFileName}` : "#";
 
   // Handle whitepaper download
   const handleWhitepaperDownload = async () => {
@@ -101,6 +128,37 @@ export default function ProductDetailLayout1({
         window.open(actualWhitepaperUrl, '_blank');
       } finally {
         setIsDownloading(false);
+      }
+    }
+  };
+
+  // Handle brochure download
+  const handleBrochureDownload = async () => {
+    if (hasBrochure && !isDownloadingBrochure) {
+      setIsDownloadingBrochure(true);
+      try {
+        // Fetch the file first to ensure it exists
+        const response = await fetch(actualBrochureUrl);
+        if (response.ok) {
+          const blob = await response.blob();
+          const url = window.URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = brochureFileName;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          window.URL.revokeObjectURL(url);
+        } else {
+          // Fallback: Open in new tab if fetch fails
+          window.open(actualBrochureUrl, '_blank');
+        }
+      } catch (error) {
+        console.error('Download failed:', error);
+        // Fallback: Open in new tab
+        window.open(actualBrochureUrl, '_blank');
+      } finally {
+        setIsDownloadingBrochure(false);
       }
     }
   };
@@ -212,13 +270,27 @@ export default function ProductDetailLayout1({
 
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-3.5">
-              <a
-                href={brochureUrl}
-                className="inline-flex items-center justify-center gap-2.5 px-3.5 py-2.5 bg-[#f26522] text-white text-sm font-medium rounded-lg shadow-[0px_2px_6px_2px_rgba(0,0,0,0.15),0px_1px_2px_0px_rgba(0,0,0,0.3)] hover:bg-[#e55a1f] hover:scale-105 hover:shadow-lg hover:shadow-[#f26522]/25 transition-all duration-300 transform active:scale-95"
+              <button
+                onClick={handleBrochureDownload}
+                disabled={!hasBrochure || isDownloadingBrochure}
+                className={`inline-flex items-center justify-center gap-2.5 px-3.5 py-2.5 text-sm font-medium rounded-lg transition-all duration-300 transform ${
+                  hasBrochure && !isDownloadingBrochure
+                    ? 'bg-[#f26522] text-white shadow-[0px_2px_6px_2px_rgba(0,0,0,0.15),0px_1px_2px_0px_rgba(0,0,0,0.3)] hover:bg-[#e55a1f] hover:scale-105 hover:shadow-lg hover:shadow-[#f26522]/25 cursor-pointer active:scale-95'
+                    : hasBrochure && isDownloadingBrochure
+                    ? 'bg-[#f26522] border border-[#f26522] text-white cursor-wait'
+                    : 'bg-gray-400 border border-gray-400 text-gray-600 cursor-not-allowed'
+                }`}
               >
-                <DownloadIcon />
-                Get Brochure
-              </a>
+                {isDownloadingBrochure ? (
+                  <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                ) : (
+                  <DownloadIcon />
+                )}
+                {isDownloadingBrochure ? 'Downloading...' : hasBrochure ? 'Get Brochure' : 'Coming Soon'}
+              </button>
               <button
                 onClick={handleWhitepaperDownload}
                 disabled={!hasWhitepaper || isDownloading}

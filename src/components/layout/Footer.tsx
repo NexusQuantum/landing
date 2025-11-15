@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import Button from '@/components/ui/Button';
 import { ArrowRight, Instagram, Linkedin, Youtube } from 'lucide-react';
@@ -14,6 +15,41 @@ interface FooterProps {
 }
 
 const Footer: React.FC<FooterProps> = ({ className }) => {
+  // Function to convert product name to URL
+  const getProductUrl = (productName: string): string => {
+    const productMap: { [key: string]: string } = {
+      'NQRust-HV Hypervisor': '/products/nqrust-hv-hypervisor',
+      'NQRust-MicroVM': '/products/nqrust-microvm',
+      'NQRust-Storage': '/products/nqrust-storage',
+      'NQRust-FleetMgr': '/products/nqrust-fleetmgr',
+      'NQRust-SecureGPU': '/products/nqrust-securegpu',
+      'NQRust-Enclave': '/products/nqrust-enclave',
+      'NQRust-Lake': '/products/nqrust-lake',
+      'NQRust-Analytics': '/products/nqrust-analytics',
+      'NQRust-Insight': '/products/nqrust-insight',
+      'NQRust-Guard': '/products/nqrust-guard',
+      'NQRust-Edge': '/products/nqrust-edge',
+      'NQRust-AI Appliance': '/products/nqrust-ai-appliance',
+      'NQRust-LLMOps': '/products/nqrust-llmops',
+      'NQRust-Identity': '/products/nqrust-identity',
+      'NQRust-ZeroCode': '/products/nqrust-zerocode',
+      'NQRust-BPMN': '/products/nqrust-bpmn'
+    };
+    return productMap[productName] || '#';
+  };
+
+  // Function to convert sitemap link to URL
+  const getSitemapUrl = (linkName: string): string => {
+    const sitemapMap: { [key: string]: string } = {
+      'Home': '/',
+      'About NQ': '/about',
+      'Solutions': '/solution',
+      'Pricing': '/pricing',
+      'Products': '/products'
+    };
+    return sitemapMap[linkName] || '#';
+  };
+
   const products = [
     'NQRust-HV Hypervisor',
     'NQRust-MicroVM',
@@ -38,8 +74,7 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
     'About NQ',
     'Solutions',
     'Pricing',
-    'Products',
-    'Platform'
+    'Products'
   ];
 
   const socialLinks = [
@@ -86,14 +121,13 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
             </h3>
             <div className="grid grid-cols-2 gap-3 w-full">
               {products.map((product, index) => (
-                <Button
+                <Link
                   key={index}
-                  variant="tertiary"
-                  size="sm"
-                  className="justify-start px-[14px] py-0 h-auto text-body-small font-normal text-white hover:bg-white/10 hover:text-white whitespace-nowrap"
+                  href={getProductUrl(product)}
+                  className="flex items-center justify-start px-[14px] py-0 h-auto text-body-small font-normal text-white hover:bg-white/10 hover:text-white whitespace-nowrap rounded transition-colors"
                 >
                   {product}
-                </Button>
+                </Link>
               ))}
             </div>
           </div>
@@ -105,14 +139,13 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
             </h3>
             <div className="grid grid-cols-1 gap-3 w-[160px]">
               {sitemapLinks.map((link, index) => (
-                <Button
+                <Link
                   key={index}
-                  variant="tertiary"
-                  size="sm"
-                  className="justify-start px-[14px] py-0 h-auto text-body-small font-normal text-white hover:bg-white/10 hover:text-white whitespace-nowrap"
+                  href={getSitemapUrl(link)}
+                  className="flex items-center justify-start px-[14px] py-0 h-auto text-body-small font-normal text-white hover:bg-white/10 hover:text-white whitespace-nowrap rounded transition-colors"
                 >
                   {link}
-                </Button>
+                </Link>
               ))}
             </div>
           </div>
@@ -147,14 +180,13 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
             </h3>
             <div className="grid grid-cols-2 gap-3 w-full">
               {products.map((product, index) => (
-                <Button
+                <Link
                   key={index}
-                  variant="tertiary"
-                  size="sm"
-                  className="justify-start px-[14px] py-0 h-auto text-body-small font-normal text-white hover:bg-white/10 hover:text-white whitespace-nowrap"
+                  href={getProductUrl(product)}
+                  className="flex items-center justify-start px-[14px] py-0 h-auto text-body-small font-normal text-white hover:bg-white/10 hover:text-white whitespace-nowrap rounded transition-colors"
                 >
                   {product}
-                </Button>
+                </Link>
               ))}
             </div>
           </div>
@@ -168,14 +200,13 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
               </h3>
               <div className="grid grid-cols-1 gap-3 w-[160px]">
                 {sitemapLinks.map((link, index) => (
-                  <Button
+                  <Link
                     key={index}
-                    variant="tertiary"
-                    size="sm"
-                    className="justify-start px-[14px] py-0 h-auto text-body-small font-normal text-white hover:bg-white/10 hover:text-white whitespace-nowrap"
+                    href={getSitemapUrl(link)}
+                    className="flex items-center justify-start px-[14px] py-0 h-auto text-body-small font-normal text-white hover:bg-white/10 hover:text-white whitespace-nowrap rounded transition-colors"
                   >
                     {link}
-                  </Button>
+                  </Link>
                 ))}
               </div>
             </div>

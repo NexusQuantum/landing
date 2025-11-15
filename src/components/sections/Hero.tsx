@@ -117,8 +117,8 @@ const Hero: React.FC<HeroProps> = ({ className, videoSrc }) => {
     if (!isDownloading) {
       setIsDownloading(true);
       try {
-        const whitepaperFileName = '[Nexus] NQRust Secure-AI-DC v1.0.pdf';
-        const whitepaperUrl = `/whitepaper-product/${whitepaperFileName}`;
+        const whitepaperFileName = '[Nexus] NexusRust Secure-AI-DC v1.0.pdf';
+        const whitepaperUrl = `/Finalized Whitepaper/${whitepaperFileName}`;
         
         // Fetch the file first to ensure it exists
         const response = await fetch(whitepaperUrl);
@@ -139,7 +139,7 @@ const Hero: React.FC<HeroProps> = ({ className, videoSrc }) => {
       } catch (error) {
         console.error('Download failed:', error);
         // Fallback: Open in new tab
-        const whitepaperUrl = '/whitepaper-product/[Nexus] NQRust Secure-AI-DC v1.0.pdf';
+        const whitepaperUrl = '/Finalized Whitepaper/[Nexus] NexusRust Secure-AI-DC v1.0.pdf';
         window.open(whitepaperUrl, '_blank');
       } finally {
         setIsDownloading(false);
