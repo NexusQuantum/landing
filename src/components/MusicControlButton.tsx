@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 
 export default function MusicControlButton() {
-  const [isMuted, setIsMuted] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -12,22 +12,41 @@ export default function MusicControlButton() {
       setIsVisible(true);
     }, 1000);
 
-    return () => clearTimeout(timer);
+    // Check if audio is playing on mount and track state
+    const audio = document.querySelector('audio') as HTMLAudioElement;
+    const updatePlayingState = () => {
+      if (audio) {
+        setIsPlaying(!audio.paused);
+      }
+    };
+
+    if (audio) {
+      audio.addEventListener('play', updatePlayingState);
+      audio.addEventListener('pause', updatePlayingState);
+      updatePlayingState();
+    }
+
+    return () => {
+      clearTimeout(timer);
+      if (audio) {
+        audio.removeEventListener('play', updatePlayingState);
+        audio.removeEventListener('pause', updatePlayingState);
+      }
+    };
   }, []);
 
-  const toggleMute = () => {
+  const togglePlay = () => {
     const audio = document.querySelector('audio') as HTMLAudioElement;
     if (audio) {
-      if (isMuted) {
-        audio.volume = 0.5; // Set back to 50%
-        audio.play().catch(() => {
-          // If autoplay is blocked, just unmute
-          console.log('Audio play was prevented, but volume restored');
-        });
+      if (isPlaying) {
+        audio.pause();
       } else {
-        audio.volume = 0; // Mute
+        audio.volume = 0.5; // Set volume to 50%
+        audio.play().catch((error) => {
+          console.log('Audio play was prevented:', error);
+        });
       }
-      setIsMuted(!isMuted);
+      setIsPlaying(!isPlaying);
     }
   };
 
@@ -36,7 +55,7 @@ export default function MusicControlButton() {
   return (
     <div className="fixed bottom-6 right-6 z-50">
       <button
-        onClick={toggleMute}
+        onClick={togglePlay}
         className="group relative overflow-hidden rounded-full p-4 transition-all duration-300 hover:scale-110 active:scale-95"
         style={{
           background: 'rgba(255, 255, 255, 0.1)',
@@ -44,7 +63,7 @@ export default function MusicControlButton() {
           border: '1px solid rgba(255, 255, 255, 0.2)',
           boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
         }}
-        aria-label={isMuted ? 'Unmute music' : 'Mute music'}
+        aria-label={isPlaying ? 'Pause music' : 'Play music'}
       >
         {/* Liquid glass effect overlay */}
         <div 
@@ -54,10 +73,10 @@ export default function MusicControlButton() {
           }}
         />
         
-        {/* Speaker icon */}
+        {/* Play/Pause icon */}
         <div className="relative z-10">
-          {isMuted ? (
-            // Muted speaker icon
+          {isPlaying ? (
+            // Pause icon
             <svg
               width="24"
               height="24"
@@ -67,29 +86,12 @@ export default function MusicControlButton() {
               className="text-white transition-colors duration-200"
             >
               <path
-                d="M11 5L6 9H2V15H6L11 19V5Z"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M19.07 4.93C20.88 6.74 22 9.24 22 12C22 14.76 20.88 17.26 19.07 19.07M15.54 8.46C16.48 9.4 17 10.66 17 12C17 13.34 16.48 14.6 15.54 15.54"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M2 2L22 22"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+                d="M6 4H10V20H6V4ZM14 4H18V20H14V4Z"
+                fill="currentColor"
               />
             </svg>
           ) : (
-            // Unmuted speaker icon
+            // Play icon
             <svg
               width="24"
               height="24"
@@ -99,18 +101,8 @@ export default function MusicControlButton() {
               className="text-white transition-colors duration-200"
             >
               <path
-                d="M11 5L6 9H2V15H6L11 19V5Z"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M19.07 4.93C20.88 6.74 22 9.24 22 12C22 14.76 20.88 17.26 19.07 19.07M15.54 8.46C16.48 9.4 17 10.66 17 12C17 13.34 16.48 14.6 15.54 15.54"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+                d="M8 5V19L19 12L8 5Z"
+                fill="currentColor"
               />
             </svg>
           )}

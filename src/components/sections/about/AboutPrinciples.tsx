@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 // Image assets from public folder
 const engineeringImages = {
@@ -22,6 +22,25 @@ interface Principle {
 
 const AboutPrinciples: React.FC<AboutPrinciplesProps> = ({ className }) => {
   const [activePrinciple, setActivePrinciple] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
+  // Auto-rotate principles
+  useEffect(() => {
+    if (!isAutoPlaying) return;
+    
+    const interval = setInterval(() => {
+      setIsTransitioning(true);
+      setTimeout(() => {
+        setActivePrinciple((prev) => (prev + 1) % 4);
+        setTimeout(() => {
+          setIsTransitioning(false);
+        }, 50);
+      }, 400);
+    }, 3000); // Change every 3 seconds
+
+    return () => clearInterval(interval);
+  }, [isAutoPlaying]);
 
   const principles: Principle[] = [
     {
@@ -57,20 +76,31 @@ const AboutPrinciples: React.FC<AboutPrinciplesProps> = ({ className }) => {
           {principles.map((principle, index) => (
             <button
               key={index}
-              onClick={() => setActivePrinciple(index)}
+              onClick={() => {
+                setIsTransitioning(true);
+                setTimeout(() => {
+                  setActivePrinciple(index);
+                  setIsTransitioning(false);
+                  setIsAutoPlaying(false); // Stop auto-play when manually clicked
+                  // Resume auto-play after 5 seconds
+                  setTimeout(() => {
+                    setIsAutoPlaying(true);
+                  }, 5000);
+                }, 150);
+              }}
               className={cn(
-                "flex flex-col gap-[8px] items-start pb-[8px] pt-0 px-0 border-b border-[#b0b0b0] w-full text-left transition-colors duration-300",
+                "flex flex-col gap-[8px] items-start pb-[8px] pt-0 px-0 border-b border-[#b0b0b0] w-full text-left transition-all duration-300",
                 index === activePrinciple ? "cursor-default" : "cursor-pointer hover:opacity-80"
               )}
             >
               <h3 className={cn(
-                "font-montserrat font-semibold text-[18px] leading-[1.3] w-full",
-                index === activePrinciple ? "text-[#551d00]" : "text-[#b0b0b0]"
+                "font-montserrat font-semibold text-[18px] leading-[1.3] w-full transition-all duration-300",
+                index === activePrinciple ? "text-[#551d00] transform scale-105" : "text-[#b0b0b0]"
               )}>
                 {principle.title}
               </h3>
               <p className={cn(
-                "font-montserrat font-medium text-[18px] leading-[1.3] w-full",
+                "font-montserrat font-medium text-[18px] leading-[1.3] w-full transition-all duration-300",
                 index === activePrinciple ? "text-[#121212]" : "text-[#b0b0b0]"
               )}>
                 {principle.description}
@@ -80,10 +110,17 @@ const AboutPrinciples: React.FC<AboutPrinciplesProps> = ({ className }) => {
         </div>
 
         {/* Visual Section */}
-        <div className="absolute h-[341px] left-[315px] top-[171px] w-[385px]">
+        <div className="absolute h-[341px] left-[315px] top-[171px] w-[385px] overflow-hidden rounded-[20px]">
           <img 
+            key={activePrinciple}
             alt={principles[activePrinciple].title} 
-            className="w-full h-full object-cover rounded-[20px]" 
+            className={cn(
+              "w-full h-full object-cover rounded-[20px] transition-all duration-500 ease-in-out",
+              isTransitioning ? "opacity-0 scale-95 blur-sm" : "opacity-100 scale-100 blur-0"
+            )} 
+            style={{
+              transition: 'opacity 0.5s ease-in-out, transform 0.5s ease-in-out, filter 0.5s ease-in-out'
+            }}
             src={engineeringImages[activePrinciple as keyof typeof engineeringImages]} 
           />
         </div>

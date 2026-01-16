@@ -113,9 +113,22 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
       {/* Main Content */}
       <div className="bg-[var(--primary-dark-3)] flex flex-col items-center px-0 py-7 gap-[14px]">
         {/* Desktop Layout */}
-        <div className="hidden md:flex gap-9 items-start justify-center w-full max-w-6xl">
+        <div className="hidden md:flex gap-6 lg:gap-9 items-start justify-center w-full max-w-7xl px-4">
+          {/* Address Section */}
+          <div className="flex flex-col gap-3 items-start justify-center w-[280px] lg:w-[320px]">
+            <h3 className="text-body-large font-semibold text-white text-center w-full">
+              Address
+            </h3>
+            <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-1 px-[14px] py-0 text-body-small font-normal text-white leading-relaxed">
+                <p>Regus JB Tower, 10 Floor</p>
+                <p>Jl. Kebon Sirih No.48-50, RT.11/RW.2, Gambir Kota Jakarta Pusat, Daerah Khusus Ibu Kota Jakarta Indonesia - 10110</p>
+              </div>
+            </div>
+          </div>
+
           {/* Products Section */}
-          <div className="flex flex-col gap-2 items-center justify-center w-[450px]">
+          <div className="flex flex-col gap-2 items-center justify-center w-[400px] lg:w-[450px]">
             <h3 className="text-body-large font-semibold text-white text-center w-full">
               Products
             </h3>
@@ -173,6 +186,19 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
 
         {/* Mobile Layout */}
         <div className="md:hidden flex flex-col gap-9 items-start w-full px-4">
+          {/* Address Section - Mobile */}
+          <div className="flex flex-col gap-3 items-start justify-center w-full">
+            <h3 className="text-body-large font-semibold text-white text-center w-full">
+              Address
+            </h3>
+            <div className="flex flex-col gap-2 w-full">
+              <div className="flex flex-col gap-1 px-[14px] py-0 w-full text-body-small font-normal text-white leading-relaxed">
+                <p>Regus JB Tower, 10 Floor</p>
+                <p>Jl. Kebon Sirih No.48-50, RT.11/RW.2, Gambir Kota Jakarta Pusat, Daerah Khusus Ibu Kota Jakarta Indonesia - 10110</p>
+              </div>
+            </div>
+          </div>
+
           {/* Products Section */}
           <div className="flex flex-col gap-2 items-center justify-center w-full">
             <h3 className="text-body-large font-semibold text-white text-center w-full">

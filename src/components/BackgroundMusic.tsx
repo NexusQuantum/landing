@@ -11,24 +11,11 @@ export default function BackgroundMusic() {
       // Set volume to 50%
       audio.volume = 0.5;
       
-      // Enable autoplay
-      audio.autoplay = true;
+      // Disable autoplay - music will not play automatically
+      audio.autoplay = false;
       
       // Loop the music
       audio.loop = true;
-      
-      // Handle autoplay policy - try to play and catch any errors
-      const playAudio = async () => {
-        try {
-          await audio.play();
-        } catch (error) {
-          console.log('Autoplay was prevented:', error);
-          // If autoplay fails, we can add a user interaction handler
-          // or show a play button
-        }
-      };
-
-      playAudio();
     }
   }, []);
 

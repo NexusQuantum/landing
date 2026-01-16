@@ -37,18 +37,20 @@ const AboutBelief: React.FC<AboutBeliefProps> = ({ className }) => {
         {/* Whitepaper */}
         <div className="w-full lg:w-[417px] lg:h-[265px] bg-[rgba(18,18,18,0.2)] rounded-[20px] p-4 lg:p-7 flex flex-col gap-[14px] items-center justify-center">
           <h3 className="font-montserrat font-medium lg:font-semibold text-[16px] lg:text-[24px] leading-[1.3] text-[#fffefd] text-center">
-            WHITEPAPER
+            EXPLORE OUR DRIVE
           </h3>
           <p className="font-montserrat font-normal lg:font-medium text-[14px] lg:text-[18px] leading-[1.3] text-[#fffefd] text-center">
             Explore our vision and technology through the Nexus whitepaper
           </p>
           <div className="w-full bg-[#fffefd] flex gap-[10px] items-center justify-center px-[14px] py-[10px] relative rounded-[8px]">
             <div className="absolute border border-[#f26522] inset-0 pointer-events-none rounded-[8px] shadow-[0px_2px_6px_2px_rgba(0,0,0,0.15),0px_1px_2px_0px_rgba(0,0,0,0.3)]" />
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M3 6H15M3 9H15M3 12H9" stroke="#f26522" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
+            <img 
+              src="/google-drive-svgrepo-com.svg" 
+              alt="Google Drive" 
+              className="w-[18px] h-[18px]"
+            />
             <p className="font-montserrat font-medium leading-[1.3] text-[#f26522] text-[14px] whitespace-nowrap">
-              Read Now
+              Explore Now
             </p>
           </div>
         </div>
