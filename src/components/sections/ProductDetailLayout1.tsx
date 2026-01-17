@@ -55,7 +55,7 @@ const whitepaperMapping: { [key: string]: string } = {
   'ZeroCode': '',
 };
 
-// Mapping product titles to brochure files
+// Mapping product titles to brochure files (mapped to files in public/Finalized Brochure)
 const brochureMapping: { [key: string]: string } = {
   'AI Appliance': '[Nexus] Brochure NQRust-AI Appliance v1.0.pdf',
   'Analytics': '[Nexus] Brochure NQRust-Analytics v1.0.pdf',
@@ -66,14 +66,19 @@ const brochureMapping: { [key: string]: string } = {
   'Guard': '[Nexus] Brochure NQRust-Guard v1.0.pdf',
   'HV': '[Nexus] Brochure NQRust-HV v1.0.pdf',
   'HV Hypervisor': '[Nexus] Brochure NQRust-HV v1.0.pdf',
+  'Hypervisor': '[Nexus] Brochure NQRust-HV v1.0.pdf',
   'Identity': '[Nexus] Brochure NQRust-Identity v1.0.pdf',
   'Insight': '[Nexus] Brochure NQRust-Insight v1.0.pdf',
   'Lake': '[Nexus] Brochure NQRust-Lake v1.0.pdf',
   'LLMOps': '[Nexus] Brochure NQRust-LLMOps v1.0.pdf',
+  'LLM Ops': '[Nexus] Brochure NQRust-LLMOps v1.0.pdf',
   'MicroVM': '[Nexus] Brochure NQRust-MicroVM v1.0.pdf',
   'SecureGPU': '[Nexus] Brochure NQRust-SecureGPU v1.0.pdf',
+  'Secure GPU': '[Nexus] Brochure NQRust-SecureGPU v1.0.pdf',
   'Storage': '[Nexus] Brochure NQRust-Storage v1.0.pdf',
   'ZeroCode': '[Nexus] Brochure NQRust-ZeroCode v1.0.pdf',
+  'Zerocode': '[Nexus] Brochure NQRust-ZeroCode v1.0.pdf',
+  'Zero Code': '[Nexus] Brochure NQRust-ZeroCode v1.0.pdf',
 };
 
 // Benefits mapping for each product - Easy to edit and update
