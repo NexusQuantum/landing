@@ -1,7 +1,37 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
+
+const CONTACT_EMAIL = 'contact@nexusquantum.id';
+
+const PRODUCT_OPTIONS = [
+  { value: '', label: 'Select product...' },
+  { value: 'NQRust-HV Hypervisor', label: 'NQRust-HV Hypervisor' },
+  { value: 'NQRust-MicroVM', label: 'NQRust-MicroVM' },
+  { value: 'NQRust-Storage', label: 'NQRust-Storage' },
+  { value: 'NQRust-FleetMgr', label: 'NQRust-FleetMgr' },
+  { value: 'NQRust-SecureGPU', label: 'NQRust-SecureGPU' },
+  { value: 'NQRust-Enclave', label: 'NQRust-Enclave' },
+  { value: 'NQRust-Lake', label: 'NQRust-Lake' },
+  { value: 'NQRust-Analytics', label: 'NQRust-Analytics' },
+  { value: 'NQRust-Insight', label: 'NQRust-Insight' },
+  { value: 'NQRust-Guard', label: 'NQRust-Guard' },
+  { value: 'NQRust-Edge', label: 'NQRust-Edge' },
+  { value: 'NQRust-AI Appliance', label: 'NQRust-AI Appliance' },
+  { value: 'NQRust-LLMOps', label: 'NQRust-LLMOps' },
+  { value: 'NQRust-Identity', label: 'NQRust-Identity' },
+  { value: 'NQRust-ZeroCode', label: 'NQRust-ZeroCode' },
+  { value: 'NQRust-BPMN', label: 'NQRust-BPMN' },
+  { value: 'General / Multiple', label: 'General / Multiple' },
+];
+
+const PURPOSE_OPTIONS = [
+  { value: '', label: 'What is your purpose?' },
+  { value: 'Request Demo', label: 'Request Demo' },
+  { value: 'Ask about Pricing', label: 'Ask about Pricing' },
+  { value: 'General Inquiry', label: 'General Inquiry' },
+];
 
 // Image assets from public folder
 const imgContactusIllustration = "/contactus illustration.png";
@@ -9,13 +39,42 @@ const imgUser = "/icons/user.svg";
 const imgMessage = "/icons/message.svg";
 const imgLocation = "/icons/location.svg";
 const imgMail = "/icons/mail.svg";
-const imgSupport = "/icons/support.svg";
 
 interface ContactContentProps {
   className?: string;
 }
 
 const ContactContent: React.FC<ContactContentProps> = ({ className }) => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [company, setCompany] = useState('');
+  const [role, setRole] = useState('');
+  const [product, setProduct] = useState('');
+  const [purpose, setPurpose] = useState('');
+  const [message, setMessage] = useState('');
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const subjectParts = [
+      purpose && purpose.trim() && purpose,
+      product && product.trim() && product,
+      name && name.trim() ? name : 'Contact from Nexus Landing',
+    ].filter(Boolean);
+    const subject = encodeURIComponent(subjectParts.join(' - '));
+    const bodyLines = [
+      name && `Name: ${name}`,
+      email && `Email: ${email}`,
+      company && `Company: ${company}`,
+      role && `Role: ${role}`,
+      product && `Product: ${product}`,
+      purpose && `Purpose: ${purpose}`,
+      message && `\nMessage:\n${message}`,
+    ].filter(Boolean);
+    const body = encodeURIComponent(bodyLines.join('\n'));
+    const mailtoUrl = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+    window.location.href = mailtoUrl;
+  };
+
   return (
     <div className={cn('bg-white flex flex-col items-center justify-center pb-[60px] pt-[100px] md:pt-[153px] px-4 md:px-[100px] relative', className)}>
       {/* Desktop Layout */}
@@ -48,7 +107,7 @@ const ContactContent: React.FC<ContactContentProps> = ({ className }) => {
           </div>
 
           {/* Contact Form */}
-          <div className="flex flex-col gap-[14px] items-start relative shrink-0 w-full">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-[14px] items-start relative shrink-0 w-full">
             <div className="flex flex-col gap-[14px] items-start relative shrink-0 w-full">
               {/* First Row: Name and Email */}
               <div className="flex gap-[14px] items-start relative shrink-0 w-full">
@@ -56,16 +115,24 @@ const ContactContent: React.FC<ContactContentProps> = ({ className }) => {
                   <div aria-hidden="true" className="absolute border border-[#b0b0b0] border-solid inset-0 pointer-events-none rounded-[5px]" />
                   <input
                     type="text"
-                    className="font-['Montserrat:Regular',_sans-serif] font-normal leading-[1.3] text-[#888888] text-[16px] bg-transparent border-none outline-none w-full"
-                    placeholder="Your Name"
+                    name="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                    className="font-['Montserrat:Regular',_sans-serif] font-normal leading-[1.3] text-[#121212] text-[16px] bg-transparent border-none outline-none w-full placeholder:text-[#888888]"
+                    placeholder="Your Name *"
                   />
                 </div>
                 <div className="bg-[rgba(0,0,0,0)] box-border flex items-center justify-between p-[10px] relative rounded-[5px] shrink-0 w-[264px]">
                   <div aria-hidden="true" className="absolute border border-[#b0b0b0] border-solid inset-0 pointer-events-none rounded-[5px]" />
                   <input
                     type="email"
-                    className="font-['Montserrat:Regular',_sans-serif] font-normal leading-[1.3] text-[#888888] text-[16px] bg-transparent border-none outline-none flex-1"
-                    placeholder="Work Email"
+                    name="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    className="font-['Montserrat:Regular',_sans-serif] font-normal leading-[1.3] text-[#121212] text-[16px] bg-transparent border-none outline-none flex-1 placeholder:text-[#888888]"
+                    placeholder="Work Email *"
                   />
                   <span className="font-['Montserrat:Medium',_sans-serif] font-medium leading-[1.3] text-[#888888] text-[16px]">@</span>
                 </div>
@@ -77,16 +144,24 @@ const ContactContent: React.FC<ContactContentProps> = ({ className }) => {
                   <div aria-hidden="true" className="absolute border border-[#b0b0b0] border-solid inset-0 pointer-events-none rounded-[5px]" />
                   <input
                     type="text"
-                    className="font-['Montserrat:Regular',_sans-serif] font-normal leading-[1.3] text-[#888888] text-[16px] bg-transparent border-none outline-none w-full"
-                    placeholder="Company Name"
+                    name="company"
+                    value={company}
+                    onChange={(e) => setCompany(e.target.value)}
+                    required
+                    className="font-['Montserrat:Regular',_sans-serif] font-normal leading-[1.3] text-[#121212] text-[16px] bg-transparent border-none outline-none w-full placeholder:text-[#888888]"
+                    placeholder="Company Name *"
                   />
                 </div>
                 <div className="bg-[rgba(0,0,0,0)] box-border flex items-center justify-between p-[10px] relative rounded-[5px] shrink-0 w-[264px]">
                   <div aria-hidden="true" className="absolute border border-[#b0b0b0] border-solid inset-0 pointer-events-none rounded-[5px]" />
                   <input
                     type="text"
-                    className="font-['Montserrat:Regular',_sans-serif] font-normal leading-[1.3] text-[#888888] text-[16px] bg-transparent border-none outline-none flex-1"
-                    placeholder="Role"
+                    name="role"
+                    value={role}
+                    onChange={(e) => setRole(e.target.value)}
+                    required
+                    className="font-['Montserrat:Regular',_sans-serif] font-normal leading-[1.3] text-[#121212] text-[16px] bg-transparent border-none outline-none flex-1 placeholder:text-[#888888]"
+                    placeholder="Role *"
                   />
                   <div className="overflow-clip relative shrink-0 size-[18px]">
                     <div className="absolute inset-[8.33%_16.67%]">
@@ -96,19 +171,57 @@ const ContactContent: React.FC<ContactContentProps> = ({ className }) => {
                 </div>
               </div>
 
+              {/* Third Row: Product and Purpose */}
+              <div className="flex gap-[14px] items-start relative shrink-0 w-full">
+                <div className="basis-0 bg-[rgba(0,0,0,0)] box-border flex gap-[10px] grow items-center min-h-px min-w-px p-[10px] relative rounded-[5px] shrink-0">
+                  <div aria-hidden="true" className="absolute border border-[#b0b0b0] border-solid inset-0 pointer-events-none rounded-[5px]" />
+                  <select
+                    name="product"
+                    value={product}
+                    onChange={(e) => setProduct(e.target.value)}
+                    className="font-['Montserrat:Regular',_sans-serif] font-normal leading-[1.3] text-[16px] bg-transparent border-none outline-none w-full appearance-none cursor-pointer text-[#121212] [color-scheme:light] [&:invalid]:text-[#888888]"
+                  >
+                    {PRODUCT_OPTIONS.map((opt) => (
+                      <option key={opt.value || 'product-empty'} value={opt.value}>
+                        {opt.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="bg-[rgba(0,0,0,0)] box-border flex items-center justify-between p-[10px] relative rounded-[5px] shrink-0 w-[264px]">
+                  <div aria-hidden="true" className="absolute border border-[#b0b0b0] border-solid inset-0 pointer-events-none rounded-[5px]" />
+                  <select
+                    name="purpose"
+                    value={purpose}
+                    onChange={(e) => setPurpose(e.target.value)}
+                    className="font-['Montserrat:Regular',_sans-serif] font-normal leading-[1.3] text-[16px] bg-transparent border-none outline-none w-full flex-1 appearance-none cursor-pointer text-[#121212] [color-scheme:light] [&:invalid]:text-[#888888]"
+                  >
+                    {PURPOSE_OPTIONS.map((opt) => (
+                      <option key={opt.value || 'purpose-empty'} value={opt.value}>
+                        {opt.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
               {/* Message Textarea */}
               <div className="bg-[rgba(0,0,0,0)] box-border flex gap-[10px] h-[112px] items-start p-[10px] relative rounded-[5px] shrink-0 w-full">
                 <div aria-hidden="true" className="absolute border border-[#b0b0b0] border-solid inset-0 pointer-events-none rounded-[5px]" />
                 <textarea
-                  className="font-['Montserrat:Regular',_sans-serif] font-normal leading-[1.3] text-[#888888] text-[16px] bg-transparent border-none outline-none w-full h-full resize-none"
-                  placeholder="Enter Your Message Here..."
+                  name="message"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  required
+                  className="font-['Montserrat:Regular',_sans-serif] font-normal leading-[1.3] text-[#121212] text-[16px] bg-transparent border-none outline-none w-full h-full resize-none placeholder:text-[#888888]"
+                  placeholder="Enter Your Message Here... *"
                 />
               </div>
             </div>
 
             {/* Submit Button */}
             <div className="flex gap-[14px] items-center relative shrink-0 w-full">
-              <button className="basis-0 bg-[#fffefd] box-border flex gap-[10px] grow items-center justify-center min-h-px min-w-px px-[14px] py-[10px] relative rounded-[8px] shrink-0">
+              <button type="submit" className="basis-0 bg-[#fffefd] box-border flex gap-[10px] grow items-center justify-center min-h-px min-w-px px-[14px] py-[10px] relative rounded-[8px] shrink-0 cursor-pointer hover:opacity-90 transition-opacity">
                 <div aria-hidden="true" className="absolute border border-[#f26522] border-solid inset-0 pointer-events-none rounded-[8px] shadow-[0px_2px_6px_2px_rgba(0,0,0,0.15),0px_1px_2px_0px_rgba(0,0,0,0.3)]" />
                 <span className="font-['Montserrat:Medium',_sans-serif] font-medium leading-[1.3] text-[#f26522] text-[14px]">
                   Submit Message
@@ -120,7 +233,7 @@ const ContactContent: React.FC<ContactContentProps> = ({ className }) => {
                 </div>
               </button>
             </div>
-          </div>
+          </form>
 
           {/* Contact Information */}
           <div className="bg-[#fff3ed] box-border flex flex-wrap gap-[14px] items-center p-[14px] relative rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.3),0px_2px_6px_2px_rgba(0,0,0,0.15)] shrink-0 w-full">
@@ -130,22 +243,10 @@ const ContactContent: React.FC<ContactContentProps> = ({ className }) => {
                 HQ: Jakarta, Indonesia
               </span>
             </div>
-            <div className="bg-[rgba(0,0,0,0)] box-border flex gap-[10px] items-center justify-center p-[10px] relative rounded-[5px] shrink-0 w-[312px]">
+            <div className="bg-[rgba(0,0,0,0)] box-border flex gap-[10px] items-center justify-center p-[10px] relative rounded-[5px] shrink-0">
               <img src={imgMail} alt="Email" className="w-[18px] h-[18px]" />
               <span className="font-['Montserrat:Medium',_sans-serif] font-medium leading-[1.3] text-[#3d3d3d] text-[14px]">
-                Sales: enterprise@nexusquantum.id
-              </span>
-            </div>
-            <div className="bg-[rgba(0,0,0,0)] box-border flex gap-[10px] items-center justify-center p-[10px] relative rounded-[5px] shrink-0 w-[290px]">
-              <img src={imgMail} alt="Email" className="w-[18px] h-[18px]" />
-              <span className="font-['Montserrat:Medium',_sans-serif] font-medium leading-[1.3] text-[#3d3d3d] text-[14px]">
-                General: hello@nexusquantum.id
-              </span>
-            </div>
-            <div className="bg-[rgba(0,0,0,0)] box-border flex gap-[10px] items-center justify-center p-[10px] relative rounded-[5px] shrink-0 w-[317px]">
-              <img src={imgSupport} alt="Support" className="w-[18px] h-[18px]" />
-              <span className="font-['Montserrat:Medium',_sans-serif] font-medium leading-[1.3] text-[#3d3d3d] text-[14px]">
-                Support: support@nexusquantum.id
+                contact@nexusquantum.id
               </span>
             </div>
           </div>
@@ -166,14 +267,18 @@ const ContactContent: React.FC<ContactContentProps> = ({ className }) => {
           </div>
 
           {/* Contact Form */}
-          <div className="flex flex-col gap-4 items-start relative w-full">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4 items-start relative w-full">
             <div className="flex flex-col gap-4 items-start relative w-full">
               {/* Work Email */}
               <div className="bg-white box-border flex items-center justify-between p-3 relative rounded-[8px] w-full border border-[#b0b0b0]">
                 <input
                   type="email"
+                  name="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
                   className="font-['Montserrat:Regular',_sans-serif] font-normal leading-[1.3] text-[#121212] text-[16px] bg-transparent border-none outline-none flex-1 placeholder:text-[#888888]"
-                  placeholder="Work Email"
+                  placeholder="Work Email *"
                 />
                 <span className="font-['Montserrat:Medium',_sans-serif] font-medium leading-[1.3] text-[#888888] text-[16px] ml-2">@</span>
               </div>
@@ -182,8 +287,12 @@ const ContactContent: React.FC<ContactContentProps> = ({ className }) => {
               <div className="bg-white box-border flex items-center p-3 relative rounded-[8px] w-full border border-[#b0b0b0]">
                 <input
                   type="text"
+                  name="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
                   className="font-['Montserrat:Regular',_sans-serif] font-normal leading-[1.3] text-[#121212] text-[16px] bg-transparent border-none outline-none w-full placeholder:text-[#888888]"
-                  placeholder="Your Name"
+                  placeholder="Your Name *"
                 />
               </div>
 
@@ -191,8 +300,12 @@ const ContactContent: React.FC<ContactContentProps> = ({ className }) => {
               <div className="bg-white box-border flex items-center p-3 relative rounded-[8px] w-full border border-[#b0b0b0]">
                 <input
                   type="text"
+                  name="company"
+                  value={company}
+                  onChange={(e) => setCompany(e.target.value)}
+                  required
                   className="font-['Montserrat:Regular',_sans-serif] font-normal leading-[1.3] text-[#121212] text-[16px] bg-transparent border-none outline-none w-full placeholder:text-[#888888]"
-                  placeholder="Company Name"
+                  placeholder="Company Name *"
                 />
               </div>
 
@@ -200,8 +313,12 @@ const ContactContent: React.FC<ContactContentProps> = ({ className }) => {
               <div className="bg-white box-border flex items-center justify-between p-3 relative rounded-[8px] w-full border border-[#b0b0b0]">
                 <input
                   type="text"
+                  name="role"
+                  value={role}
+                  onChange={(e) => setRole(e.target.value)}
+                  required
                   className="font-['Montserrat:Regular',_sans-serif] font-normal leading-[1.3] text-[#121212] text-[16px] bg-transparent border-none outline-none flex-1 placeholder:text-[#888888]"
-                  placeholder="Role"
+                  placeholder="Role *"
                 />
                 <div className="overflow-clip relative shrink-0 size-[18px] ml-2">
                   <div className="absolute inset-[8.33%_16.67%]">
@@ -210,18 +327,54 @@ const ContactContent: React.FC<ContactContentProps> = ({ className }) => {
                 </div>
               </div>
 
+              {/* Product */}
+              <div className="bg-white box-border flex items-center p-3 relative rounded-[8px] w-full border border-[#b0b0b0]">
+                <select
+                  name="product"
+                  value={product}
+                  onChange={(e) => setProduct(e.target.value)}
+                  className="font-['Montserrat:Regular',_sans-serif] font-normal leading-[1.3] text-[#121212] text-[16px] bg-transparent border-none outline-none w-full appearance-none cursor-pointer [color-scheme:light]"
+                >
+                  {PRODUCT_OPTIONS.map((opt) => (
+                    <option key={opt.value || 'product-empty'} value={opt.value}>
+                      {opt.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Purpose */}
+              <div className="bg-white box-border flex items-center p-3 relative rounded-[8px] w-full border border-[#b0b0b0]">
+                <select
+                  name="purpose"
+                  value={purpose}
+                  onChange={(e) => setPurpose(e.target.value)}
+                  className="font-['Montserrat:Regular',_sans-serif] font-normal leading-[1.3] text-[#121212] text-[16px] bg-transparent border-none outline-none w-full appearance-none cursor-pointer [color-scheme:light]"
+                >
+                  {PURPOSE_OPTIONS.map((opt) => (
+                    <option key={opt.value || 'purpose-empty'} value={opt.value}>
+                      {opt.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
               {/* Message Textarea */}
               <div className="bg-white box-border flex items-start p-3 relative rounded-[8px] w-full border border-[#b0b0b0] h-[100px]">
                 <textarea
+                  name="message"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  required
                   className="font-['Montserrat:Regular',_sans-serif] font-normal leading-[1.3] text-[#121212] text-[16px] bg-transparent border-none outline-none w-full h-full resize-none placeholder:text-[#888888]"
-                  placeholder="Enter Your Message Here..."
+                  placeholder="Enter Your Message Here... *"
                 />
               </div>
             </div>
 
             {/* Submit Button */}
             <div className="flex items-center relative w-full">
-              <button className="bg-[#fffefd] box-border flex gap-2 items-center justify-center px-4 py-3 relative rounded-[8px] w-full border border-[#f26522] shadow-[0px_2px_6px_2px_rgba(0,0,0,0.15),0px_1px_2px_0px_rgba(0,0,0,0.3)] hover:bg-[#f26522] hover:text-white transition-all duration-300">
+              <button type="submit" className="bg-[#fffefd] box-border flex gap-2 items-center justify-center px-4 py-3 relative rounded-[8px] w-full border border-[#f26522] shadow-[0px_2px_6px_2px_rgba(0,0,0,0.15),0px_1px_2px_0px_rgba(0,0,0,0.3)] hover:bg-[#f26522] hover:text-white transition-all duration-300">
                 <span className="font-['Montserrat:Medium',_sans-serif] font-medium leading-[1.3] text-[#f26522] text-[14px] group-hover:text-white">
                   Submit Message
                 </span>
@@ -232,7 +385,7 @@ const ContactContent: React.FC<ContactContentProps> = ({ className }) => {
                 </div>
               </button>
             </div>
-          </div>
+          </form>
 
           {/* Contact Information */}
           <div className="bg-[#fff3ed] box-border flex flex-col gap-3 items-center p-4 relative rounded-[12px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.3),0px_2px_6px_2px_rgba(0,0,0,0.15)] w-full">
@@ -245,19 +398,7 @@ const ContactContent: React.FC<ContactContentProps> = ({ className }) => {
             <div className="bg-white/50 box-border flex items-center justify-center gap-2 p-3 relative rounded-[8px] w-full">
               <img src={imgMail} alt="Email" className="w-[18px] h-[18px] flex-shrink-0" />
               <span className="font-['Montserrat:Medium',_sans-serif] font-medium leading-[1.3] text-[#3d3d3d] text-[14px] text-center break-all">
-                Sales: enterprise@nexusquantum.id
-              </span>
-            </div>
-            <div className="bg-white/50 box-border flex items-center justify-center gap-2 p-3 relative rounded-[8px] w-full">
-              <img src={imgMail} alt="Email" className="w-[18px] h-[18px] flex-shrink-0" />
-              <span className="font-['Montserrat:Medium',_sans-serif] font-medium leading-[1.3] text-[#3d3d3d] text-[14px] text-center break-all">
-                General: hello@nexusquantum.id
-              </span>
-            </div>
-            <div className="bg-white/50 box-border flex items-center justify-center gap-2 p-3 relative rounded-[8px] w-full">
-              <img src={imgSupport} alt="Support" className="w-[18px] h-[18px] flex-shrink-0" />
-              <span className="font-['Montserrat:Medium',_sans-serif] font-medium leading-[1.3] text-[#3d3d3d] text-[14px] text-center break-all">
-                Support: support@nexusquantum.id
+                contact@nexusquantum.id
               </span>
             </div>
           </div>

@@ -22,6 +22,7 @@ const Navbar: React.FC<NavbarProps> = ({ className, children }) => {
   const isHomePage = pathname === '/' || pathname === '/index';
   const isAboutPage = pathname === '/about';
   const isSolutionPage = pathname === '/solution';
+  const isUseCasesPage = pathname === '/use-cases';
   const isPricingPage = pathname === '/pricing';
   const isContactPage = pathname === '/contact';
 
@@ -94,7 +95,7 @@ const Navbar: React.FC<NavbarProps> = ({ className, children }) => {
     'transition-all duration-300 ease-in-out',
     {
       // Floating state (hero section) - glassmorphism effect dengan lebar yang lebih kecil di desktop
-      'mx-2 md:mx-8 lg:mx-16 xl:mx-24 mt-4 rounded-xl glass-strong backdrop-blur-xl border border-white/20': !isScrolled,
+      'mx-2 sm:mx-4 md:mx-6 lg:mx-12 xl:mx-20 2xl:mx-24 mt-2 sm:mt-3 md:mt-4 rounded-lg sm:rounded-xl glass-strong backdrop-blur-xl border border-white/20': !isScrolled,
       
       // Full width state (scrolled) - glassmorphism effect
       'mx-0 mt-0 rounded-none glass backdrop-blur-lg border-b border-white/10': isScrolled,
@@ -103,8 +104,8 @@ const Navbar: React.FC<NavbarProps> = ({ className, children }) => {
 
   const contentClasses = cn(
     'flex items-center justify-between transition-all duration-300',
-    // Responsive padding sesuai Figma design
-    'px-[16px] py-[14px] md:px-[70px]'
+    // Responsive padding dengan breakpoint yang lebih halus
+    'px-3 py-3 sm:px-4 sm:py-3.5 md:px-8 md:py-4 lg:px-12 xl:px-[70px]'
   );
 
   return (
@@ -114,8 +115,8 @@ const Navbar: React.FC<NavbarProps> = ({ className, children }) => {
               {/* Logo Section - dengan glassmorphism effects */}
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  {/* Logo dengan glassmorphism glow effect */}
-                  <div className="w-[46px] h-[38px] rounded-lg shadow-lg hover:shadow-xl hover:shadow-[#f26522]/25 transition-all duration-300 hover:scale-105 overflow-hidden">
+                  {/* Logo dengan glassmorphism glow effect - responsive sizing */}
+                  <div className="w-10 h-8 sm:w-[42px] sm:h-[35px] md:w-[46px] md:h-[38px] rounded-lg shadow-lg hover:shadow-xl hover:shadow-[#f26522]/25 transition-all duration-300 hover:scale-105 overflow-hidden">
                     <img 
                       src="/nqr logo.png" 
                       alt="NQR Logo" 
@@ -126,12 +127,12 @@ const Navbar: React.FC<NavbarProps> = ({ className, children }) => {
               </div>
 
           {/* Navigation Links - Desktop only, dengan glassmorphism effects */}
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden lg:flex items-center gap-0.5 xl:gap-1">
             {/* Navigation items dengan glassmorphism hover effects */}
              <Link
                href="/"
                className={cn(
-                 "px-[10px] py-[8px] text-[14px] font-medium leading-[1.3] relative group overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#f26522]/20",
+                 "px-2 py-2 lg:px-[10px] lg:py-[8px] text-xs lg:text-[14px] font-medium leading-[1.3] relative group overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#f26522]/20",
                  isHomePage
                    ? "text-[#f26522] border-b border-[#f26522]"
                    : "text-[#888888] hover:text-[#f26522]"
@@ -147,7 +148,7 @@ const Navbar: React.FC<NavbarProps> = ({ className, children }) => {
              <a 
                href="/about" 
                className={cn(
-                 "px-[10px] py-[8px] text-[14px] leading-[1.3] relative group overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#f26522]/20",
+                 "px-2 py-2 lg:px-[10px] lg:py-[8px] text-xs lg:text-[14px] leading-[1.3] relative group overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#f26522]/20",
                  isAboutPage 
                    ? "text-[#f26522] font-medium border-b border-[#f26522]" 
                    : "text-[#888888] font-normal hover:text-[#f26522]"
@@ -163,7 +164,7 @@ const Navbar: React.FC<NavbarProps> = ({ className, children }) => {
              <a 
                href="/solution" 
                className={cn(
-                 "px-[10px] py-[8px] text-[14px] leading-[1.3] relative group overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#f26522]/20",
+                 "px-2 py-2 lg:px-[10px] lg:py-[8px] text-xs lg:text-[14px] leading-[1.3] relative group overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#f26522]/20",
                  isSolutionPage 
                    ? "text-[#f26522] font-medium border-b border-[#f26522]" 
                    : "text-[#888888] font-normal hover:text-[#f26522]"
@@ -189,7 +190,7 @@ const Navbar: React.FC<NavbarProps> = ({ className, children }) => {
                     setIsProductDropdownOpen(true);
                   }
                 }}
-                className="px-[10px] py-[8px] text-[#888888] text-[14px] font-normal leading-[1.3] flex items-center gap-1 relative group overflow-hidden transition-all duration-300 hover:text-[#f26522] hover:scale-105 hover:shadow-lg hover:shadow-[#f26522]/20"
+                className="px-2 py-2 lg:px-[10px] lg:py-[8px] text-[#888888] text-xs lg:text-[14px] font-normal leading-[1.3] flex items-center gap-0.5 lg:gap-1 relative group overflow-hidden transition-all duration-300 hover:text-[#f26522] hover:scale-105 hover:shadow-lg hover:shadow-[#f26522]/20"
               >
                 <span className="relative z-10">Product</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-[#f26522]/10 to-[#f26522]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -218,7 +219,7 @@ const Navbar: React.FC<NavbarProps> = ({ className, children }) => {
                   
                   {/* Dropdown Content */}
                   <div 
-                    className="absolute top-full left-0 mt-[28px] w-[450px] bg-black/90 backdrop-blur-xl border border-white/30 rounded-2xl shadow-2xl z-50 animate-in slide-in-from-top-2 duration-300"
+                    className="absolute top-full left-0 mt-[28px] w-[90vw] max-w-[450px] lg:w-[450px] bg-black/90 backdrop-blur-xl border border-white/30 rounded-xl lg:rounded-2xl shadow-2xl z-50 animate-in slide-in-from-top-2 duration-300"
                     onMouseEnter={() => {
                       if (!isProductClicked) {
                         setIsProductDropdownOpen(true);
@@ -230,15 +231,15 @@ const Navbar: React.FC<NavbarProps> = ({ className, children }) => {
                       }
                     }}
                   >
-                  <div className="p-6">
+                  <div className="p-4 lg:p-6">
                     {/* Header */}
-                    <div className="mb-4 pb-3 border-b border-white/20">
-                      <h3 className="text-white font-semibold text-lg">Our Products</h3>
-                      <p className="text-white/70 text-sm">Explore our comprehensive suite of solutions</p>
+                    <div className="mb-3 lg:mb-4 pb-2 lg:pb-3 border-b border-white/20">
+                      <h3 className="text-white font-semibold text-base lg:text-lg">Our Products</h3>
+                      <p className="text-white/70 text-xs lg:text-sm">Explore our comprehensive suite of solutions</p>
                     </div>
                     
-                        {/* 3x6 Grid Layout */}
-                        <div className="grid grid-cols-3 gap-4">
+                        {/* 3x6 Grid Layout - Responsive */}
+                        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-4">
                           {/* Column 1 */}
                           <div className="space-y-2">
                             <a 
@@ -247,7 +248,7 @@ const Navbar: React.FC<NavbarProps> = ({ className, children }) => {
                                 setIsProductDropdownOpen(false);
                                 setIsProductClicked(false);
                               }}
-                              className="block px-3 py-2 text-white text-sm hover:text-[#f26522] hover:bg-white/10 transition-all duration-300 rounded-lg"
+                              className="block px-2 lg:px-3 py-1.5 lg:py-2 text-white text-xs lg:text-sm hover:text-[#f26522] hover:bg-white/10 transition-all duration-300 rounded-md lg:rounded-lg"
                             >
                               NQRust-HV Hypervisor
                             </a>
@@ -419,9 +420,25 @@ const Navbar: React.FC<NavbarProps> = ({ className, children }) => {
             </div>
 
              <a 
+               href="/use-cases" 
+               className={cn(
+                 "px-2 py-2 lg:px-[10px] lg:py-[8px] text-xs lg:text-[14px] leading-[1.3] relative group overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#f26522]/20",
+                 isUseCasesPage 
+                   ? "text-[#f26522] font-medium border-b border-[#f26522]" 
+                   : "text-[#888888] font-normal hover:text-[#f26522]"
+               )}
+             >
+               <span className="relative z-10">Industry solutions</span>
+               <div className="absolute inset-0 bg-gradient-to-r from-[#f26522]/10 to-[#f26522]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+               <div className={cn(
+                 "absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-[#f26522] to-[#e55a1e] group-hover:h-1 transition-all duration-300",
+                 isUseCasesPage ? "w-full" : "w-0 group-hover:w-full"
+               )}></div>
+             </a>
+             <a 
                href="/pricing" 
                className={cn(
-                 "px-[10px] py-[8px] text-[14px] leading-[1.3] relative group overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#f26522]/20",
+                 "px-2 py-2 lg:px-[10px] lg:py-[8px] text-xs lg:text-[14px] leading-[1.3] relative group overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#f26522]/20",
                  isPricingPage 
                    ? "text-[#f26522] font-medium border-b border-[#f26522]" 
                    : "text-[#888888] font-normal hover:text-[#f26522]"
@@ -437,7 +454,7 @@ const Navbar: React.FC<NavbarProps> = ({ className, children }) => {
              <a 
                href="/contact" 
                className={cn(
-                 "px-[10px] py-[8px] text-[14px] leading-[1.3] relative group overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#f26522]/20",
+                 "px-2 py-2 lg:px-[10px] lg:py-[8px] text-xs lg:text-[14px] leading-[1.3] relative group overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#f26522]/20",
                  isContactPage 
                    ? "text-[#f26522] font-medium border-b border-[#f26522]" 
                    : "text-[#888888] font-normal hover:text-[#f26522]"
@@ -453,22 +470,22 @@ const Navbar: React.FC<NavbarProps> = ({ className, children }) => {
           </div>
 
           {/* Action Buttons - responsive design sesuai Figma */}
-          <div className="flex items-center gap-[14px]">
+          <div className="flex items-center gap-2 sm:gap-3 lg:gap-[14px]">
             {/* Desktop: CTA button dengan glassmorphism hover effect */}
-            <a href="/under-construction" className="hidden md:block bg-white text-[#551D00] border border-[#551D00] px-[14px] py-[10px] rounded-lg shadow-[0px_2px_6px_2px_rgba(0,0,0,0.15),0px_1px_2px_0px_rgba(0,0,0,0.3)] text-[14px] font-medium leading-[1.3] hover:bg-[#551D00]/10 hover:shadow-[0px_4px_12px_2px_rgba(0,0,0,0.25),0px_2px_4px_0px_rgba(0,0,0,0.4)] hover:scale-105 transition-all duration-300 w-[139px] text-center">
+            <a href="/under-construction" className="hidden lg:block bg-white text-[#551D00] border border-[#551D00] px-3 lg:px-[14px] py-2 lg:py-[10px] rounded-lg shadow-[0px_2px_6px_2px_rgba(0,0,0,0.15),0px_1px_2px_0px_rgba(0,0,0,0.3)] text-xs lg:text-[14px] font-medium leading-[1.3] hover:bg-[#551D00]/10 hover:shadow-[0px_4px_12px_2px_rgba(0,0,0,0.25),0px_2px_4px_0px_rgba(0,0,0,0.4)] hover:scale-105 transition-all duration-300 w-auto lg:w-[139px] text-center whitespace-nowrap">
               Start Free Trial
             </a>
             
-            {/* Mobile: CTA button + Menu button sesuai Figma */}
-            <div className="md:hidden flex items-center gap-[14px]">
-              <a href="/under-construction" className="bg-white text-[#551D00] border border-[#551D00] px-[14px] py-[10px] rounded-lg shadow-[0px_2px_6px_2px_rgba(0,0,0,0.15),0px_1px_2px_0px_rgba(0,0,0,0.3)] text-[14px] font-medium leading-[1.3] hover:bg-[#551D00]/10 hover:shadow-[0px_4px_12px_2px_rgba(0,0,0,0.25),0px_2px_4px_0px_rgba(0,0,0,0.4)] hover:scale-105 transition-all duration-300 w-[139px] text-center">
+            {/* Mobile/Tablet: CTA button + Menu button sesuai Figma */}
+            <div className="lg:hidden flex items-center gap-2 sm:gap-3">
+              <a href="/under-construction" className="bg-white text-[#551D00] border border-[#551D00] px-2.5 sm:px-3 py-2 sm:py-2.5 rounded-lg shadow-[0px_2px_6px_2px_rgba(0,0,0,0.15),0px_1px_2px_0px_rgba(0,0,0,0.3)] text-[10px] sm:text-xs font-medium leading-[1.3] hover:bg-[#551D00]/10 hover:shadow-[0px_4px_12px_2px_rgba(0,0,0,0.25),0px_2px_4px_0px_rgba(0,0,0,0.4)] hover:scale-105 transition-all duration-300 text-center whitespace-nowrap">
                 Start Free Trial
               </a>
                   <button 
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                    className="bg-[#fffefd] border border-[#f26522] px-[14px] py-[10px] rounded-lg shadow-[0px_2px_6px_2px_rgba(0,0,0,0.15),0px_1px_2px_0px_rgba(0,0,0,0.3)] hover:bg-white/90 hover:shadow-[0px_4px_12px_2px_rgba(0,0,0,0.25),0px_2px_4px_0px_rgba(0,0,0,0.4)] hover:scale-105 transition-all duration-300"
+                    className="bg-[#fffefd] border border-[#f26522] px-2.5 sm:px-3 py-2 sm:py-2.5 rounded-lg shadow-[0px_2px_6px_2px_rgba(0,0,0,0.15),0px_1px_2px_0px_rgba(0,0,0,0.3)] hover:bg-white/90 hover:shadow-[0px_4px_12px_2px_rgba(0,0,0,0.25),0px_2px_4px_0px_rgba(0,0,0,0.4)] hover:scale-105 transition-all duration-300 flex-shrink-0"
                   >
-                    <svg className="w-[18px] h-[18px] text-[#f26522]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-4 h-4 sm:w-[18px] sm:h-[18px] text-[#f26522]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
                   </button>
@@ -573,8 +590,25 @@ const Navbar: React.FC<NavbarProps> = ({ className, children }) => {
                 Solution
               </a>
 
+              {/* Industry solutions */}
+              <a 
+                href="/use-cases" 
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  setIsMobileProductOpen(false);
+                }}
+                className={cn(
+                  "block px-4 py-3 text-lg font-medium transition-all duration-300 rounded-lg animate-in slide-in-from-left duration-500 delay-500 hover:scale-105 hover:shadow-lg hover:shadow-[#f26522]/20",
+                  isUseCasesPage 
+                    ? "text-[#f26522] bg-white/10" 
+                    : "text-white hover:text-[#f26522] hover:bg-white/10"
+                )}
+              >
+                Industry solutions
+              </a>
+
               {/* Product Accordion */}
-              <div className="space-y-2 animate-in slide-in-from-left duration-500 delay-500">
+              <div className="space-y-2 animate-in slide-in-from-left duration-500 delay-600">
                 <button 
                   onClick={() => setIsMobileProductOpen(!isMobileProductOpen)}
                   className="w-full flex items-center justify-between px-4 py-3 text-white text-lg font-medium hover:text-[#f26522] hover:bg-white/10 transition-all duration-300 rounded-lg hover:scale-105 hover:shadow-lg hover:shadow-[#f26522]/20"

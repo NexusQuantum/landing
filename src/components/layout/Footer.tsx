@@ -44,6 +44,7 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
       'Home': '/',
       'About NQ': '/about',
       'Solutions': '/solution',
+      'Industry solutions': '/use-cases',
       'Pricing': '/pricing',
       'Products': '/products'
     };
@@ -73,6 +74,7 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
     'Home',
     'About NQ',
     'Solutions',
+    'Industry solutions',
     'Pricing',
     'Products'
   ];

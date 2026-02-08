@@ -663,6 +663,7 @@ export default function ProductDetailLayout1({
           
           return description;
         })()}
+        videoUrl={productTitle === 'MicroVM' ? '/microVM.mp4' : undefined}
         brochureUrl={actualBrochureUrl}
         whitepaperUrl={actualWhitepaperUrl}
         productTitle={productTitle}

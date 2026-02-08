@@ -4,9 +4,6 @@ import React, { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
 
-// Image assets from Figma
-const imgFeaturedProduct = "http://localhost:3845/assets/bcb3dc5173e194019661369237c5466095327a75.png";
-
 interface ProductCardProps {
   name: string;
   description: string;
@@ -165,15 +162,7 @@ const FeaturedProductsSection: React.FC<FeaturedProductsSectionProps> = ({ class
   return (
     <section className={cn('relative overflow-hidden', className)}>
       {/* Background */}
-      <div className="absolute inset-0 bg-[#dc5d21]">
-        <div className="absolute inset-0 overflow-hidden">
-          <img 
-            alt="Featured Product Background" 
-            className="absolute h-[185.3%] left-[29%] max-w-none top-[-42.65%] w-full object-cover" 
-            src={imgFeaturedProduct} 
-          />
-        </div>
-      </div>
+      <div className="absolute inset-0 bg-[#dc5d21]" />
 
       {/* Desktop Layout */}
       <div className="hidden lg:flex items-center justify-between px-[70px] relative z-10">

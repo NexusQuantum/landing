@@ -21,6 +21,7 @@ interface AboutSectionProps {
   title?: string;
   description?: string;
   imageUrl?: string;
+  videoUrl?: string; // Optional video URL (if provided, will display video instead of image)
   brochureUrl?: string;
   whitepaperUrl?: string;
   productTitle?: string;
@@ -31,6 +32,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({
   title = "About Product",
   description = "Vorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur tempus urna at turpis condimentum lobortis. Ut commodo efficitur neque. per inceptos himenaeos. Curabitur tempus urna at turpis condimentum lobortis. Ut commodo efficitur neque. per inceptos himenaeos.",
   imageUrl = "/illustration about us.png",
+  videoUrl,
   brochureUrl,
   whitepaperUrl,
   productTitle
@@ -166,17 +168,50 @@ const AboutSection: React.FC<AboutSectionProps> = ({
           </div>
         </div>
         
-        {/* Right Column - Image */}
-        <div className="h-[200px] sm:h-[240px] md:h-[260px] lg:h-[287px] relative rounded-[10px] w-full lg:w-[399px] flex-shrink-0 overflow-hidden shadow-lg">
-          <img 
-            alt="Product illustration" 
-            className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[10px] w-full h-full" 
-            src={imageUrl}
-            onError={(e) => {
-              // Fallback to a placeholder if image fails to load
-              (e.target as HTMLImageElement).src = '/bg-product.png';
-            }}
-          />
+        {/* Right Column - Image or Video */}
+        <div className={`relative rounded-[10px] w-full lg:w-[399px] flex-shrink-0 overflow-hidden shadow-lg ${
+          videoUrl 
+            ? 'aspect-video' // 16:9 aspect ratio for video
+            : 'h-[200px] sm:h-[240px] md:h-[260px] lg:h-[287px]' // Fixed height for image
+        }`}>
+          {videoUrl ? (
+            // Video player with autoplay, loop, and muted (muted is required for autoplay in modern browsers)
+            <video 
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="absolute inset-0 w-full h-full object-contain rounded-[10px] pointer-events-none"
+              onError={(e) => {
+                // Fallback to image if video fails to load
+                const videoElement = e.target as HTMLVideoElement;
+                const fallbackImg = document.createElement('img');
+                fallbackImg.src = imageUrl;
+                fallbackImg.alt = "Product illustration";
+                fallbackImg.className = "absolute inset-0 max-w-none object-cover pointer-events-none rounded-[10px] w-full h-full";
+                videoElement.parentElement?.replaceChild(fallbackImg, videoElement);
+              }}
+            >
+              <source src={videoUrl} type="video/mp4" />
+              {/* Fallback to image if video format not supported */}
+              <img 
+                alt="Product illustration" 
+                className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[10px] w-full h-full" 
+                src={imageUrl}
+              />
+            </video>
+          ) : (
+            // Image (default)
+            <img 
+              alt="Product illustration" 
+              className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[10px] w-full h-full" 
+              src={imageUrl}
+              onError={(e) => {
+                // Fallback to a placeholder if image fails to load
+                (e.target as HTMLImageElement).src = '/bg-product.png';
+              }}
+            />
+          )}
         </div>
       </div>
     </section>
