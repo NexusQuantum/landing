@@ -3,6 +3,7 @@
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import Hero from '@/components/sections/Hero';
+import ProductReleaseBanner from '@/components/sections/ProductReleaseBanner';
 import LayersSection from '@/components/sections/LayersSection';
 import ValueSection from '@/components/sections/ValueSection';
 import FeaturedProductsSection from '@/components/sections/FeaturedProductsSection';
@@ -20,6 +21,8 @@ export default function HomePage() {
         <div className="animated-bg">
           <Hero videoSrc="/hero-video.mp4.mp4" />
         </div>
+
+        <ProductReleaseBanner />
 
         {/* Layers Section - ONE CLOUD, THREE LAYERS */}
         <LayersSection />
