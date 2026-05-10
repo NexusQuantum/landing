@@ -24,7 +24,9 @@ export default function NQRustIdentityPage() {
     ],
     backgroundImage: "/bg-product.png",
     brochureUrl: "#",
-    whitepaperUrl: "#"
+    whitepaperUrl: "#",
+    heroPrimaryExternalUrl: "https://identity.nexusquantum.id/",
+    heroPrimaryExternalLabel: "Explore Identity",
   };
 
   return <ProductDetailLayout2 {...productData} />;
