@@ -22,7 +22,7 @@ export default function NQRustEnclavePage() {
         description: "Hardware-backed remote attestation and key binding enabling secure collaboration without data exposure."
       }
     ],
-    backgroundImage: "/bg-product.png",
+    backgroundImage: "/bg-product.jpg",
     brochureUrl: "#",
     whitepaperUrl: "#"
   };

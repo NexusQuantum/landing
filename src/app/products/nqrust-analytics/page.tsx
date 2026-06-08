@@ -22,7 +22,7 @@ export default function NQRustAnalyticsPage() {
         description: "Multi-layer security model supporting SOC2, ISO, GDPR, PCI, HIPAA compliance with Lake integration."
       }
     ],
-    backgroundImage: "/bg-product.png",
+    backgroundImage: "/bg-product.jpg",
     brochureUrl: "#",
     whitepaperUrl: "#"
   };

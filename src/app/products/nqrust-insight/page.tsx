@@ -22,7 +22,7 @@ export default function NQRustInsightPage() {
         description: "60% monitoring cost reduction with 9 million USD per year infrastructure savings and 6x faster incident resolution."
       }
     ],
-    backgroundImage: "/bg-product.png",
+    backgroundImage: "/bg-product.jpg",
     brochureUrl: "#",
     whitepaperUrl: "#"
   };

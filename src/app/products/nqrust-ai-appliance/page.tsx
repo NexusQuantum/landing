@@ -22,7 +22,7 @@ export default function NQRustAIAppliancePage() {
         description: "LLAMA-3 70B training in 3 days, TTFT 30-60ms for large models, 90% GPU utilization."
       }
     ],
-    backgroundImage: "/bg-product.png",
+    backgroundImage: "/bg-product.jpg",
     brochureUrl: "#",
     whitepaperUrl: "#"
   };

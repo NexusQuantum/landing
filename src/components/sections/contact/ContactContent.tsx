@@ -34,7 +34,7 @@ const PURPOSE_OPTIONS = [
 ];
 
 // Image assets from public folder
-const imgContactusIllustration = "/contactus illustration.png";
+const imgContactusIllustration = "/contactus illustration.jpg";
 const imgUser = "/icons/user.svg";
 const imgMessage = "/icons/message.svg";
 const imgLocation = "/icons/location.svg";
@@ -97,11 +97,11 @@ const ContactContent: React.FC<ContactContentProps> = ({ className }) => {
           {/* Header Section */}
           <div className="flex flex-col gap-[14px] items-start relative shrink-0 w-full">
             <div className="flex flex-col gap-[14px] items-start relative shrink-0 w-full">
-              <h1 className="font-['Montserrat:SemiBold',_sans-serif] font-semibold leading-[1.3] text-[#121212] text-[32px] w-full">
+              <h1 className="font-montserrat font-semibold leading-[1.3] text-[#121212] text-[32px] w-full">
                 Contact Us
               </h1>
             </div>
-            <p className="font-['Montserrat:Regular',_sans-serif] font-normal leading-[1.3] text-[#3d3d3d] text-[14px] w-full">
+            <p className="font-montserrat font-normal leading-[1.3] text-[#3d3d3d] text-[14px] w-full">
               Connect with our AI infrastructure experts to discuss your specific requirements, schedule a platform demo, or explore deployment options tailored to your organization&apos;s needs.
             </p>
           </div>
@@ -119,7 +119,7 @@ const ContactContent: React.FC<ContactContentProps> = ({ className }) => {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     required
-                    className="font-['Montserrat:Regular',_sans-serif] font-normal leading-[1.3] text-[#121212] text-[16px] bg-transparent border-none outline-none w-full placeholder:text-[#888888]"
+                    className="font-montserrat font-normal leading-[1.3] text-[#121212] text-[16px] bg-transparent border-none outline-none w-full placeholder:text-[#888888]"
                     placeholder="Your Name *"
                   />
                 </div>
@@ -131,10 +131,10 @@ const ContactContent: React.FC<ContactContentProps> = ({ className }) => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="font-['Montserrat:Regular',_sans-serif] font-normal leading-[1.3] text-[#121212] text-[16px] bg-transparent border-none outline-none flex-1 placeholder:text-[#888888]"
+                    className="font-montserrat font-normal leading-[1.3] text-[#121212] text-[16px] bg-transparent border-none outline-none flex-1 placeholder:text-[#888888]"
                     placeholder="Work Email *"
                   />
-                  <span className="font-['Montserrat:Medium',_sans-serif] font-medium leading-[1.3] text-[#888888] text-[16px]">@</span>
+                  <span className="font-montserrat font-medium leading-[1.3] text-[#888888] text-[16px]">@</span>
                 </div>
               </div>
 
@@ -148,7 +148,7 @@ const ContactContent: React.FC<ContactContentProps> = ({ className }) => {
                     value={company}
                     onChange={(e) => setCompany(e.target.value)}
                     required
-                    className="font-['Montserrat:Regular',_sans-serif] font-normal leading-[1.3] text-[#121212] text-[16px] bg-transparent border-none outline-none w-full placeholder:text-[#888888]"
+                    className="font-montserrat font-normal leading-[1.3] text-[#121212] text-[16px] bg-transparent border-none outline-none w-full placeholder:text-[#888888]"
                     placeholder="Company Name *"
                   />
                 </div>
@@ -160,7 +160,7 @@ const ContactContent: React.FC<ContactContentProps> = ({ className }) => {
                     value={role}
                     onChange={(e) => setRole(e.target.value)}
                     required
-                    className="font-['Montserrat:Regular',_sans-serif] font-normal leading-[1.3] text-[#121212] text-[16px] bg-transparent border-none outline-none flex-1 placeholder:text-[#888888]"
+                    className="font-montserrat font-normal leading-[1.3] text-[#121212] text-[16px] bg-transparent border-none outline-none flex-1 placeholder:text-[#888888]"
                     placeholder="Role *"
                   />
                   <div className="overflow-clip relative shrink-0 size-[18px]">
@@ -179,7 +179,7 @@ const ContactContent: React.FC<ContactContentProps> = ({ className }) => {
                     name="product"
                     value={product}
                     onChange={(e) => setProduct(e.target.value)}
-                    className="font-['Montserrat:Regular',_sans-serif] font-normal leading-[1.3] text-[16px] bg-transparent border-none outline-none w-full appearance-none cursor-pointer text-[#121212] [color-scheme:light] [&:invalid]:text-[#888888]"
+                    className="font-montserrat font-normal leading-[1.3] text-[16px] bg-transparent border-none outline-none w-full appearance-none cursor-pointer text-[#121212] [color-scheme:light] [&:invalid]:text-[#888888]"
                   >
                     {PRODUCT_OPTIONS.map((opt) => (
                       <option key={opt.value || 'product-empty'} value={opt.value}>
@@ -194,7 +194,7 @@ const ContactContent: React.FC<ContactContentProps> = ({ className }) => {
                     name="purpose"
                     value={purpose}
                     onChange={(e) => setPurpose(e.target.value)}
-                    className="font-['Montserrat:Regular',_sans-serif] font-normal leading-[1.3] text-[16px] bg-transparent border-none outline-none w-full flex-1 appearance-none cursor-pointer text-[#121212] [color-scheme:light] [&:invalid]:text-[#888888]"
+                    className="font-montserrat font-normal leading-[1.3] text-[16px] bg-transparent border-none outline-none w-full flex-1 appearance-none cursor-pointer text-[#121212] [color-scheme:light] [&:invalid]:text-[#888888]"
                   >
                     {PURPOSE_OPTIONS.map((opt) => (
                       <option key={opt.value || 'purpose-empty'} value={opt.value}>
@@ -213,7 +213,7 @@ const ContactContent: React.FC<ContactContentProps> = ({ className }) => {
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   required
-                  className="font-['Montserrat:Regular',_sans-serif] font-normal leading-[1.3] text-[#121212] text-[16px] bg-transparent border-none outline-none w-full h-full resize-none placeholder:text-[#888888]"
+                  className="font-montserrat font-normal leading-[1.3] text-[#121212] text-[16px] bg-transparent border-none outline-none w-full h-full resize-none placeholder:text-[#888888]"
                   placeholder="Enter Your Message Here... *"
                 />
               </div>
@@ -223,7 +223,7 @@ const ContactContent: React.FC<ContactContentProps> = ({ className }) => {
             <div className="flex gap-[14px] items-center relative shrink-0 w-full">
               <button type="submit" className="basis-0 bg-[#fffefd] box-border flex gap-[10px] grow items-center justify-center min-h-px min-w-px px-[14px] py-[10px] relative rounded-[8px] shrink-0 cursor-pointer hover:opacity-90 transition-opacity">
                 <div aria-hidden="true" className="absolute border border-[#f26522] border-solid inset-0 pointer-events-none rounded-[8px] shadow-[0px_2px_6px_2px_rgba(0,0,0,0.15),0px_1px_2px_0px_rgba(0,0,0,0.3)]" />
-                <span className="font-['Montserrat:Medium',_sans-serif] font-medium leading-[1.3] text-[#f26522] text-[14px]">
+                <span className="font-montserrat font-medium leading-[1.3] text-[#f26522] text-[14px]">
                   Submit Message
                 </span>
                 <div className="overflow-clip relative shrink-0 size-[18px]">
@@ -239,13 +239,13 @@ const ContactContent: React.FC<ContactContentProps> = ({ className }) => {
           <div className="bg-[#fff3ed] box-border flex flex-wrap gap-[14px] items-center p-[14px] relative rounded-[10px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.3),0px_2px_6px_2px_rgba(0,0,0,0.15)] shrink-0 w-full">
             <div className="bg-[rgba(0,0,0,0)] box-border flex gap-[10px] items-center justify-center p-[10px] relative rounded-[5px] shrink-0 w-[203px]">
               <img src={imgLocation} alt="Location" className="w-[18px] h-[18px]" />
-              <span className="font-['Montserrat:Medium',_sans-serif] font-medium leading-[1.3] text-[#3d3d3d] text-[14px]">
+              <span className="font-montserrat font-medium leading-[1.3] text-[#3d3d3d] text-[14px]">
                 HQ: Jakarta, Indonesia
               </span>
             </div>
             <div className="bg-[rgba(0,0,0,0)] box-border flex gap-[10px] items-center justify-center p-[10px] relative rounded-[5px] shrink-0">
               <img src={imgMail} alt="Email" className="w-[18px] h-[18px]" />
-              <span className="font-['Montserrat:Medium',_sans-serif] font-medium leading-[1.3] text-[#3d3d3d] text-[14px]">
+              <span className="font-montserrat font-medium leading-[1.3] text-[#3d3d3d] text-[14px]">
                 contact@nexusquantum.id
               </span>
             </div>
@@ -258,10 +258,10 @@ const ContactContent: React.FC<ContactContentProps> = ({ className }) => {
         <div className="flex flex-col gap-4 items-start relative w-full max-w-sm">
           {/* Header Section */}
           <div className="flex flex-col gap-3 items-center relative w-full">
-            <h1 className="font-['Montserrat:SemiBold',_sans-serif] font-semibold leading-[1.3] text-[#121212] text-[24px] text-center w-full">
+            <h1 className="font-montserrat font-semibold leading-[1.3] text-[#121212] text-[24px] text-center w-full">
               Contact Us
             </h1>
-            <p className="font-['Montserrat:Regular',_sans-serif] font-normal leading-[1.4] text-[#3d3d3d] text-[14px] text-center w-full">
+            <p className="font-montserrat font-normal leading-[1.4] text-[#3d3d3d] text-[14px] text-center w-full">
               Ready to get started? Let&apos;s talk about how we can help your organization with our cutting-edge AI infrastructure solutions.
             </p>
           </div>
@@ -277,10 +277,10 @@ const ContactContent: React.FC<ContactContentProps> = ({ className }) => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="font-['Montserrat:Regular',_sans-serif] font-normal leading-[1.3] text-[#121212] text-[16px] bg-transparent border-none outline-none flex-1 placeholder:text-[#888888]"
+                  className="font-montserrat font-normal leading-[1.3] text-[#121212] text-[16px] bg-transparent border-none outline-none flex-1 placeholder:text-[#888888]"
                   placeholder="Work Email *"
                 />
-                <span className="font-['Montserrat:Medium',_sans-serif] font-medium leading-[1.3] text-[#888888] text-[16px] ml-2">@</span>
+                <span className="font-montserrat font-medium leading-[1.3] text-[#888888] text-[16px] ml-2">@</span>
               </div>
 
               {/* Your Name */}
@@ -291,7 +291,7 @@ const ContactContent: React.FC<ContactContentProps> = ({ className }) => {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   required
-                  className="font-['Montserrat:Regular',_sans-serif] font-normal leading-[1.3] text-[#121212] text-[16px] bg-transparent border-none outline-none w-full placeholder:text-[#888888]"
+                  className="font-montserrat font-normal leading-[1.3] text-[#121212] text-[16px] bg-transparent border-none outline-none w-full placeholder:text-[#888888]"
                   placeholder="Your Name *"
                 />
               </div>
@@ -304,7 +304,7 @@ const ContactContent: React.FC<ContactContentProps> = ({ className }) => {
                   value={company}
                   onChange={(e) => setCompany(e.target.value)}
                   required
-                  className="font-['Montserrat:Regular',_sans-serif] font-normal leading-[1.3] text-[#121212] text-[16px] bg-transparent border-none outline-none w-full placeholder:text-[#888888]"
+                  className="font-montserrat font-normal leading-[1.3] text-[#121212] text-[16px] bg-transparent border-none outline-none w-full placeholder:text-[#888888]"
                   placeholder="Company Name *"
                 />
               </div>
@@ -317,7 +317,7 @@ const ContactContent: React.FC<ContactContentProps> = ({ className }) => {
                   value={role}
                   onChange={(e) => setRole(e.target.value)}
                   required
-                  className="font-['Montserrat:Regular',_sans-serif] font-normal leading-[1.3] text-[#121212] text-[16px] bg-transparent border-none outline-none flex-1 placeholder:text-[#888888]"
+                  className="font-montserrat font-normal leading-[1.3] text-[#121212] text-[16px] bg-transparent border-none outline-none flex-1 placeholder:text-[#888888]"
                   placeholder="Role *"
                 />
                 <div className="overflow-clip relative shrink-0 size-[18px] ml-2">
@@ -333,7 +333,7 @@ const ContactContent: React.FC<ContactContentProps> = ({ className }) => {
                   name="product"
                   value={product}
                   onChange={(e) => setProduct(e.target.value)}
-                  className="font-['Montserrat:Regular',_sans-serif] font-normal leading-[1.3] text-[#121212] text-[16px] bg-transparent border-none outline-none w-full appearance-none cursor-pointer [color-scheme:light]"
+                  className="font-montserrat font-normal leading-[1.3] text-[#121212] text-[16px] bg-transparent border-none outline-none w-full appearance-none cursor-pointer [color-scheme:light]"
                 >
                   {PRODUCT_OPTIONS.map((opt) => (
                     <option key={opt.value || 'product-empty'} value={opt.value}>
@@ -349,7 +349,7 @@ const ContactContent: React.FC<ContactContentProps> = ({ className }) => {
                   name="purpose"
                   value={purpose}
                   onChange={(e) => setPurpose(e.target.value)}
-                  className="font-['Montserrat:Regular',_sans-serif] font-normal leading-[1.3] text-[#121212] text-[16px] bg-transparent border-none outline-none w-full appearance-none cursor-pointer [color-scheme:light]"
+                  className="font-montserrat font-normal leading-[1.3] text-[#121212] text-[16px] bg-transparent border-none outline-none w-full appearance-none cursor-pointer [color-scheme:light]"
                 >
                   {PURPOSE_OPTIONS.map((opt) => (
                     <option key={opt.value || 'purpose-empty'} value={opt.value}>
@@ -366,7 +366,7 @@ const ContactContent: React.FC<ContactContentProps> = ({ className }) => {
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   required
-                  className="font-['Montserrat:Regular',_sans-serif] font-normal leading-[1.3] text-[#121212] text-[16px] bg-transparent border-none outline-none w-full h-full resize-none placeholder:text-[#888888]"
+                  className="font-montserrat font-normal leading-[1.3] text-[#121212] text-[16px] bg-transparent border-none outline-none w-full h-full resize-none placeholder:text-[#888888]"
                   placeholder="Enter Your Message Here... *"
                 />
               </div>
@@ -375,7 +375,7 @@ const ContactContent: React.FC<ContactContentProps> = ({ className }) => {
             {/* Submit Button */}
             <div className="flex items-center relative w-full">
               <button type="submit" className="bg-[#fffefd] box-border flex gap-2 items-center justify-center px-4 py-3 relative rounded-[8px] w-full border border-[#f26522] shadow-[0px_2px_6px_2px_rgba(0,0,0,0.15),0px_1px_2px_0px_rgba(0,0,0,0.3)] hover:bg-[#f26522] hover:text-white transition-all duration-300">
-                <span className="font-['Montserrat:Medium',_sans-serif] font-medium leading-[1.3] text-[#f26522] text-[14px] group-hover:text-white">
+                <span className="font-montserrat font-medium leading-[1.3] text-[#f26522] text-[14px] group-hover:text-white">
                   Submit Message
                 </span>
                 <div className="overflow-clip relative shrink-0 size-[18px]">
@@ -391,13 +391,13 @@ const ContactContent: React.FC<ContactContentProps> = ({ className }) => {
           <div className="bg-[#fff3ed] box-border flex flex-col gap-3 items-center p-4 relative rounded-[12px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.3),0px_2px_6px_2px_rgba(0,0,0,0.15)] w-full">
             <div className="bg-white/50 box-border flex items-center justify-center gap-2 p-3 relative rounded-[8px] w-full">
               <img src={imgLocation} alt="Location" className="w-[18px] h-[18px] flex-shrink-0" />
-              <span className="font-['Montserrat:Medium',_sans-serif] font-medium leading-[1.3] text-[#3d3d3d] text-[14px] text-center">
+              <span className="font-montserrat font-medium leading-[1.3] text-[#3d3d3d] text-[14px] text-center">
                 HQ: Jakarta, Indonesia
               </span>
             </div>
             <div className="bg-white/50 box-border flex items-center justify-center gap-2 p-3 relative rounded-[8px] w-full">
               <img src={imgMail} alt="Email" className="w-[18px] h-[18px] flex-shrink-0" />
-              <span className="font-['Montserrat:Medium',_sans-serif] font-medium leading-[1.3] text-[#3d3d3d] text-[14px] text-center break-all">
+              <span className="font-montserrat font-medium leading-[1.3] text-[#3d3d3d] text-[14px] text-center break-all">
                 contact@nexusquantum.id
               </span>
             </div>

@@ -22,7 +22,7 @@ export default function NQRustFleetMgrPage() {
         description: "60% operational savings and 9x faster deployments with intelligent scheduling achieving 90% CPU, 96% GPU utilization."
       }
     ],
-    backgroundImage: "/bg-product.png",
+    backgroundImage: "/bg-product.jpg",
     brochureUrl: "#",
     whitepaperUrl: "#"
   };

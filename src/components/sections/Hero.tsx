@@ -1,12 +1,9 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import Button from '@/components/ui/Button';
 import { Download, MessageCircle } from 'lucide-react';
-
-// Image assets from Figma
-const imgFrame9 = "http://localhost:3845/assets/a7f3898f351bf380f5e59b1256975a4deb7b711f.svg";
 
 interface HeroProps {
   className?: string;
@@ -157,7 +154,8 @@ const Hero: React.FC<HeroProps> = ({ className, videoSrc }) => {
             muted
             loop
             playsInline
-            preload="auto"
+            preload="metadata"
+            poster="/hero-poster.jpg"
             className="w-full h-full object-cover video-background"
             style={{ 
               position: 'fixed',
@@ -278,11 +276,7 @@ const Hero: React.FC<HeroProps> = ({ className, videoSrc }) => {
                 : 'opacity-0 transform translate-y-4'
             }`}>
               {/* Decorative Line */}
-              <div className="relative w-12 h-0">
-                <div className="absolute bottom-0 left-0 right-0 top-[-3px]">
-                  <img alt="" className="w-full h-full" src={imgFrame9} />
-                </div>
-              </div>
+              <div className="w-12 h-[3px] rounded-full bg-gradient-to-r from-[#FF5001] to-[#FF9C6D]" />
 
               {/* Buttons */}
               <div className="flex flex-col md:flex-row gap-[14px] items-center w-full md:w-auto">

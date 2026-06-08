@@ -2,12 +2,7 @@
 
 import React from 'react';
 import { cn } from '@/lib/utils';
-import { MessageSquare, Server, Layers, Users, Package } from 'lucide-react';
-
-// Image assets from Figma
-const imgPrimaryNoBackgroundWithOrangeText3 = "http://localhost:3845/assets/1679420ca1a44cace7bdb3c4b6fb19476177e026.png";
-const imgIllustrationPricing = "http://localhost:3845/assets/25ada818176299492deb7d2eb73b12605171a145.png";
-const img = "http://localhost:3845/assets/fcada072977cfd43f02dc316500b35f1cae9e8b8.svg";
+import { Server, Layers, Users, Package } from 'lucide-react';
 
 interface PricingContentProps {
   className?: string;
@@ -23,15 +18,6 @@ const PricingContent: React.FC<PricingContentProps> = ({ className }) => {
           <div className="flex flex-col gap-[36px] items-start w-[651px]">
             {/* Header Section */}
             <div className="flex flex-col gap-[14px] items-start w-full">
-              <div className="h-[49px] relative w-[136px]">
-                <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                  <img 
-                    alt="" 
-                    className="absolute h-[200%] left-[-5.15%] max-w-none top-[-49.68%] w-[112.39%]" 
-                    src={imgPrimaryNoBackgroundWithOrangeText3} 
-                  />
-                </div>
-              </div>
               <p className="font-montserrat font-semibold leading-[1.3] text-[#121212] text-[32px]">
                 Flexible Solutions for Every Need
               </p>
@@ -139,7 +125,7 @@ const PricingContent: React.FC<PricingContentProps> = ({ className }) => {
               <img 
                 alt="Pricing illustration" 
                 className="w-full h-full object-cover rounded-[20px]" 
-                src="/illustration pricing.png" 
+                src="/illustration pricing.jpg" 
               />
             </div>
           </div>
@@ -150,15 +136,6 @@ const PricingContent: React.FC<PricingContentProps> = ({ className }) => {
       <div className="lg:hidden flex flex-col items-center w-full">
         {/* Header Section */}
         <div className="flex flex-col gap-[14px] h-[297px] items-center justify-end overflow-hidden px-4 py-[30px] w-full">
-          <div className="h-[27px] relative w-[76px]">
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-              <img 
-                alt="" 
-                className="absolute h-[200%] left-[-5.15%] max-w-none top-[-49.68%] w-[112.39%]" 
-                src={imgPrimaryNoBackgroundWithOrangeText3} 
-              />
-            </div>
-          </div>
           <p className="font-montserrat font-medium leading-[1.3] text-[#121212] text-[18px] text-center">
             Flexible Solutions for Every Need
           </p>

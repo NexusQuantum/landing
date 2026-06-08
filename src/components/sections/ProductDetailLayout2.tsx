@@ -483,7 +483,7 @@ export default function ProductDetailLayout2({
   productTitle,
   description,
   benefits,
-  backgroundImage = "/bg-product.png",
+  backgroundImage = "/bg-product.jpg",
   brochureUrl = "#",
   whitepaperUrl = "#",
   aboutDescription, // Jika tidak ada, akan menggunakan description
@@ -804,10 +804,10 @@ export default function ProductDetailLayout2({
                 <img 
                   alt="Product illustration" 
                   className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[10px] w-full h-full" 
-                  src="/illustration about us.png"
+                  src="/illustration about us.jpg"
                   onError={(e) => {
-                    // Fallback to bg-product.png if image fails to load
-                    (e.target as HTMLImageElement).src = '/bg-product.png';
+                    // Fallback to bg-product.jpg if image fails to load
+                    (e.target as HTMLImageElement).src = '/bg-product.jpg';
                   }}
                 />
               </div>

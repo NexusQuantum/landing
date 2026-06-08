@@ -8,7 +8,7 @@ import Footer from '@/components/layout/Footer';
 import { ArrowLeft, MessageSquare } from 'lucide-react';
 
 // Image assets from public folder
-const backgroundImage = "/under construction.png";
+const backgroundImage = "/under construction.jpg";
 const logoImage = "/nqr logo.png";
 
 export default function UnderConstruction() {
@@ -33,7 +33,7 @@ export default function UnderConstruction() {
           {/* Background Image */}
           <div className="absolute inset-0 rounded-2xl sm:rounded-3xl overflow-hidden z-0">
             <img
-              src="/under construction.png"
+              src="/under construction.jpg"
               alt="Under Construction Background"
               className="w-full h-full object-cover"
               style={{ minHeight: '500px' }}

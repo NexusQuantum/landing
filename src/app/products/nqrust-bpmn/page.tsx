@@ -22,7 +22,7 @@ export default function NQRustBPMNPage() {
         description: "3x faster process deployment with real-time monitoring, compliance tracking, and 300% productivity improvement through automation."
       }
     ],
-    backgroundImage: "/bg-product.png",
+    backgroundImage: "/bg-product.jpg",
     brochureUrl: "#",
     whitepaperUrl: "#"
   };

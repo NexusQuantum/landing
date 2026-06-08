@@ -22,7 +22,7 @@ export default function NQRustStoragePage() {
         description: "99.999% durability with erasure coding, automatic repair, end-to-end encryption, and policy-driven tiering."
       }
     ],
-    backgroundImage: "/bg-product.png",
+    backgroundImage: "/bg-product.jpg",
     brochureUrl: "#",
     whitepaperUrl: "#"
   };

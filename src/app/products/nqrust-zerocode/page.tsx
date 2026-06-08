@@ -22,7 +22,7 @@ export default function NQRustZeroCodePage() {
         description: "9x faster API development with built-in security filters, business logic functions, and 600% ROI through automation."
       }
     ],
-    backgroundImage: "/bg-product.png",
+    backgroundImage: "/bg-product.jpg",
     brochureUrl: "#",
     whitepaperUrl: "#"
   };

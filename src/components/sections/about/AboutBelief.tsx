@@ -3,7 +3,7 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 // Image assets from Figma
-const imgBeliefSection = "/belief section.png";
+const imgBeliefSection = "/belief section.jpg";
 
 interface AboutBeliefProps {
   className?: string;

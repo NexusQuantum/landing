@@ -206,7 +206,7 @@ const UseCasesContent: React.FC<UseCasesContentProps> = ({ className }) => {
         {/* Background Image */}
         <div className="absolute inset-0">
           <img
-            src="/bgUseCase.png"
+            src="/bgUseCase.jpg"
             alt="Use Cases Background"
             className="h-full w-full object-cover"
           />

@@ -31,7 +31,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({
   className,
   title = "About Product",
   description = "Vorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur tempus urna at turpis condimentum lobortis. Ut commodo efficitur neque. per inceptos himenaeos. Curabitur tempus urna at turpis condimentum lobortis. Ut commodo efficitur neque. per inceptos himenaeos.",
-  imageUrl = "/illustration about us.png",
+  imageUrl = "/illustration about us.jpg",
   videoUrl,
   brochureUrl,
   whitepaperUrl,
@@ -208,7 +208,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({
               src={imageUrl}
               onError={(e) => {
                 // Fallback to a placeholder if image fails to load
-                (e.target as HTMLImageElement).src = '/bg-product.png';
+                (e.target as HTMLImageElement).src = '/bg-product.jpg';
               }}
             />
           )}

@@ -22,7 +22,7 @@ export default function NQRustLakePage() {
         description: "Performance-vs-cost sweet spot versus Spark, Snowflake, Databricks, and ClickHouse with proven enterprise scale."
       }
     ],
-    backgroundImage: "/bg-product.png",
+    backgroundImage: "/bg-product.jpg",
     brochureUrl: "#",
     whitepaperUrl: "#"
   };

@@ -22,7 +22,7 @@ export default function NQRustGuardPage() {
         description: "Weighted decision matrix score 9.6/10 versus 6.0/10 alternatives on recovery assurance, cost, and compliance."
       }
     ],
-    backgroundImage: "/bg-product.png",
+    backgroundImage: "/bg-product.jpg",
     brochureUrl: "#",
     whitepaperUrl: "#"
   };

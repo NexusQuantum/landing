@@ -6,10 +6,6 @@ import { cn } from '@/lib/utils';
 import Button from '@/components/ui/Button';
 import { ArrowRight, Instagram, Linkedin, Youtube } from 'lucide-react';
 
-// Image assets from Figma
-const imgLinkedinLogo = "http://localhost:3845/assets/e1df4a30443792d9a8e0be5ac40f8afe6060f92f.png";
-const imgLineIcon = "http://localhost:3845/assets/965ca9ff34e8e5d2fc6dd10d8a2b0498fc981752.svg";
-
 interface FooterProps {
   className?: string;
 }
@@ -263,11 +259,7 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
 
 
         {/* Divider Line */}
-        <div className="w-full h-0 relative">
-          <div className="absolute bottom-0 left-0 right-0 top-[-1px]">
-            <img alt="" className="w-full h-full" src={imgLineIcon} />
-          </div>
-        </div>
+        <div className="w-full h-px bg-white/15" />
 
         {/* Legal Links */}
         <div className="flex flex-wrap gap-[14px] items-start justify-center px-4 md:px-[70px] w-full">

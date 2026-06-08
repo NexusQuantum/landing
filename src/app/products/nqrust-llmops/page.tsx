@@ -22,7 +22,7 @@ export default function NQRustLLMOpsPage() {
         description: "30-day program from install through fine-tune, integrate, to production with comprehensive model profiles."
       }
     ],
-    backgroundImage: "/bg-product.png",
+    backgroundImage: "/bg-product.jpg",
     brochureUrl: "#",
     whitepaperUrl: "#"
   };

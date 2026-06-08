@@ -22,7 +22,7 @@ export default function NQRustMicroVMPage() {
         description: "Docker/K8s compatibility with parallel rollout capabilities, enabling 6-month payback in conservative migration timelines."
       }
     ],
-    backgroundImage: "/bg-product.png",
+    backgroundImage: "/bg-product.jpg",
     brochureUrl: "#",
     whitepaperUrl: "#"
   };

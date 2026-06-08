@@ -22,7 +22,7 @@ export default function NQRustHVHypervisorPage() {
         description: "Deep analytics for 99.99% SLA compliance tracking, per-VM cost metrics, and policy-driven isolation for regulated multi-tenant environments."
       }
     ],
-    backgroundImage: "/bg-product.png",
+    backgroundImage: "/bg-product.jpg",
     brochureUrl: "#",
     whitepaperUrl: "#"
   };

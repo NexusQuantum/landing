@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
@@ -9,6 +9,34 @@ interface NavbarProps {
   className?: string;
   children?: React.ReactNode;
 }
+
+const NAV_PRODUCTS: { label: string; href: string }[][] = [
+  [
+    { label: 'NQRust-HV Hypervisor', href: '/products/nqrust-hv-hypervisor' },
+    { label: 'NQRust-MicroVM', href: '/products/nqrust-microvm' },
+    { label: 'NQRust-Storage', href: '/products/nqrust-storage' },
+    { label: 'NQRust-FleetMgr', href: '/products/nqrust-fleetmgr' },
+    { label: 'NQRust-SecureGPU', href: '/products/nqrust-securegpu' },
+    { label: 'NQRust-Enclave', href: '/products/nqrust-enclave' },
+  ],
+  [
+    { label: 'NQRust-Lake', href: '/products/nqrust-lake' },
+    { label: 'NQRust-Analytics', href: '/products/nqrust-analytics' },
+    { label: 'NQRust-Insight', href: '/products/nqrust-insight' },
+    { label: 'NQRust-Guard', href: '/products/nqrust-guard' },
+    { label: 'NQRust-Edge', href: '/products/nqrust-edge' },
+    { label: 'NQRust-AI Appliance', href: '/products/nqrust-ai-appliance' },
+  ],
+  [
+    { label: 'NQRust-LLMOps', href: '/products/nqrust-llmops' },
+    { label: 'NQRust-Identity', href: '/products/nqrust-identity' },
+    { label: 'NQRust-ZeroCode', href: '/products/nqrust-zerocode' },
+    { label: 'NQRust-BPMN', href: '/products/nqrust-bpmn' },
+  ],
+];
+
+const PRODUCT_LINK_CLASS =
+  'group/link flex items-center gap-2 px-2.5 lg:px-3 py-1.5 lg:py-2 text-white/75 text-xs lg:text-sm rounded-md lg:rounded-lg transition-all duration-200 hover:text-[#f26522] hover:bg-[#f26522]/12 border-l-2 border-transparent hover:border-[#f26522] hover:pl-3';
 
 const Navbar: React.FC<NavbarProps> = ({ className, children }) => {
   const pathname = usePathname();
@@ -25,6 +53,40 @@ const Navbar: React.FC<NavbarProps> = ({ className, children }) => {
   const isUseCasesPage = pathname === '/use-cases';
   const isPricingPage = pathname === '/pricing';
   const isContactPage = pathname === '/contact';
+  const isProductPage = pathname.startsWith('/products');
+
+  const productCloseTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const closeProductDropdown = useCallback(() => {
+    setIsProductDropdownOpen(false);
+    setIsProductClicked(false);
+  }, []);
+
+  const handleProductMouseEnter = useCallback(() => {
+    if (productCloseTimeoutRef.current) {
+      clearTimeout(productCloseTimeoutRef.current);
+      productCloseTimeoutRef.current = null;
+    }
+    if (!isProductClicked) {
+      setIsProductDropdownOpen(true);
+    }
+  }, [isProductClicked]);
+
+  const handleProductMouseLeave = useCallback(() => {
+    if (!isProductClicked) {
+      productCloseTimeoutRef.current = setTimeout(() => {
+        setIsProductDropdownOpen(false);
+      }, 200);
+    }
+  }, [isProductClicked]);
+
+  useEffect(() => {
+    return () => {
+      if (productCloseTimeoutRef.current) {
+        clearTimeout(productCloseTimeoutRef.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -179,242 +241,90 @@ const Navbar: React.FC<NavbarProps> = ({ className, children }) => {
              </a>
             
             {/* Product Dropdown */}
-            <div className="relative product-dropdown-container">
-              <button 
+            <div
+              className="relative product-dropdown-container"
+              onMouseEnter={handleProductMouseEnter}
+              onMouseLeave={handleProductMouseLeave}
+            >
+              <button
+                type="button"
                 onClick={() => {
-                  setIsProductClicked(!isProductClicked);
-                  setIsProductDropdownOpen(!isProductDropdownOpen);
+                  const nextOpen = !isProductDropdownOpen;
+                  setIsProductClicked(nextOpen);
+                  setIsProductDropdownOpen(nextOpen);
                 }}
-                onMouseEnter={() => {
-                  if (!isProductClicked) {
-                    setIsProductDropdownOpen(true);
-                  }
-                }}
-                className="px-2 py-2 lg:px-[10px] lg:py-[8px] text-[#888888] text-xs lg:text-[14px] font-normal leading-[1.3] flex items-center gap-0.5 lg:gap-1 relative group overflow-hidden transition-all duration-300 hover:text-[#f26522] hover:scale-105 hover:shadow-lg hover:shadow-[#f26522]/20"
+                className={cn(
+                  'px-2 py-2 lg:px-[10px] lg:py-[8px] text-xs lg:text-[14px] leading-[1.3] flex items-center gap-0.5 lg:gap-1 relative group overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#f26522]/20',
+                  isProductPage || isProductDropdownOpen
+                    ? 'text-[#f26522] font-medium'
+                    : 'text-[#888888] font-normal hover:text-[#f26522]'
+                )}
               >
                 <span className="relative z-10">Product</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-[#f26522]/10 to-[#f26522]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-[#f26522] to-[#e55a1e] group-hover:w-full transition-all duration-300"></div>
-                <svg 
-                  className={`w-3 h-3 transition-transform duration-300 relative z-10 ${isProductDropdownOpen ? 'rotate-180' : ''}`} 
-                  fill="none" 
-                  stroke="currentColor" 
+                <div className="absolute inset-0 bg-gradient-to-r from-[#f26522]/10 to-[#f26522]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div
+                  className={cn(
+                    'absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-[#f26522] to-[#e55a1e] transition-all duration-300',
+                    isProductPage || isProductDropdownOpen ? 'w-full' : 'w-0 group-hover:w-full'
+                  )}
+                />
+                <svg
+                  className={cn(
+                    'w-3 h-3 transition-transform duration-300 relative z-10',
+                    isProductDropdownOpen && 'rotate-180'
+                  )}
+                  fill="none"
+                  stroke="currentColor"
                   viewBox="0 0 24 24"
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
 
-              {/* Product Dropdown Menu - 4x3 Layout */}
               {isProductDropdownOpen && (
                 <>
-                  {/* Backdrop Overlay */}
-                  <div 
-                    className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40" 
-                    onClick={() => {
-                      setIsProductDropdownOpen(false);
-                      setIsProductClicked(false);
-                    }}
-                  />
-                  
-                  {/* Dropdown Content */}
-                  <div 
-                    className="absolute top-full left-0 mt-[28px] w-[90vw] max-w-[450px] lg:w-[450px] bg-black/90 backdrop-blur-xl border border-white/30 rounded-xl lg:rounded-2xl shadow-2xl z-50 animate-in slide-in-from-top-2 duration-300"
-                    onMouseEnter={() => {
-                      if (!isProductClicked) {
-                        setIsProductDropdownOpen(true);
-                      }
-                    }}
-                    onMouseLeave={() => {
-                      if (!isProductClicked) {
-                        setIsProductDropdownOpen(false);
-                      }
-                    }}
-                  >
-                  <div className="p-4 lg:p-6">
-                    {/* Header */}
-                    <div className="mb-3 lg:mb-4 pb-2 lg:pb-3 border-b border-white/20">
-                      <h3 className="text-white font-semibold text-base lg:text-lg">Our Products</h3>
-                      <p className="text-white/70 text-xs lg:text-sm">Explore our comprehensive suite of solutions</p>
-                    </div>
-                    
-                        {/* 3x6 Grid Layout - Responsive */}
-                        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-4">
-                          {/* Column 1 */}
-                          <div className="space-y-2">
-                            <a 
-                              href="/products/nqrust-hv-hypervisor" 
-                              onClick={() => {
-                                setIsProductDropdownOpen(false);
-                                setIsProductClicked(false);
-                              }}
-                              className="block px-2 lg:px-3 py-1.5 lg:py-2 text-white text-xs lg:text-sm hover:text-[#f26522] hover:bg-white/10 transition-all duration-300 rounded-md lg:rounded-lg"
-                            >
-                              NQRust-HV Hypervisor
-                            </a>
-                            <a 
-                              href="/products/nqrust-microvm" 
-                              onClick={() => {
-                                setIsProductDropdownOpen(false);
-                                setIsProductClicked(false);
-                              }}
-                              className="block px-3 py-2 text-white text-sm hover:text-[#f26522] hover:bg-white/10 transition-all duration-300 rounded-lg"
-                            >
-                              NQRust-MicroVM
-                            </a>
-                            <a 
-                              href="/products/nqrust-storage" 
-                              onClick={() => {
-                                setIsProductDropdownOpen(false);
-                                setIsProductClicked(false);
-                              }}
-                              className="block px-3 py-2 text-white text-sm hover:text-[#f26522] hover:bg-white/10 transition-all duration-300 rounded-lg"
-                            >
-                              NQRust-Storage
-                            </a>
-                            <a 
-                              href="/products/nqrust-fleetmgr" 
-                              onClick={() => {
-                                setIsProductDropdownOpen(false);
-                                setIsProductClicked(false);
-                              }}
-                              className="block px-3 py-2 text-white text-sm hover:text-[#f26522] hover:bg-white/10 transition-all duration-300 rounded-lg"
-                            >
-                              NQRust-FleetMgr
-                            </a>
-                            <a 
-                              href="/products/nqrust-securegpu" 
-                              onClick={() => {
-                                setIsProductDropdownOpen(false);
-                                setIsProductClicked(false);
-                              }}
-                              className="block px-3 py-2 text-white text-sm hover:text-[#f26522] hover:bg-white/10 transition-all duration-300 rounded-lg"
-                            >
-                              NQRust-SecureGPU
-                            </a>
-                            <a 
-                              href="/products/nqrust-enclave" 
-                              onClick={() => {
-                                setIsProductDropdownOpen(false);
-                                setIsProductClicked(false);
-                              }}
-                              className="block px-3 py-2 text-white text-sm hover:text-[#f26522] hover:bg-white/10 transition-all duration-300 rounded-lg"
-                            >
-                              NQRust-Enclave
-                            </a>
-                          </div>
+                  {isProductClicked && (
+                    <div
+                      className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40"
+                      onClick={closeProductDropdown}
+                      aria-hidden
+                    />
+                  )}
 
-                          {/* Column 2 */}
-                          <div className="space-y-2">
-                            <a 
-                              href="/products/nqrust-lake" 
-                              onClick={() => {
-                                setIsProductDropdownOpen(false);
-                                setIsProductClicked(false);
-                              }}
-                              className="block px-3 py-2 text-white text-sm hover:text-[#f26522] hover:bg-white/10 transition-all duration-300 rounded-lg"
-                            >
-                              NQRust-Lake
-                            </a>
-                            <a 
-                              href="/products/nqrust-analytics" 
-                              onClick={() => {
-                                setIsProductDropdownOpen(false);
-                                setIsProductClicked(false);
-                              }}
-                              className="block px-3 py-2 text-white text-sm hover:text-[#f26522] hover:bg-white/10 transition-all duration-300 rounded-lg"
-                            >
-                              NQRust-Analytics
-                            </a>
-                            <a 
-                              href="/products/nqrust-insight" 
-                              onClick={() => {
-                                setIsProductDropdownOpen(false);
-                                setIsProductClicked(false);
-                              }}
-                              className="block px-3 py-2 text-white text-sm hover:text-[#f26522] hover:bg-white/10 transition-all duration-300 rounded-lg"
-                            >
-                              NQRust-Insight
-                            </a>
-                            <a 
-                              href="/products/nqrust-guard" 
-                              onClick={() => {
-                                setIsProductDropdownOpen(false);
-                                setIsProductClicked(false);
-                              }}
-                              className="block px-3 py-2 text-white text-sm hover:text-[#f26522] hover:bg-white/10 transition-all duration-300 rounded-lg"
-                            >
-                              NQRust-Guard
-                            </a>
-                            <a 
-                              href="/products/nqrust-edge" 
-                              onClick={() => {
-                                setIsProductDropdownOpen(false);
-                                setIsProductClicked(false);
-                              }}
-                              className="block px-3 py-2 text-white text-sm hover:text-[#f26522] hover:bg-white/10 transition-all duration-300 rounded-lg"
-                            >
-                              NQRust-Edge
-                            </a>
-                            <a 
-                              href="/products/nqrust-ai-appliance" 
-                              onClick={() => {
-                                setIsProductDropdownOpen(false);
-                                setIsProductClicked(false);
-                              }}
-                              className="block px-3 py-2 text-white text-sm hover:text-[#f26522] hover:bg-white/10 transition-all duration-300 rounded-lg"
-                            >
-                              NQRust-AI Appliance
-                            </a>
-                          </div>
-
-                          {/* Column 3 */}
-                          <div className="space-y-2">
-                            <a 
-                              href="/products/nqrust-llmops" 
-                              onClick={() => {
-                                setIsProductDropdownOpen(false);
-                                setIsProductClicked(false);
-                              }}
-                              className="block px-3 py-2 text-white text-sm hover:text-[#f26522] hover:bg-white/10 transition-all duration-300 rounded-lg"
-                            >
-                              NQRust-LLMOps
-                            </a>
-                            <a 
-                              href="/products/nqrust-identity" 
-                              onClick={() => {
-                                setIsProductDropdownOpen(false);
-                                setIsProductClicked(false);
-                              }}
-                              className="block px-3 py-2 text-white text-sm hover:text-[#f26522] hover:bg-white/10 transition-all duration-300 rounded-lg"
-                            >
-                              NQRust-Identity
-                            </a>
-                            <a 
-                              href="/products/nqrust-zerocode" 
-                              onClick={() => {
-                                setIsProductDropdownOpen(false);
-                                setIsProductClicked(false);
-                              }}
-                              className="block px-3 py-2 text-white text-sm hover:text-[#f26522] hover:bg-white/10 transition-all duration-300 rounded-lg"
-                            >
-                              NQRust-ZeroCode
-                            </a>
-                            <a 
-                              href="/products/nqrust-bpmn" 
-                              onClick={() => {
-                                setIsProductDropdownOpen(false);
-                                setIsProductClicked(false);
-                              }}
-                              className="block px-3 py-2 text-white text-sm hover:text-[#f26522] hover:bg-white/10 transition-all duration-300 rounded-lg"
-                            >
-                              NQRust-BPMN
-                            </a>
-                          </div>
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 pt-2 z-50 w-[min(90vw,520px)] lg:w-[520px]">
+                    <div className="bg-[#141414]/95 backdrop-blur-xl border border-white/15 rounded-xl lg:rounded-2xl shadow-[0_16px_48px_rgba(0,0,0,0.45)] ring-1 ring-[#f26522]/10 animate-in fade-in slide-in-from-top-1 duration-200">
+                      <div className="p-4 lg:p-5">
+                        <div className="mb-3 lg:mb-4 pb-2 lg:pb-3 border-b border-white/10">
+                          <h3 className="text-white font-semibold text-base lg:text-lg">Our Products</h3>
+                          <p className="text-white/60 text-xs lg:text-sm mt-0.5">
+                            Explore our comprehensive suite of solutions
+                          </p>
                         </div>
 
+                        <div className="grid grid-cols-2 lg:grid-cols-3 gap-1 lg:gap-2">
+                          {NAV_PRODUCTS.map((column, columnIndex) => (
+                            <div key={columnIndex} className="space-y-0.5">
+                              {column.map((product) => (
+                                <a
+                                  key={product.href}
+                                  href={product.href}
+                                  onClick={closeProductDropdown}
+                                  className={cn(
+                                    PRODUCT_LINK_CLASS,
+                                    pathname === product.href &&
+                                      'text-[#f26522] bg-[#f26522]/10 border-[#f26522] font-medium'
+                                  )}
+                                >
+                                  <span className="w-1 h-1 rounded-full bg-[#f26522]/0 group-hover/link:bg-[#f26522] transition-colors duration-200 shrink-0" />
+                                  {product.label}
+                                </a>
+                              ))}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
                 </>
               )}
             </div>

@@ -494,7 +494,7 @@ export default function ProductDetailLayout1({
   productTitle,
   description,
   benefits,
-  backgroundImage = "/bg-product.png",
+  backgroundImage = "/bg-product.jpg",
   brochureUrl = "#",
   whitepaperUrl = "#",
   aboutDescription // Jika tidak ada, akan menggunakan description

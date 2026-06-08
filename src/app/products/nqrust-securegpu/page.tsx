@@ -22,7 +22,7 @@ export default function NQRustSecureGPUPage() {
         description: "Automated 30-day GPU optimization program from discovery through MIG layout to production cutover."
       }
     ],
-    backgroundImage: "/bg-product.png",
+    backgroundImage: "/bg-product.jpg",
     brochureUrl: "#",
     whitepaperUrl: "#"
   };

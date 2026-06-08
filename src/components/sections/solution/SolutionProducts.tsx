@@ -4,12 +4,6 @@ import React from 'react';
 import { cn } from '@/lib/utils';
 import { ArrowUpRight } from 'lucide-react';
 
-// Image assets from Figma
-const imgLine4 = "http://localhost:3845/assets/3e08bd5c9b3d1b3abb8989fa2b54a813e00e1cea.svg";
-const img = "http://localhost:3845/assets/c85e7b8a8c9721f83d08f12bc7955c53456793f2.svg";
-const imgLine5 = "http://localhost:3845/assets/52a03cc4929b7b9de869be07711a5ac3802d97ca.svg";
-const imgLine6 = "http://localhost:3845/assets/d935a75e367296fa27333c3d475b64869908c610.svg";
-
 interface SolutionProductsProps {
   className?: string;
 }
@@ -24,11 +18,7 @@ const SolutionProducts: React.FC<SolutionProductsProps> = ({ className }) => {
             <p className="font-montserrat font-medium leading-[1.3] text-[#121212] text-[18px]">
               Business Intelligence & Analytics (SaaS)
             </p>
-            <div className="h-0 relative w-full">
-              <div className="absolute bottom-0 left-0 right-0 top-[-1px]">
-                <img alt="" className="block max-w-none size-full" src={imgLine4} />
-              </div>
-            </div>
+            <div className="w-full h-px bg-[var(--primary-2)]" />
             <ul className="block font-montserrat font-normal leading-0 text-[14px] text-black">
               <li className="mb-0 ms-[21px]">
                 <span className="leading-[1.3]">NQRust-Analytics — Ask in natural language, analyze at lakehouse scale. Governed, cached, and explainable.</span>
@@ -82,11 +72,7 @@ const SolutionProducts: React.FC<SolutionProductsProps> = ({ className }) => {
             <p className="font-montserrat font-medium leading-[1.3] text-[#121212] text-[18px]">
               Business Intelligence & Analytics (SaaS)
             </p>
-            <div className="h-0 relative w-full">
-              <div className="absolute bottom-0 left-0 right-0 top-[-1px]">
-                <img alt="" className="block max-w-none size-full" src={imgLine4} />
-              </div>
-            </div>
+            <div className="w-full h-px bg-[var(--primary-2)]" />
             <ul className="block font-montserrat font-normal leading-0 text-[14px] text-black">
               <li className="mb-0 ms-[21px]">
                 <span className="leading-[1.3]">NQRust-Analytics — Ask in natural language, analyze at lakehouse scale. Governed, cached, and explainable.</span>
@@ -128,11 +114,7 @@ const SolutionProducts: React.FC<SolutionProductsProps> = ({ className }) => {
             <p className="font-montserrat font-medium leading-[1.3] text-[#551d00] text-[18px] whitespace-nowrap">
               LLM Operations (PaaS)
             </p>
-            <div className="h-0 relative w-full">
-              <div className="absolute bottom-0 left-0 right-0 top-[-1px]">
-                <img alt="" className="block max-w-none size-full" src={imgLine5} />
-              </div>
-            </div>
+            <div className="w-full h-px bg-[var(--primary-2)]" />
             <p className="font-montserrat font-normal leading-[1.3] text-[14px] text-black">
               NQRust-LLMOps — Fine-tuning, evals, safety checks, and GPU-efficient serving. Canary rollouts and guardrails out-of-the-box.
             </p>
@@ -165,11 +147,7 @@ const SolutionProducts: React.FC<SolutionProductsProps> = ({ className }) => {
             <p className="font-montserrat font-medium leading-[1.3] text-[#121212] text-[18px]">
               LLM Operations (PaaS)
             </p>
-            <div className="h-0 relative w-full">
-              <div className="absolute bottom-0 left-0 right-0 top-[-1px]">
-                <img alt="" className="block max-w-none size-full" src={imgLine4} />
-              </div>
-            </div>
+            <div className="w-full h-px bg-[var(--primary-2)]" />
             <ul className="block font-montserrat font-normal leading-0 text-[14px] text-black">
               <li className="ms-[21px]">
                 <span className="leading-[1.3]">NQRust-LLMOps — Fine-tuning, evals, safety checks, and GPU-efficient serving. Canary rollouts and guardrails out-of-the-box.</span>
@@ -217,11 +195,7 @@ const SolutionProducts: React.FC<SolutionProductsProps> = ({ className }) => {
                   Enclave — Keep data encrypted in use. Attest the runtime, bind keys to policy, and prove integrity to your partners.
                 </p>
               </div>
-              <div className="h-0 relative w-full">
-                <div className="absolute bottom-0 left-0 right-0 top-[-1px]">
-                  <img alt="" className="block max-w-none size-full" src={imgLine6} />
-                </div>
-              </div>
+              <div className="w-full h-px bg-[var(--primary-2)]" />
               <div className="flex flex-col gap-[14px] items-start leading-[1.3] w-full">
                 <p className="font-montserrat font-medium text-[#551d00] text-[18px] w-full">
                   Edge AI (IaaS + PaaS)
@@ -268,11 +242,7 @@ const SolutionProducts: React.FC<SolutionProductsProps> = ({ className }) => {
                 Enclave — Keep data encrypted in use. Attest the runtime, bind keys to policy, and prove integrity to your partners.
               </p>
             </div>
-            <div className="h-0 relative w-full">
-              <div className="absolute bottom-0 left-0 right-0 top-[-1px]">
-                <img alt="" className="block max-w-none size-full" src={imgLine4} />
-              </div>
-            </div>
+            <div className="w-full h-px bg-[var(--primary-2)]" />
             <div className="flex flex-col gap-[14px] items-start leading-[1.3] w-full">
               <p className="font-montserrat font-medium text-[#551d00] text-[18px] w-full">
                 Edge AI (IaaS + PaaS)
@@ -298,11 +268,7 @@ const SolutionProducts: React.FC<SolutionProductsProps> = ({ className }) => {
                   NQRust-Guard — Immutable snapshots, WORM retention, policy-based restores. Built for ransomware-resistant recovery.
                 </p>
               </div>
-              <div className="h-0 relative w-full">
-                <div className="absolute bottom-0 left-0 right-0 top-[-1px]">
-                  <img alt="" className="block max-w-none size-full" src={imgLine6} />
-                </div>
-              </div>
+              <div className="w-full h-px bg-[var(--primary-2)]" />
               <div className="flex flex-col gap-[14px] items-start leading-[1.3] w-full">
                 <p className="font-montserrat font-medium text-[#551d00] text-[18px] w-full">
                   Observability for AI (SaaS)
@@ -352,11 +318,7 @@ const SolutionProducts: React.FC<SolutionProductsProps> = ({ className }) => {
                 NQRust-Guard — Immutable snapshots, WORM retention, policy-based restores. Built for ransomware-resistant recovery.
               </p>
             </div>
-            <div className="h-0 relative w-full">
-              <div className="absolute bottom-0 left-0 right-0 top-[-1px]">
-                <img alt="" className="block max-w-none size-full" src={imgLine4} />
-              </div>
-            </div>
+            <div className="w-full h-px bg-[var(--primary-2)]" />
             <div className="flex flex-col gap-[14px] items-start leading-[1.3] w-full">
               <p className="font-montserrat font-medium text-[#551d00] text-[18px] w-full">
                 Observability for AI (SaaS)
@@ -388,11 +350,7 @@ const SolutionProducts: React.FC<SolutionProductsProps> = ({ className }) => {
             <p className="font-montserrat font-medium leading-[1.3] text-[#551d00] text-[18px]">
               Hardware Appliance
             </p>
-            <div className="h-0 relative w-full">
-              <div className="absolute bottom-0 left-0 right-0 top-[-1px]">
-                <img alt="" className="block max-w-none size-full" src={imgLine5} />
-              </div>
-            </div>
+            <div className="w-full h-px bg-[var(--primary-2)]" />
             <p className="font-montserrat font-normal leading-[1.3] text-[14px] text-black whitespace-pre-wrap">
               Pre-integrated AI cloud-in-a-box featuring up to 16x H100 GPUs with NVLink, complete Nexus software stack, enterprise security, and less than 24 hour deployment to production readiness. 
             </p>
@@ -425,11 +383,7 @@ const SolutionProducts: React.FC<SolutionProductsProps> = ({ className }) => {
             <p className="font-montserrat font-medium leading-[1.3] text-[#551d00] text-[18px]">
               Hardware Appliance
             </p>
-            <div className="h-0 relative w-full">
-              <div className="absolute bottom-0 left-0 right-0 top-[-1px]">
-                <img alt="" className="block max-w-none size-full" src={imgLine4} />
-              </div>
-            </div>
+            <div className="w-full h-px bg-[var(--primary-2)]" />
             <p className="font-montserrat font-normal leading-[1.3] text-[14px] text-black whitespace-pre-wrap">
               Pre-integrated AI cloud-in-a-box featuring up to 16x H100 GPUs with NVLink, complete Nexus software stack, enterprise security, and less than 24 hour deployment to production readiness. 
             </p>

@@ -22,7 +22,7 @@ export default function BackgroundMusic() {
   return (
     <audio
       ref={audioRef}
-      preload="auto"
+      preload="none"
       style={{ display: 'none' }}
     >
       <source src="/bg-music-nqr.mp3" type="audio/mpeg" />
