@@ -3,6 +3,7 @@
 import React, { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
+import { PUBLIC_PRODUCTS, splitIntoColumns } from '@/config/products';
 
 interface ProductCardProps {
   name: string;
@@ -159,6 +160,9 @@ interface FeaturedProductsSectionProps {
 }
 
 const FeaturedProductsSection: React.FC<FeaturedProductsSectionProps> = ({ className }) => {
+  const desktopColumns = splitIntoColumns(PUBLIC_PRODUCTS, 3);
+  const mobileColumns = splitIntoColumns(PUBLIC_PRODUCTS, 2);
+
   return (
     <section className={cn('relative overflow-hidden', className)}>
       {/* Background */}
@@ -178,113 +182,19 @@ const FeaturedProductsSection: React.FC<FeaturedProductsSectionProps> = ({ class
 
         {/* Products Grid - Desktop with Scroll */}
         <div className="flex gap-[14px] h-[327px] items-start justify-center px-[38px] overflow-y-auto scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent hover:scrollbar-thumb-white/40">
-          {/* Column 1 */}
-          <div className="flex flex-col gap-[14px] w-[271px]">
-            <ProductCard 
-              name="NQRust-HV Hypervisor" 
-              description="Memory-safe enterprise hypervisor with sub-second provisioning and hardware-enforced isolation."
-              height="h-[180px]"
-              productUrl="/products/nqrust-hv-hypervisor"
-            />
-            <ProductCard 
-              name="NQRust-MicroVM" 
-              description="Container-speed, VM-grade security, perfect for serverless AI and regulated workloads."
-              height="h-[160px]"
-              productUrl="/products/nqrust-microvm"
-            />
-            <ProductCard 
-              name="NQRust-Storage" 
-              description="Memory-safe distributed storage achieving 9x faster I/O performance and 90% cost reduction."
-              height="h-[170px]"
-              productUrl="/products/nqrust-storage"
-            />
-            <ProductCard 
-              name="NQRust-FleetMgr" 
-              description="Unified Git-native control plane for managing MicroVMs, containers, and GPU resources with 9x faster deployments."
-              height="h-[150px]"
-              productUrl="/products/nqrust-fleetmgr"
-            />
-            <ProductCard 
-              name="NQRust-SecureGPU" 
-              description="GPU partitioning and orchestration for high utilization without noisy neighbors."
-              height="h-[160px]"
-              productUrl="/products/nqrust-securegpu"
-            />
-            <ProductCard 
-              name="NQRust-Enclave" 
-              description="Confidential computing with hardware TEEs, remote attestation, and verifiable execution."
-              height="h-[155px]"
-              productUrl="/products/nqrust-enclave"
-            />
-          </div>
-
-          {/* Column 2 */}
-          <div className="flex flex-col gap-[14px] w-[271px]">
-            <ProductCard 
-              name="NQRust-Lake" 
-              description="A Rust-powered lakehouse plus NL analytics for instant answers over unified data."
-              height="h-[165px]"
-              productUrl="/products/nqrust-lake"
-            />
-            <ProductCard 
-              name="NQRust-Analytics" 
-              description="Advanced analytics platform with real-time processing and business intelligence capabilities."
-              height="h-[155px]"
-              productUrl="/products/nqrust-analytics"
-            />
-            <ProductCard 
-              name="NQRust-Insight" 
-              description="AI-powered insights and monitoring for enterprise infrastructure and application performance."
-              height="h-[170px]"
-              productUrl="/products/nqrust-insight"
-            />
-            <ProductCard 
-              name="NQRust-Guard" 
-              description="Immutable backups, air-gapped restores, and policy-driven data protection for enterprise workloads."
-              height="h-[160px]"
-              productUrl="/products/nqrust-guard"
-            />
-            <ProductCard 
-              name="NQRust-Edge" 
-              description="Autonomous edge runtime with offline resilience and smart backhaul reduction capabilities."
-              height="h-[175px]"
-              productUrl="/products/nqrust-edge"
-            />
-            <ProductCard 
-              name="NQRust-AI Appliance" 
-              description="AI cloud-in-a-box for on-prem pilots or sovereign deployments with full control."
-              height="h-[160px]"
-              productUrl="/products/nqrust-ai-appliance"
-            />
-          </div>
-
-          {/* Column 3 */}
-          <div className="flex flex-col gap-[14px] w-[271px]">
-            <ProductCard 
-              name="NQRust-LLMOps" 
-              description="Opinionated pipelines for fine-tuning, evaluation, and GPU-efficient serving of models."
-              height="h-[150px]"
-              productUrl="/products/nqrust-llmops"
-            />
-            <ProductCard 
-              name="NQRust-Identity" 
-              description="Universal Single Sign-On across applications with OAuth 2.0, OpenID Connect, and SAML compliance."
-              height="h-[160px]"
-              productUrl="/products/nqrust-identity"
-            />
-            <ProductCard 
-              name="NQRust-ZeroCode" 
-              description="9x faster API development with drag-and-drop GUI for legacy system integration and automation."
-              height="h-[155px]"
-              productUrl="/products/nqrust-zerocode"
-            />
-            <ProductCard 
-              name="NQRust-BPMN" 
-              description="Process automation using BPMN notation and DMN decision engine with 300% productivity improvement."
-              height="h-[165px]"
-              productUrl="/products/nqrust-bpmn"
-            />
-          </div>
+          {desktopColumns.map((column, columnIndex) => (
+            <div key={columnIndex} className="flex flex-col gap-[14px] w-[271px]">
+              {column.map((product) => (
+                <ProductCard
+                  key={product.href}
+                  name={product.name}
+                  description={product.description}
+                  height="h-[160px]"
+                  productUrl={product.href}
+                />
+              ))}
+            </div>
+          ))}
         </div>
       </div>
 
@@ -302,93 +212,18 @@ const FeaturedProductsSection: React.FC<FeaturedProductsSectionProps> = ({ class
 
         {/* Products Grid - Mobile - 2 columns side by side */}
         <div className="flex gap-[14px] items-start w-full">
-          {/* Column 1 */}
-          <div className="flex flex-col gap-[14px] flex-1">
-            <ProductCard 
-              name="NQRust-HV Hypervisor" 
-              description="Memory-safe enterprise hypervisor with sub-second provisioning and hardware-enforced isolation."
-              productUrl="/products/nqrust-hv-hypervisor"
-            />
-            <ProductCard 
-              name="NQRust-MicroVM" 
-              description="Container-speed, VM-grade security, perfect for serverless AI and regulated workloads."
-              productUrl="/products/nqrust-microvm"
-            />
-            <ProductCard 
-              name="NQRust-Storage" 
-              description="Memory-safe distributed storage achieving 9x faster I/O performance and 90% cost reduction."
-              productUrl="/products/nqrust-storage"
-            />
-            <ProductCard 
-              name="NQRust-FleetMgr" 
-              description="Unified Git-native control plane for managing MicroVMs, containers, and GPU resources with 9x faster deployments."
-              productUrl="/products/nqrust-fleetmgr"
-            />
-            <ProductCard 
-              name="NQRust-SecureGPU" 
-              description="GPU partitioning and orchestration for high utilization without noisy neighbors."
-              productUrl="/products/nqrust-securegpu"
-            />
-            <ProductCard 
-              name="NQRust-Enclave" 
-              description="Confidential computing with hardware TEEs, remote attestation, and verifiable execution."
-              productUrl="/products/nqrust-enclave"
-            />
-            <ProductCard 
-              name="NQRust-Lake" 
-              description="A Rust-powered lakehouse plus NL analytics for instant answers over unified data."
-              productUrl="/products/nqrust-lake"
-            />
-            <ProductCard 
-              name="NQRust-Analytics" 
-              description="Advanced analytics platform with real-time processing and business intelligence capabilities."
-              productUrl="/products/nqrust-analytics"
-            />
-          </div>
-
-          {/* Column 2 */}
-          <div className="flex flex-col gap-[14px] flex-1">
-            <ProductCard 
-              name="NQRust-Insight" 
-              description="AI-powered insights and monitoring for enterprise infrastructure and application performance."
-              productUrl="/products/nqrust-insight"
-            />
-            <ProductCard 
-              name="NQRust-Guard" 
-              description="Immutable backups, air-gapped restores, and policy-driven data protection for enterprise workloads."
-              productUrl="/products/nqrust-guard"
-            />
-            <ProductCard 
-              name="NQRust-Edge" 
-              description="Autonomous edge runtime with offline resilience and smart backhaul reduction capabilities."
-              productUrl="/products/nqrust-edge"
-            />
-            <ProductCard 
-              name="NQRust-AI Appliance" 
-              description="AI cloud-in-a-box for on-prem pilots or sovereign deployments with full control."
-              productUrl="/products/nqrust-ai-appliance"
-            />
-            <ProductCard 
-              name="NQRust-LLMOps" 
-              description="Opinionated pipelines for fine-tuning, evaluation, and GPU-efficient serving of models."
-              productUrl="/products/nqrust-llmops"
-            />
-            <ProductCard 
-              name="NQRust-Identity" 
-              description="Universal Single Sign-On across applications with OAuth 2.0, OpenID Connect, and SAML compliance."
-              productUrl="/products/nqrust-identity"
-            />
-            <ProductCard 
-              name="NQRust-ZeroCode" 
-              description="9x faster API development with drag-and-drop GUI for legacy system integration and automation."
-              productUrl="/products/nqrust-zerocode"
-            />
-            <ProductCard 
-              name="NQRust-BPMN" 
-              description="Process automation using BPMN notation and DMN decision engine with 300% productivity improvement."
-              productUrl="/products/nqrust-bpmn"
-            />
-          </div>
+          {mobileColumns.map((column, columnIndex) => (
+            <div key={columnIndex} className="flex flex-col gap-[14px] flex-1">
+              {column.map((product) => (
+                <ProductCard
+                  key={product.href}
+                  name={product.name}
+                  description={product.description}
+                  productUrl={product.href}
+                />
+              ))}
+            </div>
+          ))}
         </div>
       </div>
     </section>

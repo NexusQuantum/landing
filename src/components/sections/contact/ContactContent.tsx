@@ -2,27 +2,16 @@
 
 import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
+import { PUBLIC_PRODUCTS } from '@/config/products';
 
 const CONTACT_EMAIL = 'contact@nexusquantum.id';
 
 const PRODUCT_OPTIONS = [
   { value: '', label: 'Select product...' },
-  { value: 'NQRust-HV Hypervisor', label: 'NQRust-HV Hypervisor' },
-  { value: 'NQRust-MicroVM', label: 'NQRust-MicroVM' },
-  { value: 'NQRust-Storage', label: 'NQRust-Storage' },
-  { value: 'NQRust-FleetMgr', label: 'NQRust-FleetMgr' },
-  { value: 'NQRust-SecureGPU', label: 'NQRust-SecureGPU' },
-  { value: 'NQRust-Enclave', label: 'NQRust-Enclave' },
-  { value: 'NQRust-Lake', label: 'NQRust-Lake' },
-  { value: 'NQRust-Analytics', label: 'NQRust-Analytics' },
-  { value: 'NQRust-Insight', label: 'NQRust-Insight' },
-  { value: 'NQRust-Guard', label: 'NQRust-Guard' },
-  { value: 'NQRust-Edge', label: 'NQRust-Edge' },
-  { value: 'NQRust-AI Appliance', label: 'NQRust-AI Appliance' },
-  { value: 'NQRust-LLMOps', label: 'NQRust-LLMOps' },
-  { value: 'NQRust-Identity', label: 'NQRust-Identity' },
-  { value: 'NQRust-ZeroCode', label: 'NQRust-ZeroCode' },
-  { value: 'NQRust-BPMN', label: 'NQRust-BPMN' },
+  ...PUBLIC_PRODUCTS.map((product) => ({
+    value: product.name,
+    label: product.name,
+  })),
   { value: 'General / Multiple', label: 'General / Multiple' },
 ];
 

@@ -3,7 +3,7 @@ import ProductDetailLayout1 from '@/components/sections/ProductDetailLayout1';
 export default function NQRustHVHypervisorPage() {
   const productData = {
     productName: "NQRust",
-    productTitle: "HV Hypervisor",
+    productTitle: 'HyperVisor',
     description: "A Rust-based type-1 hypervisor that establishes a memory-safe foundation for the cloud, eliminating C/C++ vulnerabilities and enabling zero-compromise security.",
     benefits: [
       {

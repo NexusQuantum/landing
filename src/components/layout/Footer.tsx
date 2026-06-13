@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import Button from '@/components/ui/Button';
+import { PUBLIC_PRODUCTS } from '@/config/products';
 import { ArrowRight, Instagram, Linkedin, Youtube } from 'lucide-react';
 
 interface FooterProps {
@@ -11,28 +12,8 @@ interface FooterProps {
 }
 
 const Footer: React.FC<FooterProps> = ({ className }) => {
-  // Function to convert product name to URL
-  const getProductUrl = (productName: string): string => {
-    const productMap: { [key: string]: string } = {
-      'NQRust-HV Hypervisor': '/products/nqrust-hv-hypervisor',
-      'NQRust-MicroVM': '/products/nqrust-microvm',
-      'NQRust-Storage': '/products/nqrust-storage',
-      'NQRust-FleetMgr': '/products/nqrust-fleetmgr',
-      'NQRust-SecureGPU': '/products/nqrust-securegpu',
-      'NQRust-Enclave': '/products/nqrust-enclave',
-      'NQRust-Lake': '/products/nqrust-lake',
-      'NQRust-Analytics': '/products/nqrust-analytics',
-      'NQRust-Insight': '/products/nqrust-insight',
-      'NQRust-Guard': '/products/nqrust-guard',
-      'NQRust-Edge': '/products/nqrust-edge',
-      'NQRust-AI Appliance': '/products/nqrust-ai-appliance',
-      'NQRust-LLMOps': '/products/nqrust-llmops',
-      'NQRust-Identity': '/products/nqrust-identity',
-      'NQRust-ZeroCode': '/products/nqrust-zerocode',
-      'NQRust-BPMN': '/products/nqrust-bpmn'
-    };
-    return productMap[productName] || '#';
-  };
+  const getProductUrl = (productName: string): string =>
+    PUBLIC_PRODUCTS.find((product) => product.name === productName)?.href ?? '#';
 
   // Function to convert sitemap link to URL
   const getSitemapUrl = (linkName: string): string => {
@@ -47,24 +28,7 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
     return sitemapMap[linkName] || '#';
   };
 
-  const products = [
-    'NQRust-HV Hypervisor',
-    'NQRust-MicroVM',
-    'NQRust-Storage',
-    'NQRust-FleetMgr',
-    'NQRust-SecureGPU',
-    'NQRust-Enclave',
-    'NQRust-Lake',
-    'NQRust-Analytics',
-    'NQRust-Insight',
-    'NQRust-Guard',
-    'NQRust-Edge',
-    'NQRust-AI Appliance',
-    'NQRust-LLMOps',
-    'NQRust-Identity',
-    'NQRust-ZeroCode',
-    'NQRust-BPMN'
-  ];
+  const products = PUBLIC_PRODUCTS.map((product) => product.name);
 
   const sitemapLinks = [
     'Home',
@@ -76,8 +40,8 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
   ];
 
   const socialLinks = [
-    { name: 'Instagram', icon: <Instagram />, href: '#' },
-    { name: 'LinkedIn', icon: <Linkedin />, href: '#' },
+    { name: 'Instagram', icon: <Instagram />, href: 'https://www.instagram.com/nqrusttech/' },
+    { name: 'LinkedIn', icon: <Linkedin />, href: 'https://www.linkedin.com/company/nqrust-tech/' },
     { name: 'YouTube', icon: <Youtube />, href: '#' }
   ];
 
@@ -171,6 +135,9 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
                 <a
                   key={index}
                   href={social.href}
+                  target={social.href !== '#' ? '_blank' : undefined}
+                  rel={social.href !== '#' ? 'noopener noreferrer' : undefined}
+                  aria-label={social.name}
                   className="flex items-center p-[14px] rounded hover:bg-white/10 transition-colors"
                 >
                   <div className="w-[22px] h-[22px] flex items-center justify-center">
@@ -245,6 +212,9 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
                   <a
                     key={index}
                     href={social.href}
+                    target={social.href !== '#' ? '_blank' : undefined}
+                    rel={social.href !== '#' ? 'noopener noreferrer' : undefined}
+                    aria-label={social.name}
                     className="flex items-center p-[14px] rounded hover:bg-white/10 transition-colors"
                   >
                     <div className="w-[22px] h-[22px] flex items-center justify-center">

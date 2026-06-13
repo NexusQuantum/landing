@@ -593,6 +593,34 @@ input[type="range"]:focus::-webkit-slider-thumb {
   transition-duration: 400ms;
 }
 
+/* ===== Page Transition (App Router template) ===== */
+/*
+ * Uses `backwards` fill (not `both`) and no persistent `will-change` so that
+ * NO transform lingers after the animation finishes. A lingering transform on
+ * this wrapper would create a new containing block and break `position: fixed`
+ * descendants like the navbar (it would scroll away instead of staying pinned).
+ */
+.page-transition {
+  animation: pageEnter 0.45s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-transition {
+    animation: none;
+  }
+}
+
 /* ===== Agentic AI Modern Section Styles ===== */
 
 .agent-panel {

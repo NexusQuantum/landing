@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
+import { PUBLIC_PRODUCTS } from '@/config/products';
 
 interface ProductCardProps {
   name: string;
@@ -44,109 +45,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ name, description, href, layo
 };
 
 export default function ProductsPage() {
-  const products = [
-    // Design 1 - Carousel Layout
-    {
-      name: "NQRust HV Hypervisor",
-      description: "A memory-safe enterprise hypervisor for modern AI workloads with sub-second VM provisioning and hardware acceleration.",
-      href: "/products/nqrust-hv-hypervisor",
-      layout: "carousel" as const
-    },
-    {
-      name: "NQRust MicroVM",
-      description: "Container-speed, VM-grade security for serverless AI and regulated workloads with perfect balance of performance and isolation.",
-      href: "/products/nqrust-microvm",
-      layout: "carousel" as const
-    },
-    {
-      name: "NQRust Storage",
-      description: "High-performance, distributed storage system with built-in encryption and data integrity guarantees for enterprise workloads.",
-      href: "/products/nqrust-storage",
-      layout: "carousel" as const
-    },
-    {
-      name: "NQRust FleetMgr",
-      description: "Unified fleet management for containers, microVMs, GPUs, and edge deployments with Git-native workflows.",
-      href: "/products/nqrust-fleetmgr",
-      layout: "carousel" as const
-    },
-    {
-      name: "NQRust SecureGPU",
-      description: "GPU partitioning and orchestration for high utilization without noisy neighbors and secure multi-tenant access.",
-      href: "/products/nqrust-securegpu",
-      layout: "carousel" as const
-    },
-    {
-      name: "NQRust Enclave",
-      description: "Confidential computing with hardware TEEs, remote attestation, and verifiable execution for sensitive data processing.",
-      href: "/products/nqrust-enclave",
-      layout: "carousel" as const
-    },
-    {
-      name: "NQRust Lake",
-      description: "A Rust-powered data lakehouse with unified data storage, processing, and analytics capabilities for modern data workloads.",
-      href: "/products/nqrust-lake",
-      layout: "carousel" as const
-    },
-    {
-      name: "NQRust Analytics",
-      description: "Natural language analytics for instant answers over unified data with AI-powered insights and recommendations.",
-      href: "/products/nqrust-analytics",
-      layout: "carousel" as const
-    },
-    // Design 2 - Cards Layout
-    {
-      name: "NQRust Guard",
-      description: "Immutable backups, air-gapped restores, and policy-driven data protection for enterprise workloads.",
-      href: "/products/nqrust-guard",
-      layout: "cards" as const
-    },
-    {
-      name: "NQRust Edge",
-      description: "Autonomous edge runtime with offline resilience and smart backhaul reduction capabilities for distributed computing.",
-      href: "/products/nqrust-edge",
-      layout: "cards" as const
-    },
-    {
-      name: "NQRust AI Appliance",
-      description: "AI cloud-in-a-box for on-premises pilots or sovereign deployments with full control over your AI infrastructure.",
-      href: "/products/nqrust-ai-appliance",
-      layout: "cards" as const
-    },
-    {
-      name: "NQRust LLMOps",
-      description: "Opinionated pipelines for fine-tuning, evaluation, and GPU-efficient serving of large language models.",
-      href: "/products/nqrust-llmops",
-      layout: "cards" as const
-    },
-    {
-      name: "NQRust Identity",
-      description: "Zero-trust identity and access management with hardware-backed authentication and fine-grained authorization controls.",
-      href: "/products/nqrust-identity",
-      layout: "cards" as const
-    },
-    {
-      name: "NQRust ZeroCode",
-      description: "Visual workflow builder for creating enterprise applications without writing code, with AI-assisted development.",
-      href: "/products/nqrust-zerocode",
-      layout: "cards" as const
-    },
-    {
-      name: "NQRust BPMN",
-      description: "Business Process Model and Notation engine for designing, executing, and monitoring complex business workflows.",
-      href: "/products/nqrust-bpmn",
-      layout: "cards" as const
-    },
-    {
-      name: "NQRust Insight",
-      description: "Advanced analytics and monitoring platform for gaining deep insights into system performance and operational metrics.",
-      href: "/products/nqrust-insight",
-      layout: "cards" as const
-    }
-  ];
-
-  const carouselProducts = products.filter(p => p.layout === 'carousel');
-  const cardsProducts = products.filter(p => p.layout === 'cards');
+  const products = PUBLIC_PRODUCTS;
+  const carouselProducts = products.filter((product) => product.layout === 'carousel');
+  const cardsProducts = products.filter((product) => product.layout === 'cards');
 
   return (
     <div className="min-h-screen bg-gray-50">

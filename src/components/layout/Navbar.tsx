@@ -4,36 +4,16 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
+import { NAV_PRODUCT_COLUMNS } from '@/config/products';
 
 interface NavbarProps {
   className?: string;
   children?: React.ReactNode;
 }
 
-const NAV_PRODUCTS: { label: string; href: string }[][] = [
-  [
-    { label: 'NQRust-HV Hypervisor', href: '/products/nqrust-hv-hypervisor' },
-    { label: 'NQRust-MicroVM', href: '/products/nqrust-microvm' },
-    { label: 'NQRust-Storage', href: '/products/nqrust-storage' },
-    { label: 'NQRust-FleetMgr', href: '/products/nqrust-fleetmgr' },
-    { label: 'NQRust-SecureGPU', href: '/products/nqrust-securegpu' },
-    { label: 'NQRust-Enclave', href: '/products/nqrust-enclave' },
-  ],
-  [
-    { label: 'NQRust-Lake', href: '/products/nqrust-lake' },
-    { label: 'NQRust-Analytics', href: '/products/nqrust-analytics' },
-    { label: 'NQRust-Insight', href: '/products/nqrust-insight' },
-    { label: 'NQRust-Guard', href: '/products/nqrust-guard' },
-    { label: 'NQRust-Edge', href: '/products/nqrust-edge' },
-    { label: 'NQRust-AI Appliance', href: '/products/nqrust-ai-appliance' },
-  ],
-  [
-    { label: 'NQRust-LLMOps', href: '/products/nqrust-llmops' },
-    { label: 'NQRust-Identity', href: '/products/nqrust-identity' },
-    { label: 'NQRust-ZeroCode', href: '/products/nqrust-zerocode' },
-    { label: 'NQRust-BPMN', href: '/products/nqrust-bpmn' },
-  ],
-];
+const NAV_PRODUCTS = NAV_PRODUCT_COLUMNS.map((column) =>
+  column.map((product) => ({ label: product.name, href: product.href }))
+);
 
 const PRODUCT_LINK_CLASS =
   'group/link flex items-center gap-2 px-2.5 lg:px-3 py-1.5 lg:py-2 text-white/75 text-xs lg:text-sm rounded-md lg:rounded-lg transition-all duration-200 hover:text-[#f26522] hover:bg-[#f26522]/12 border-l-2 border-transparent hover:border-[#f26522] hover:pl-3';
@@ -537,177 +517,19 @@ const Navbar: React.FC<NavbarProps> = ({ className, children }) => {
                 {/* Product Submenu */}
                 {isMobileProductOpen && (
                   <div className="ml-4 space-y-2 border-l-2 border-[#f26522]/30 pl-4 animate-in slide-in-from-left duration-400 delay-100">
-                    {/* Column 1 */}
-                    <div className="space-y-2">
-                      <a 
-                        href="/products/nqrust-hv-hypervisor" 
+                    {NAV_PRODUCTS.flat().map((product) => (
+                      <a
+                        key={product.href}
+                        href={product.href}
                         onClick={() => {
                           setIsMobileMenuOpen(false);
                           setIsMobileProductOpen(false);
                         }}
                         className="block px-4 py-2 text-white/80 text-base hover:text-[#f26522] hover:bg-white/5 transition-all duration-300 rounded-lg"
                       >
-                        NQRust-HV Hypervisor
+                        {product.label}
                       </a>
-                      <a 
-                        href="/products/nqrust-microvm" 
-                        onClick={() => {
-                          setIsMobileMenuOpen(false);
-                          setIsMobileProductOpen(false);
-                        }}
-                        className="block px-4 py-2 text-white/80 text-base hover:text-[#f26522] hover:bg-white/5 transition-all duration-300 rounded-lg"
-                      >
-                        NQRust-MicroVM
-                      </a>
-                      <a 
-                        href="/products/nqrust-storage" 
-                        onClick={() => {
-                          setIsMobileMenuOpen(false);
-                          setIsMobileProductOpen(false);
-                        }}
-                        className="block px-4 py-2 text-white/80 text-base hover:text-[#f26522] hover:bg-white/5 transition-all duration-300 rounded-lg"
-                      >
-                        NQRust-Storage
-                      </a>
-                      <a 
-                        href="/products/nqrust-fleetmgr" 
-                        onClick={() => {
-                          setIsMobileMenuOpen(false);
-                          setIsMobileProductOpen(false);
-                        }}
-                        className="block px-4 py-2 text-white/80 text-base hover:text-[#f26522] hover:bg-white/5 transition-all duration-300 rounded-lg"
-                      >
-                        NQRust-FleetMgr
-                      </a>
-                      <a 
-                        href="/products/nqrust-securegpu" 
-                        onClick={() => {
-                          setIsMobileMenuOpen(false);
-                          setIsMobileProductOpen(false);
-                        }}
-                        className="block px-4 py-2 text-white/80 text-base hover:text-[#f26522] hover:bg-white/5 transition-all duration-300 rounded-lg"
-                      >
-                        NQRust-SecureGPU
-                      </a>
-                      <a 
-                        href="/products/nqrust-enclave" 
-                        onClick={() => {
-                          setIsMobileMenuOpen(false);
-                          setIsMobileProductOpen(false);
-                        }}
-                        className="block px-4 py-2 text-white/80 text-base hover:text-[#f26522] hover:bg-white/5 transition-all duration-300 rounded-lg"
-                      >
-                        NQRust-Enclave
-                      </a>
-                    </div>
-
-                    {/* Column 2 */}
-                    <div className="space-y-2">
-                      <a 
-                        href="/products/nqrust-lake" 
-                        onClick={() => {
-                          setIsMobileMenuOpen(false);
-                          setIsMobileProductOpen(false);
-                        }}
-                        className="block px-4 py-2 text-white/80 text-base hover:text-[#f26522] hover:bg-white/5 transition-all duration-300 rounded-lg"
-                      >
-                        NQRust-Lake
-                      </a>
-                      <a 
-                        href="/products/nqrust-analytics" 
-                        onClick={() => {
-                          setIsMobileMenuOpen(false);
-                          setIsMobileProductOpen(false);
-                        }}
-                        className="block px-4 py-2 text-white/80 text-base hover:text-[#f26522] hover:bg-white/5 transition-all duration-300 rounded-lg"
-                      >
-                        NQRust-Analytics
-                      </a>
-                      <a 
-                        href="/products/nqrust-insight" 
-                        onClick={() => {
-                          setIsMobileMenuOpen(false);
-                          setIsMobileProductOpen(false);
-                        }}
-                        className="block px-4 py-2 text-white/80 text-base hover:text-[#f26522] hover:bg-white/5 transition-all duration-300 rounded-lg"
-                      >
-                        NQRust-Insight
-                      </a>
-                      <a 
-                        href="/products/nqrust-guard" 
-                        onClick={() => {
-                          setIsMobileMenuOpen(false);
-                          setIsMobileProductOpen(false);
-                        }}
-                        className="block px-4 py-2 text-white/80 text-base hover:text-[#f26522] hover:bg-white/5 transition-all duration-300 rounded-lg"
-                      >
-                        NQRust-Guard
-                      </a>
-                      <a 
-                        href="/products/nqrust-edge" 
-                        onClick={() => {
-                          setIsMobileMenuOpen(false);
-                          setIsMobileProductOpen(false);
-                        }}
-                        className="block px-4 py-2 text-white/80 text-base hover:text-[#f26522] hover:bg-white/5 transition-all duration-300 rounded-lg"
-                      >
-                        NQRust-Edge
-                      </a>
-                      <a 
-                        href="/products/nqrust-ai-appliance" 
-                        onClick={() => {
-                          setIsMobileMenuOpen(false);
-                          setIsMobileProductOpen(false);
-                        }}
-                        className="block px-4 py-2 text-white/80 text-base hover:text-[#f26522] hover:bg-white/5 transition-all duration-300 rounded-lg"
-                      >
-                        NQRust-AI Appliance
-                      </a>
-                    </div>
-
-                    {/* Column 3 */}
-                    <div className="space-y-2">
-                      <a 
-                        href="/products/nqrust-llmops" 
-                        onClick={() => {
-                          setIsMobileMenuOpen(false);
-                          setIsMobileProductOpen(false);
-                        }}
-                        className="block px-4 py-2 text-white/80 text-base hover:text-[#f26522] hover:bg-white/5 transition-all duration-300 rounded-lg"
-                      >
-                        NQRust-LLMOps
-                      </a>
-                      <a 
-                        href="/products/nqrust-identity" 
-                        onClick={() => {
-                          setIsMobileMenuOpen(false);
-                          setIsMobileProductOpen(false);
-                        }}
-                        className="block px-4 py-2 text-white/80 text-base hover:text-[#f26522] hover:bg-white/5 transition-all duration-300 rounded-lg"
-                      >
-                        NQRust-Identity
-                      </a>
-                      <a 
-                        href="/products/nqrust-zerocode" 
-                        onClick={() => {
-                          setIsMobileMenuOpen(false);
-                          setIsMobileProductOpen(false);
-                        }}
-                        className="block px-4 py-2 text-white/80 text-base hover:text-[#f26522] hover:bg-white/5 transition-all duration-300 rounded-lg"
-                      >
-                        NQRust-ZeroCode
-                      </a>
-                      <a 
-                        href="/products/nqrust-bpmn" 
-                        onClick={() => {
-                          setIsMobileMenuOpen(false);
-                          setIsMobileProductOpen(false);
-                        }}
-                        className="block px-4 py-2 text-white/80 text-base hover:text-[#f26522] hover:bg-white/5 transition-all duration-300 rounded-lg"
-                      >
-                        NQRust-BPMN
-                      </a>
-                    </div>
+                    ))}
                   </div>
                 )}
               </div>
