@@ -65,7 +65,7 @@ export const productReleasesConfig: ProductReleasesConfig = {
   enabled: true,
   defaultBadge: 'New release',
   defaultCtaLabels: DEFAULT_RELEASE_CTA_LABELS,
-  autoRotateIntervalMs: 9000,
+  autoRotateIntervalMs: 3000,
   items: [
     {
       id: 'nqrust-hypervisor',

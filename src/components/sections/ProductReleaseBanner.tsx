@@ -4,6 +4,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { ArrowUpRight, ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
+import CrabRunner from '@/components/sections/CrabRunner';
 import {
   DEFAULT_RELEASE_CTA_LABELS,
   productReleasesConfig,
@@ -253,7 +254,8 @@ const ProductReleaseBanner: React.FC<ProductReleaseBannerProps> = ({ className }
 
   const [index, setIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
+  const [hasAnimated, setHasAnimated] = useState(false);
+  const [isInView, setIsInView] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -273,7 +275,8 @@ const ProductReleaseBanner: React.FC<ProductReleaseBannerProps> = ({ className }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) setIsVisible(true);
+        setIsInView(entry.isIntersecting);
+        if (entry.isIntersecting) setHasAnimated(true);
       },
       { threshold: 0.15 }
     );
@@ -283,14 +286,14 @@ const ProductReleaseBanner: React.FC<ProductReleaseBannerProps> = ({ className }
   }, []);
 
   useEffect(() => {
-    if (!showCarousel || !autoRotateIntervalMs || autoRotateIntervalMs <= 0 || isPaused) return;
+    if (!showCarousel || !autoRotateIntervalMs || autoRotateIntervalMs <= 0 || isPaused || !isInView) return;
 
     const t = window.setInterval(() => {
       setIndex((i) => (i + 1) % count);
     }, autoRotateIntervalMs);
 
     return () => window.clearInterval(t);
-  }, [showCarousel, autoRotateIntervalMs, isPaused, count]);
+  }, [showCarousel, autoRotateIntervalMs, isPaused, isInView, count]);
 
   useEffect(() => {
     const el = containerRef.current;
@@ -404,28 +407,36 @@ const ProductReleaseBanner: React.FC<ProductReleaseBannerProps> = ({ className }
       ref={sectionRef}
       aria-label={showCarousel ? 'New product releases' : 'New product release'}
       className={cn('relative w-full overflow-hidden border-b border-white/10 bg-[#0f0f23]', className)}
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-      onFocusCapture={() => setIsPaused(true)}
-      onBlurCapture={(e) => {
-        if (!e.currentTarget.contains(e.relatedTarget as Node)) setIsPaused(false);
-      }}
     >
       <AmbientBackground />
 
       <div
         className={cn(
-          'mx-auto w-full max-w-[1100px] px-4 py-6 transition-all duration-700 ease-out sm:px-6 sm:py-8 md:px-10 md:py-10 lg:px-12',
-          isVisible ? 'translate-y-0 opacity-100' : 'translate-y-3 opacity-0'
+          'mx-auto w-full max-w-[1100px] px-4 pt-6 transition-all duration-700 ease-out sm:px-6 sm:pt-8 md:px-10 md:pt-10 lg:px-12',
+          hasAnimated ? 'translate-y-0 opacity-100' : 'translate-y-3 opacity-0'
         )}
       >
-        <div className={cn(glassCardClass, 'p-5 sm:p-6 md:p-8 lg:p-9')}>
+        <div
+          className={cn(glassCardClass, 'p-5 sm:p-6 md:p-8 lg:p-9')}
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+          onFocusCapture={() => setIsPaused(true)}
+          onBlurCapture={(e) => {
+            if (!e.currentTarget.contains(e.relatedTarget as Node)) setIsPaused(false);
+          }}
+        >
           <div
             className="pointer-events-none absolute inset-0 rounded-[inherit] bg-gradient-to-br from-white/[0.06] via-transparent to-[var(--primary-dark-1)]/[0.04]"
             aria-hidden
           />
           <div className="relative z-[1]">{slideContent}</div>
         </div>
+      </div>
+
+      {/* Mini game blends straight into the section: the crab and buildings ride
+          the section's bottom border, so there is no bottom padding here. */}
+      <div className="relative z-[1] mt-4 w-full sm:mt-5">
+        <CrabRunner embedded />
       </div>
     </section>
   );
