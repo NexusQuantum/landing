@@ -6,6 +6,7 @@ import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import { LiquidGlassCard } from '@/components/liquid/LiquidGlassCard';
 import AboutSection from '@/components/sections/about/AboutSection';
+import { brochureMapping } from '@/config/brochures';
 
 // Product descriptions mapping
 const productDescriptions: { [key: string]: string } = {
@@ -61,33 +62,6 @@ const whitepaperMapping: { [key: string]: string } = {
   'ZeroCode': '',
 };
 
-// Mapping product titles to brochure files (mapped to files in public/Finalized Brochure)
-const brochureMapping: { [key: string]: string } = {
-  'AI Appliance': '[Nexus] Brochure NQRust-AI Appliance v1.0.pdf',
-  'Analytics': '[Nexus] Brochure NQRust-Analytics v1.0.pdf',
-  'BPMN': '[Nexus] Brochure NQRust-BPMN v1.0.pdf',
-  'Edge': '[Nexus] Brochure NQRust-Edge v1.0.pdf',
-  'Enclave': '[Nexus] Brochure NQRust-Enclave v1.0.pdf',
-  'FleetMgr': '[Nexus] Brochure NQRust-FleetMgr v1.0.pdf',
-  'Guard': '[Nexus] Brochure NQRust-Guard v1.0.pdf',
-  'Backup & Restore': '[Nexus] Brochure NQRust-Guard v1.0.pdf',
-  'HV': '[Nexus] Brochure NQRust-HV v1.0.pdf',
-  'HV Hypervisor': '[Nexus] Brochure NQRust-HV v1.0.pdf',
-  'Hypervisor': '[Nexus] Brochure NQRust-HV v1.0.pdf',
-  'HyperVisor': '[Nexus] Brochure NQRust-HV v1.0.pdf',
-  'Identity': '[Nexus] Brochure NQRust-Identity v1.0.pdf',
-  'Insight': '[Nexus] Brochure NQRust-Insight v1.0.pdf',
-  'Lake': '[Nexus] Brochure NQRust-Lake v1.0.pdf',
-  'LLMOps': '[Nexus] Brochure NQRust-LLMOps v1.0.pdf',
-  'LLM Ops': '[Nexus] Brochure NQRust-LLMOps v1.0.pdf',
-  'MicroVM': '[Nexus] Brochure NQRust-MicroVM v1.0.pdf',
-  'SecureGPU': '[Nexus] Brochure NQRust-SecureGPU v1.0.pdf',
-  'Secure GPU': '[Nexus] Brochure NQRust-SecureGPU v1.0.pdf',
-  'Storage': '[Nexus] Brochure NQRust-Storage v1.0.pdf',
-  'ZeroCode': '[Nexus] Brochure NQRust-ZeroCode v1.0.pdf',
-  'Zerocode': '[Nexus] Brochure NQRust-ZeroCode v1.0.pdf',
-  'Zero Code': '[Nexus] Brochure NQRust-ZeroCode v1.0.pdf',
-};
 
 // Benefits mapping for each product - Easy to edit and update
 const productBenefitsMapping: { [key: string]: Benefit[] } = {
