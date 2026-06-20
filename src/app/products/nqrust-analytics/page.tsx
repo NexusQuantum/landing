@@ -24,7 +24,8 @@ export default function NQRustAnalyticsPage() {
     ],
     backgroundImage: "/bg-product.jpg",
     brochureUrl: "#",
-    whitepaperUrl: "#"
+    whitepaperUrl: "#",
+    releaseId: "nqrust-analytics",
   };
 
   return <ProductDetailLayout1 {...productData} />;

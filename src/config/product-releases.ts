@@ -121,3 +121,7 @@ function isExternalHref(href: string): boolean {
 export function isReleaseCtaExternal(href: string): boolean {
   return isExternalHref(href);
 }
+
+export function getProductReleaseItem(releaseId: string): ProductReleaseItem | undefined {
+  return productReleasesConfig.items.find((item) => item.id === releaseId);
+}

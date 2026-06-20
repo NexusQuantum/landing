@@ -815,3 +815,63 @@ input[type="range"]:focus::-webkit-slider-thumb {
   background: linear-gradient(90deg, transparent, rgba(242, 101, 34, 0.6), transparent);
   animation: flowPulse 2s ease-in-out infinite;
 }
+
+/* ===== Marquee Carousel ===== */
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marqueeScroll var(--marquee-duration, 36s) linear infinite;
+}
+
+.marquee-track--reverse {
+  animation-direction: reverse;
+}
+
+@keyframes marqueeScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
+/* ===== MicroVM Hero Capsule Animations ===== */
+.microvm-capsule-float {
+  animation: capsuleFloat 5s ease-in-out infinite;
+}
+
+.microvm-capsule-float--delay-1 {
+  animation-delay: 0.8s;
+}
+
+.microvm-capsule-float--delay-2 {
+  animation-delay: 1.6s;
+}
+
+.microvm-capsule-float--delay-3 {
+  animation-delay: 2.4s;
+}
+
+@keyframes capsuleFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.microvm-flow-packet {
+  animation: flowPacket 3s ease-in-out infinite;
+}
+
+@keyframes flowPacket {
+  0%, 100% { opacity: 0.4; transform: translateX(0); }
+  50% { opacity: 1; transform: translateX(6px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .microvm-capsule-float,
+  .microvm-flow-packet {
+    animation: none;
+  }
+}

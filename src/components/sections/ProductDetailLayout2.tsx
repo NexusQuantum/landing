@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import { LiquidGlassCard } from '@/components/liquid/LiquidGlassCard';
+import ProductDetailCtaButtons from '@/components/sections/ProductDetailCtaButtons';
 import { brochureMapping } from '@/config/brochures';
 
 // Product descriptions mapping
@@ -458,6 +459,8 @@ interface ProductDetailLayout2Props {
   /** When set, hero primary CTA opens this URL instead of brochure download */
   heroPrimaryExternalUrl?: string;
   heroPrimaryExternalLabel?: string;
+  /** Matches Latest releases CTAs from `product-releases.ts` */
+  releaseId?: string;
 }
 
 export default function ProductDetailLayout2({
@@ -471,6 +474,7 @@ export default function ProductDetailLayout2({
   aboutDescription, // Jika tidak ada, akan menggunakan description
   heroPrimaryExternalUrl,
   heroPrimaryExternalLabel,
+  releaseId,
 }: ProductDetailLayout2Props) {
   const [isDownloading, setIsDownloading] = useState(false);
   const [isDownloadingBrochure, setIsDownloadingBrochure] = useState(false);
@@ -613,10 +617,16 @@ export default function ProductDetailLayout2({
               <p className="font-medium text-base sm:text-lg lg:text-[18px] leading-[1.3] text-[#fffefd] mb-6">
                 {description}
               </p>
+
+              {releaseId ? (
+                <div className="mb-6">
+                  <ProductDetailCtaButtons releaseId={releaseId} />
+                </div>
+              ) : null}
               
               {/* Brochure and Whitepaper Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                {heroPrimaryExternalUrl ? (
+                {!releaseId && heroPrimaryExternalUrl ? (
                   <a
                     href={heroPrimaryExternalUrl}
                     target="_blank"

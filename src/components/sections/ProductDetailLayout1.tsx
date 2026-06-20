@@ -6,6 +6,7 @@ import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import { LiquidGlassCard } from '@/components/liquid/LiquidGlassCard';
 import AboutSection from '@/components/sections/about/AboutSection';
+import ProductDetailCtaButtons from '@/components/sections/ProductDetailCtaButtons';
 import { brochureMapping } from '@/config/brochures';
 
 // Product descriptions mapping
@@ -469,6 +470,8 @@ interface ProductDetailLayout1Props {
   brochureUrl?: string;
   whitepaperUrl?: string;
   aboutDescription?: string; // Deskripsi khusus untuk About Section (opsional)
+  /** Matches Latest releases CTAs from `product-releases.ts` */
+  releaseId?: string;
 }
 
 export default function ProductDetailLayout1({
@@ -479,7 +482,8 @@ export default function ProductDetailLayout1({
   backgroundImage = "/bg-product.jpg",
   brochureUrl = "#",
   whitepaperUrl = "#",
-  aboutDescription // Jika tidak ada, akan menggunakan description
+  aboutDescription, // Jika tidak ada, akan menggunakan description
+  releaseId,
 }: ProductDetailLayout1Props) {
   const [activeBenefit, setActiveBenefit] = useState(0);
   const [isDownloading, setIsDownloading] = useState(false);
@@ -620,6 +624,11 @@ export default function ProductDetailLayout1({
             <p className="font-medium text-base sm:text-lg lg:text-[18px] leading-[1.3] text-[#fffefd]">
               {description}
             </p>
+            {releaseId ? (
+              <div className="mt-6">
+                <ProductDetailCtaButtons releaseId={releaseId} />
+              </div>
+            ) : null}
           </LiquidGlassCard>
         </div>
       </div>
