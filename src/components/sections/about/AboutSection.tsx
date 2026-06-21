@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
+import { triggerDownload } from '@/lib/download';
 
 // Icons - Responsive
 const DownloadIcon = ({ className = "w-4 h-4 sm:w-[18px] sm:h-[18px]" }: { className?: string }) => (
@@ -45,23 +46,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({
     if (brochureUrl && brochureUrl !== "#" && !isDownloadingBrochure) {
       setIsDownloadingBrochure(true);
       try {
-        const response = await fetch(brochureUrl);
-        if (response.ok) {
-          const blob = await response.blob();
-          const url = window.URL.createObjectURL(blob);
-          const link = document.createElement('a');
-          link.href = url;
-          link.download = brochureUrl.split('/').pop() || 'brochure.pdf';
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-          window.URL.revokeObjectURL(url);
-        } else {
-          window.open(brochureUrl, '_blank');
-        }
-      } catch (error) {
-        console.error('Download failed:', error);
-        window.open(brochureUrl, '_blank');
+        await triggerDownload(brochureUrl, brochureUrl.split('/').pop() || 'brochure.pdf');
       } finally {
         setIsDownloadingBrochure(false);
       }
@@ -73,23 +58,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({
     if (whitepaperUrl && whitepaperUrl !== "#" && !isDownloading) {
       setIsDownloading(true);
       try {
-        const response = await fetch(whitepaperUrl);
-        if (response.ok) {
-          const blob = await response.blob();
-          const url = window.URL.createObjectURL(blob);
-          const link = document.createElement('a');
-          link.href = url;
-          link.download = whitepaperUrl.split('/').pop() || 'whitepaper.pdf';
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-          window.URL.revokeObjectURL(url);
-        } else {
-          window.open(whitepaperUrl, '_blank');
-        }
-      } catch (error) {
-        console.error('Download failed:', error);
-        window.open(whitepaperUrl, '_blank');
+        await triggerDownload(whitepaperUrl, whitepaperUrl.split('/').pop() || 'whitepaper.pdf');
       } finally {
         setIsDownloading(false);
       }

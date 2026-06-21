@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
+import { triggerDownload } from '@/lib/download';
 import Button from '@/components/ui/Button';
 import { Download, MessageCircle } from 'lucide-react';
 
@@ -113,31 +114,10 @@ const Hero: React.FC<HeroProps> = ({ className, videoSrc }) => {
   const handleWhitepaperDownload = async () => {
     if (!isDownloading) {
       setIsDownloading(true);
+      const whitepaperFileName = '[Nexus] NexusRust Secure-AI-DC v1.0.pdf';
+      const whitepaperUrl = `/Finalized Whitepaper/${whitepaperFileName}`;
       try {
-        const whitepaperFileName = '[Nexus] NexusRust Secure-AI-DC v1.0.pdf';
-        const whitepaperUrl = `/Finalized Whitepaper/${whitepaperFileName}`;
-        
-        // Fetch the file first to ensure it exists
-        const response = await fetch(whitepaperUrl);
-        if (response.ok) {
-          const blob = await response.blob();
-          const url = window.URL.createObjectURL(blob);
-          const link = document.createElement('a');
-          link.href = url;
-          link.download = whitepaperFileName;
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-          window.URL.revokeObjectURL(url);
-        } else {
-          // Fallback: Open in new tab if fetch fails
-          window.open(whitepaperUrl, '_blank');
-        }
-      } catch (error) {
-        console.error('Download failed:', error);
-        // Fallback: Open in new tab
-        const whitepaperUrl = '/Finalized Whitepaper/[Nexus] NexusRust Secure-AI-DC v1.0.pdf';
-        window.open(whitepaperUrl, '_blank');
+        await triggerDownload(whitepaperUrl, whitepaperFileName);
       } finally {
         setIsDownloading(false);
       }

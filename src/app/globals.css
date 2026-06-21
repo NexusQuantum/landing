@@ -838,6 +838,22 @@ input[type="range"]:focus::-webkit-slider-thumb {
   }
 }
 
+/* ===== Identity Hub Token Flow ===== */
+.identity-flow-line {
+  animation: identityTokenFlow 3s linear infinite;
+}
+
+@keyframes identityTokenFlow {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: -20; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .identity-flow-line {
+    animation: none;
+  }
+}
+
 /* ===== MicroVM Hero Capsule Animations ===== */
 .microvm-capsule-float {
   animation: capsuleFloat 5s ease-in-out infinite;

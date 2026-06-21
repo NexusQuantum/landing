@@ -24,6 +24,13 @@ export type ProductReleaseCtas = {
   viewDocs: ProductReleaseCtaLink;
 };
 
+export type ProductReleaseDemoSite = {
+  name: string;
+  href: string;
+  username: string;
+  password: string;
+};
+
 export type ProductReleaseItem = {
   /** Stable id for keys and a11y */
   id: string;
@@ -35,6 +42,8 @@ export type ProductReleaseItem = {
   headlineSuffix?: string;
   description: string;
   ctas: ProductReleaseCtas;
+  /** Optional demo environments with login credentials */
+  demoSites?: ProductReleaseDemoSite[];
 };
 
 export type ProductReleasesConfig = {
@@ -68,6 +77,31 @@ export const productReleasesConfig: ProductReleasesConfig = {
   autoRotateIntervalMs: 3000,
   items: [
     {
+      id: 'nqrust-identity',
+      productName: 'NQRust-Identity',
+      description:
+        'Enterprise IAM with Universal SSO, OAuth 2.0, OpenID Connect, and SAML—sovereign identity governance for government, regulated industries, and corporate environments in Indonesia.',
+      demoSites: [
+        {
+          name: 'Demo Portal',
+          href: 'https://demo.portal.nexusquantum.id',
+          username: 'demo',
+          password: 'demo',
+        },
+        {
+          name: 'Demo IDM',
+          href: 'https://demo.identity.nexusquantum.id',
+          username: 'admin',
+          password: 'identity',
+        },
+      ],
+      ctas: {
+        exploreProduct: { href: 'https://identity.nexusquantum.id/' },
+        tryDemo: { href: 'https://demo.portal.nexusquantum.id' },
+        viewDocs: { href: 'https://docs-identity.nexusquantum.id/' },
+      },
+    },
+    {
       id: 'nqrust-hypervisor',
       productName: 'NQRust-HyperVisor',
       description:
@@ -98,17 +132,6 @@ export const productReleasesConfig: ProductReleasesConfig = {
         exploreProduct: { href: 'https://analytics.nexusquantum.id/' },
         tryDemo: { href: 'https://demo.analytics.nexusquantum.id/home' },
         viewDocs: { href: 'https://docs.analytics.nexusquantum.id/' },
-      },
-    },
-    {
-      id: 'nqrust-identity',
-      productName: 'NQRust-Identity',
-      description:
-        'Self-hosted IAM with OIDC, OAuth2, and SAML, a branded portal, first-party MFA app, and an airgapped-ready installer—built for teams that need full control over identity and audit.',
-      ctas: {
-        exploreProduct: { href: 'https://identity.nexusquantum.id/' },
-        tryDemo: { href: 'https://demo.identity.nexusquantum.id/' },
-        viewDocs: { href: 'https://docs-identity.nexusquantum.id/' },
       },
     },
   ],

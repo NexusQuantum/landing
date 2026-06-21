@@ -8,6 +8,7 @@ import { LiquidGlassCard } from '@/components/liquid/LiquidGlassCard';
 import AboutSection from '@/components/sections/about/AboutSection';
 import ProductDetailCtaButtons from '@/components/sections/ProductDetailCtaButtons';
 import { brochureMapping } from '@/config/brochures';
+import { triggerDownload } from '@/lib/download';
 
 // Product descriptions mapping
 const productDescriptions: { [key: string]: string } = {
@@ -532,26 +533,7 @@ export default function ProductDetailLayout1({
     if (hasWhitepaper && !isDownloading) {
       setIsDownloading(true);
       try {
-        // Fetch the file first to ensure it exists
-        const response = await fetch(actualWhitepaperUrl);
-        if (response.ok) {
-          const blob = await response.blob();
-          const url = window.URL.createObjectURL(blob);
-          const link = document.createElement('a');
-          link.href = url;
-          link.download = whitepaperFileName;
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-          window.URL.revokeObjectURL(url);
-        } else {
-          // Fallback: Open in new tab if fetch fails
-          window.open(actualWhitepaperUrl, '_blank');
-        }
-      } catch (error) {
-        console.error('Download failed:', error);
-        // Fallback: Open in new tab
-        window.open(actualWhitepaperUrl, '_blank');
+        await triggerDownload(actualWhitepaperUrl, whitepaperFileName);
       } finally {
         setIsDownloading(false);
       }
@@ -563,26 +545,7 @@ export default function ProductDetailLayout1({
     if (hasBrochure && !isDownloadingBrochure) {
       setIsDownloadingBrochure(true);
       try {
-        // Fetch the file first to ensure it exists
-        const response = await fetch(actualBrochureUrl);
-        if (response.ok) {
-          const blob = await response.blob();
-          const url = window.URL.createObjectURL(blob);
-          const link = document.createElement('a');
-          link.href = url;
-          link.download = brochureFileName;
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-          window.URL.revokeObjectURL(url);
-        } else {
-          // Fallback: Open in new tab if fetch fails
-          window.open(actualBrochureUrl, '_blank');
-        }
-      } catch (error) {
-        console.error('Download failed:', error);
-        // Fallback: Open in new tab
-        window.open(actualBrochureUrl, '_blank');
+        await triggerDownload(actualBrochureUrl, brochureFileName);
       } finally {
         setIsDownloadingBrochure(false);
       }

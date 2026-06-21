@@ -46,6 +46,9 @@ import {
   Container,
   type LucideIcon,
 } from 'lucide-react';
+import { triggerDownload } from '@/lib/download';
+import { useAutoplay } from '@/hooks/useAutoplay';
+import SectionHeading from '@/components/ui/ProductSectionHeading';
 
 /* ------------------------------------------------------------------ */
 /* Static content & resource config                                    */
@@ -252,61 +255,6 @@ const sovereignItems: { label: string; icon: LucideIcon }[] = [
   { label: 'TKDN-Ready', icon: BadgeCheck },
   { label: 'Local Engineering Support', icon: Headset },
 ];
-
-const AUTOPLAY_MS = 6000;
-
-function useAutoplay(count: number, interval = AUTOPLAY_MS) {
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    if (count <= 1) return;
-    const timer = setInterval(() => {
-      setIndex((i) => (i + 1) % count);
-    }, interval);
-    return () => clearInterval(timer);
-  }, [count, interval]);
-
-  return [index, setIndex] as const;
-}
-
-/* ------------------------------------------------------------------ */
-/* Shared section header                                               */
-/* ------------------------------------------------------------------ */
-
-function SectionHeading({
-  badge,
-  title,
-  subtitle,
-  align = 'center',
-  badgeIcon: BadgeIcon = Cloud,
-}: {
-  badge: string;
-  title: string;
-  subtitle?: string;
-  align?: 'center' | 'left';
-  badgeIcon?: LucideIcon;
-}) {
-  return (
-    <div
-      className={`mb-10 flex flex-col gap-4 md:mb-14 ${
-        align === 'center' ? 'items-center text-center' : 'items-start text-left'
-      }`}
-    >
-      <span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--primary-2)] bg-[var(--primary-1)]/60 px-3.5 py-1 font-montserrat text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--primary-dark-2)]">
-        <BadgeIcon className="h-3.5 w-3.5" aria-hidden />
-        {badge}
-      </span>
-      <h2 className="font-montserrat text-[26px] font-semibold leading-[1.15] text-[var(--dark-9)] sm:text-[32px] md:text-[36px]">
-        {title}
-      </h2>
-      {subtitle && (
-        <p className="max-w-3xl font-montserrat text-[14px] leading-relaxed text-[var(--dark-5)] sm:text-[15px] md:text-[16px]">
-          {subtitle}
-        </p>
-      )}
-    </div>
-  );
-}
 
 /* ------------------------------------------------------------------ */
 /* Foundation layered carousel                                         */
@@ -751,23 +699,7 @@ export default function NQRustMicroVMPage() {
     if (!url || url === '#' || busy) return;
     setBusy(true);
     try {
-      const response = await fetch(url);
-      if (response.ok) {
-        const blob = await response.blob();
-        const objectUrl = window.URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = objectUrl;
-        link.download = url.split('/').pop() || 'download.pdf';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        window.URL.revokeObjectURL(objectUrl);
-      } else {
-        window.open(url, '_blank');
-      }
-    } catch (error) {
-      console.error('Download failed:', error);
-      window.open(url, '_blank');
+      await triggerDownload(url);
     } finally {
       setBusy(false);
     }
