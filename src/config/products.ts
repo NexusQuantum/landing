@@ -38,6 +38,20 @@ export const PUBLIC_PRODUCTS: Product[] = [
     layout: 'carousel',
   },
   {
+    name: 'NQRust-Lake',
+    href: '/products/nqrust-lake',
+    description:
+      'A Rust-native data lakehouse with columnar storage, vector-ready architecture, and low-latency queries for analytics and AI workloads.',
+    layout: 'carousel',
+  },
+  {
+    name: 'NQRust-LLMOps',
+    href: '/products/nqrust-llmops',
+    description:
+      'End-to-end LLM operations for fine-tuning, evals, safety checks, and GPU-efficient serving with production guardrails.',
+    layout: 'cards',
+  },
+  {
     name: 'NQRust-Identity',
     href: '/products/nqrust-identity',
     description:
